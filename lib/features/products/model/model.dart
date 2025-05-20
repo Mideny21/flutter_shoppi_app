@@ -1,0 +1,1 @@
+export './categorymodel.dart';

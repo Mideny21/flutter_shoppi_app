@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:shoppi/core/router/app_router.gr.dart';
 
 @AutoRouterConfig(replaceInRouteName: 'Screen|Page,Route')
 class AppRouter extends RootStackRouter {
@@ -6,7 +7,7 @@ class AppRouter extends RootStackRouter {
   RouteType get defaultRouteType => const RouteType.material();
   @override
   List<AutoRoute> get routes => [
-    // AutoRoute(page: TaskRoute.page, initial: true),
+    AutoRoute(page: HomeRoute.page, initial: true),
     // AutoRoute(page: AddTaskRoute.page),
   ];
 }

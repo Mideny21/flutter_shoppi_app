@@ -5,7 +5,7 @@ import 'env_config.dart';
 @LazySingleton(as: EnvConfig)
 class DevEnvConfig implements EnvConfig {
   @override
-  String get baseUrl => 'https://api-dev.example.com';
+  String get baseUrl => 'http://192.168.88.24:3000/api/';
 
   @override
   int get connectTimeout => 30000;

@@ -12,6 +12,9 @@
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
+import '../../features/products/presentation/bloc/product_bloc.dart' as _i28;
+import '../../features/products/products.dart' as _i485;
+import '../../features/products/repository/product_repository.dart' as _i592;
 import '../config/env_config.dart' as _i373;
 import '../config/env_config_dev.dart' as _i325;
 import '../config/env_config_prod.dart' as _i737;
@@ -49,6 +52,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i1025.NetworkService>(
       () => _i1025.NetworkService(gh<_i667.DioClient>()),
+    );
+    gh.factory<_i592.ProductRepository>(
+      () => _i592.ProductRepository(gh<_i1025.NetworkService>()),
+    );
+    gh.factory<_i28.ProductBloc>(
+      () => _i28.ProductBloc(gh<_i485.ProductRepository>()),
     );
     return this;
   }
