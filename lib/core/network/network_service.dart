@@ -3,6 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:shoppi/core/network/api_result.dart';
 import 'package:shoppi/core/network/api_service_wrapper.dart';
 import 'package:shoppi/core/network/dio_client.dart';
+import 'package:shoppi/core/utils/app_logger.dart';
 
 @injectable
 class NetworkService {
@@ -18,6 +19,10 @@ class NetworkService {
     CancelToken? cancelToken,
     ProgressCallback? onReceiveProgress,
   }) async {
+    if (queryParameters != null) {
+      log.d('Query parameters: $queryParameters');
+    }
+
     return ApiServiceWrapper.execute(
       apiCall:
           () => _dioClient.dio.get(
@@ -40,6 +45,7 @@ class NetworkService {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
+    log.d('Post data: $data');
     return ApiServiceWrapper.execute(
       apiCall:
           () => _dioClient.dio.post(

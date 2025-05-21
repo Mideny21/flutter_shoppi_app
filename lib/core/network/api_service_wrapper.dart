@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:shoppi/core/network/api_result.dart';
 import 'package:shoppi/core/network/exceptions/api_exception.dart';
+import 'package:shoppi/core/utils/app_logger.dart';
 
 class ApiServiceWrapper {
-  /// Wraps API calls in a try-catch block and returns an ApiResult
   static Future<ApiResult<T>> execute<T>({
     required Future<T> Function() apiCall,
   }) async {
@@ -11,8 +11,10 @@ class ApiServiceWrapper {
       final response = await apiCall();
       return ApiResult.success(response);
     } on DioException catch (e) {
+      log.e('Dio error during API call', e);
       return ApiResult.failure(_handleDioException(e));
     } catch (e) {
+      log.e('Unexpected error during API call', e);
       return ApiResult.failure(
         ApiException(message: e.toString(), statusCode: null),
       );
@@ -25,6 +27,7 @@ class ApiServiceWrapper {
       case DioExceptionType.connectionTimeout:
       case DioExceptionType.sendTimeout:
       case DioExceptionType.receiveTimeout:
+        log.w('Connection timeout: ${exception.message}');
         return ApiException(
           message:
               'Connection timed out. Please check your internet connection.',
@@ -34,18 +37,21 @@ class ApiServiceWrapper {
       case DioExceptionType.badResponse:
         return _handleBadResponseException(exception);
       case DioExceptionType.cancel:
+        log.i('Request cancelled: ${exception.message}');
         return ApiException(
           message: 'Request was cancelled',
           statusCode: exception.response?.statusCode,
           response: exception.response?.data,
         );
       case DioExceptionType.connectionError:
+        log.w('Connection error: ${exception.message}');
         return ApiException(
           message: 'No internet connection. Please check your network.',
           statusCode: exception.response?.statusCode,
           response: exception.response?.data,
         );
       default:
+        log.e('Unknown Dio error: ${exception.message}');
         return ApiException(
           message: exception.message ?? 'Something went wrong',
           statusCode: exception.response?.statusCode,
@@ -58,6 +64,11 @@ class ApiServiceWrapper {
   static ApiException _handleBadResponseException(DioException exception) {
     final statusCode = exception.response?.statusCode;
     final responseData = exception.response?.data;
+
+    log.e('Bad response: Status $statusCode', exception);
+    if (responseData != null) {
+      log.e('Response data: $responseData');
+    }
 
     String message;
 
