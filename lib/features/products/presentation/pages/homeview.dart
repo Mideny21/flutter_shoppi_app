@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoppi/features/products/presentation/bloc/product_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 @RoutePage()
 class HomePage extends StatefulWidget {
@@ -23,6 +24,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.helloWorld)),
       body: BlocBuilder<ProductBloc, ProductState>(
         builder: (context, state) {
           if (state.status == ProductStatus.success) {
