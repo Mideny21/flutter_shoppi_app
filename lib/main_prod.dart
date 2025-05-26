@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shoppi/core/di/injection.dart';
+import 'package:shoppi/core/di/setup.dart';
 import 'package:shoppi/main.dart';
 
 import 'core/app_flavor/flavors.dart';
@@ -15,6 +16,7 @@ void main() async {
     ),
   );
   WidgetsFlutterBinding.ensureInitialized();
+  await setup();
   configureDependencies(Environment.prod);
   initializeApp();
 }
