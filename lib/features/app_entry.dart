@@ -28,7 +28,7 @@ class _AppEntryScreenState extends State<AppEntryScreen> {
         context.router.replace(const ChangeLanguageRoute());
       } else {
         log.i('App is open - navigating to home');
-        context.router.replace(const HomeRoute());
+        context.router.replace(const DashboardRoute());
       }
     });
   }

@@ -14,7 +14,7 @@ class ProductRepository {
     return result.when(
       success: (response) {
         final categoryList =
-            (response.data as List)
+            (response.data['data'] as List)
                 .map((e) => Categorymodel.fromJson(e))
                 .toList();
         return ApiResult.success(categoryList);

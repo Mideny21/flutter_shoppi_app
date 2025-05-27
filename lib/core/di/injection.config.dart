@@ -40,11 +40,11 @@ extension GetItInjectableX on _i174.GetIt {
   }) async {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final registerModule = _$RegisterModule();
-    gh.factory<_i745.AuthInterceptor>(() => _i745.AuthInterceptor());
     await gh.factoryAsync<_i919.Box<_i822.AppSettings>>(
       () => registerModule.appSettingsBox,
       preResolve: true,
     );
+    gh.factory<_i745.AuthInterceptor>(() => _i745.AuthInterceptor());
     gh.factory<_i151.AppSettingsCubit>(() => _i151.AppSettingsCubit());
     gh.lazySingleton<_i373.EnvConfig>(
       () => _i325.DevEnvConfig(),
