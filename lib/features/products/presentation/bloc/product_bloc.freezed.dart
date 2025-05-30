@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ProductState {
 
- String get error; ProductStatus get status; List<Categorymodel> get categories;
+ String get error; ProductStatus get status; List<Categorymodel> get categories; PaginatedData<ProductModel> get allProducts;
 /// Create a copy of ProductState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -26,16 +26,16 @@ $ProductStateCopyWith<ProductState> get copyWith => _$ProductStateCopyWithImpl<P
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProductState&&(identical(other.error, error) || other.error == error)&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other.categories, categories));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProductState&&(identical(other.error, error) || other.error == error)&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other.categories, categories)&&(identical(other.allProducts, allProducts) || other.allProducts == allProducts));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,error,status,const DeepCollectionEquality().hash(categories));
+int get hashCode => Object.hash(runtimeType,error,status,const DeepCollectionEquality().hash(categories),allProducts);
 
 @override
 String toString() {
-  return 'ProductState(error: $error, status: $status, categories: $categories)';
+  return 'ProductState(error: $error, status: $status, categories: $categories, allProducts: $allProducts)';
 }
 
 
@@ -46,11 +46,11 @@ abstract mixin class $ProductStateCopyWith<$Res>  {
   factory $ProductStateCopyWith(ProductState value, $Res Function(ProductState) _then) = _$ProductStateCopyWithImpl;
 @useResult
 $Res call({
- String error, ProductStatus status, List<Categorymodel> categories
+ String error, ProductStatus status, List<Categorymodel> categories, PaginatedData<ProductModel> allProducts
 });
 
 
-
+$PaginatedDataCopyWith<ProductModel, $Res> get allProducts;
 
 }
 /// @nodoc
@@ -63,15 +63,25 @@ class _$ProductStateCopyWithImpl<$Res>
 
 /// Create a copy of ProductState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? error = null,Object? status = null,Object? categories = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? error = null,Object? status = null,Object? categories = null,Object? allProducts = null,}) {
   return _then(_self.copyWith(
 error: null == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
 as String,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as ProductStatus,categories: null == categories ? _self.categories : categories // ignore: cast_nullable_to_non_nullable
-as List<Categorymodel>,
+as List<Categorymodel>,allProducts: null == allProducts ? _self.allProducts : allProducts // ignore: cast_nullable_to_non_nullable
+as PaginatedData<ProductModel>,
   ));
 }
-
+/// Create a copy of ProductState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$PaginatedDataCopyWith<ProductModel, $Res> get allProducts {
+  
+  return $PaginatedDataCopyWith<ProductModel, $Res>(_self.allProducts, (value) {
+    return _then(_self.copyWith(allProducts: value));
+  });
+}
 }
 
 
@@ -79,7 +89,7 @@ as List<Categorymodel>,
 
 
 class _ProductState implements ProductState {
-  const _ProductState({this.error = '', this.status = ProductStatus.initial, final  List<Categorymodel> categories = const <Categorymodel>[]}): _categories = categories;
+  const _ProductState({this.error = '', this.status = ProductStatus.initial, final  List<Categorymodel> categories = const <Categorymodel>[], this.allProducts = const PaginatedData<ProductModel>()}): _categories = categories;
   
 
 @override@JsonKey() final  String error;
@@ -91,6 +101,7 @@ class _ProductState implements ProductState {
   return EqualUnmodifiableListView(_categories);
 }
 
+@override@JsonKey() final  PaginatedData<ProductModel> allProducts;
 
 /// Create a copy of ProductState
 /// with the given fields replaced by the non-null parameter values.
@@ -102,16 +113,16 @@ _$ProductStateCopyWith<_ProductState> get copyWith => __$ProductStateCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProductState&&(identical(other.error, error) || other.error == error)&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other._categories, _categories));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProductState&&(identical(other.error, error) || other.error == error)&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other._categories, _categories)&&(identical(other.allProducts, allProducts) || other.allProducts == allProducts));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,error,status,const DeepCollectionEquality().hash(_categories));
+int get hashCode => Object.hash(runtimeType,error,status,const DeepCollectionEquality().hash(_categories),allProducts);
 
 @override
 String toString() {
-  return 'ProductState(error: $error, status: $status, categories: $categories)';
+  return 'ProductState(error: $error, status: $status, categories: $categories, allProducts: $allProducts)';
 }
 
 
@@ -122,11 +133,11 @@ abstract mixin class _$ProductStateCopyWith<$Res> implements $ProductStateCopyWi
   factory _$ProductStateCopyWith(_ProductState value, $Res Function(_ProductState) _then) = __$ProductStateCopyWithImpl;
 @override @useResult
 $Res call({
- String error, ProductStatus status, List<Categorymodel> categories
+ String error, ProductStatus status, List<Categorymodel> categories, PaginatedData<ProductModel> allProducts
 });
 
 
-
+@override $PaginatedDataCopyWith<ProductModel, $Res> get allProducts;
 
 }
 /// @nodoc
@@ -139,16 +150,26 @@ class __$ProductStateCopyWithImpl<$Res>
 
 /// Create a copy of ProductState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? error = null,Object? status = null,Object? categories = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? error = null,Object? status = null,Object? categories = null,Object? allProducts = null,}) {
   return _then(_ProductState(
 error: null == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
 as String,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as ProductStatus,categories: null == categories ? _self._categories : categories // ignore: cast_nullable_to_non_nullable
-as List<Categorymodel>,
+as List<Categorymodel>,allProducts: null == allProducts ? _self.allProducts : allProducts // ignore: cast_nullable_to_non_nullable
+as PaginatedData<ProductModel>,
   ));
 }
 
-
+/// Create a copy of ProductState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$PaginatedDataCopyWith<ProductModel, $Res> get allProducts {
+  
+  return $PaginatedDataCopyWith<ProductModel, $Res>(_self.allProducts, (value) {
+    return _then(_self.copyWith(allProducts: value));
+  });
+}
 }
 
 /// @nodoc
@@ -205,6 +226,102 @@ int get hashCode => runtimeType.hashCode;
 @override
 String toString() {
   return 'ProductEvent.loadCategories()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _LoadProducts implements ProductEvent {
+  const _LoadProducts();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoadProducts);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'ProductEvent.loadProducts()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _LoadMoreProducts implements ProductEvent {
+  const _LoadMoreProducts();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoadMoreProducts);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'ProductEvent.loadMoreProducts()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _RefreshProducts implements ProductEvent {
+  const _RefreshProducts();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RefreshProducts);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'ProductEvent.refreshProducts()';
 }
 
 

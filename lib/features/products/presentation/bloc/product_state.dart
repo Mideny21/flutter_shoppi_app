@@ -8,6 +8,8 @@ abstract class ProductState with _$ProductState {
     @Default('') String error,
     @Default(ProductStatus.initial) ProductStatus status,
     @Default(<Categorymodel>[]) List<Categorymodel> categories,
+    @Default(PaginatedData<ProductModel>())
+    PaginatedData<ProductModel> allProducts,
   }) = _ProductState;
 
   factory ProductState.initial() => const ProductState();

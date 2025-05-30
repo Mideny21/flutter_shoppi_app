@@ -48,10 +48,13 @@ class ProductRepository {
   //   );
   // }
 
-  Future<ApiResult<ApiResponse<ProductResponse>>> getProducts() async {
+  Future<ApiResult<ApiResponse<ProductResponse>>> getProducts({
+    int? page,
+    int? limit,
+  }) async {
     final result = await _networkService.get(
       'products',
-      queryParameters: {'page': 1, 'limit': 20},
+      queryParameters: {'page': page, 'limit': limit},
     );
     return result.when(
       success: (response) {

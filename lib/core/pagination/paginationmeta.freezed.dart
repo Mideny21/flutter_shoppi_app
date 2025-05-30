@@ -84,7 +84,7 @@ as int,
 
 class _PaginationMeta implements PaginationMeta {
   const _PaginationMeta({required this.itemsPerPage, required this.totalItems, required this.currentPage, required this.totalPages});
-  factory _PaginationMeta.fromJson(Map<String, dynamic> json) => _$PaginationMetaFromJson(json);
+  factory _PaginationMeta.fromJson(Map<String, dynamic> json,) => _$PaginationMetaFromJson(json,);
 
 @override final  int itemsPerPage;
 @override final  int totalItems;

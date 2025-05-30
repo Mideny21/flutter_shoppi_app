@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'paginationmeta.freezed.dart';
 part 'paginationmeta.g.dart';
 
-@freezed
+@Freezed(genericArgumentFactories: true)
 abstract class PaginationMeta with _$PaginationMeta {
   const factory PaginationMeta({
     required int itemsPerPage,
