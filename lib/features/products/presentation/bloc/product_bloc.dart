@@ -85,14 +85,16 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     _LoadMoreProducts event,
     Emitter<ProductState> emit,
   ) async {
-    final nextPage = state.allProducts.currentPage + 1;
-
     if (state.allProducts.hasReachedMax || state.allProducts.isLoadingMore) {
       return;
     }
 
+    final nextPage = state.allProducts.currentPage + 1;
+
     emit(
-      state.copyWith(allProducts: state.allProducts.copyWith(isLoading: true)),
+      state.copyWith(
+        allProducts: state.allProducts.copyWith(isLoadingMore: true),
+      ),
     );
 
     final results = await _productRepository.getProducts(
@@ -107,7 +109,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         emit(
           state.copyWith(
             allProducts: state.allProducts.copyWith(
-              isLoading: false,
+              isLoadingMore: false,
               items: newItems,
               currentPage: data.data.meta.currentPage,
               totalPages: data.data.meta.totalPages,
@@ -123,7 +125,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         emit(
           state.copyWith(
             allProducts: state.allProducts.copyWith(
-              isLoading: false,
+              isLoadingMore: false,
               error: error.message,
             ),
           ),

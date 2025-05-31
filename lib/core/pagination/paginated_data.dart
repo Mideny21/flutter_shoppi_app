@@ -11,7 +11,7 @@ sealed class PaginatedData<T> with _$PaginatedData<T> {
     @Default(1) int currentPage,
     @Default(0) int totalPages,
     @Default(0) int totalItems,
-    @Default(10) int itemsPerPage,
+    @Default(16) int itemsPerPage,
     @Default(false) bool hasReachedMax,
     String? error,
   }) = _PaginatedData<T>;
