@@ -10,15 +10,22 @@ class ProductRepository {
 
   ProductRepository(this._networkService);
 
-  Future<ApiResult<List<Categorymodel>>> getCategories() async {
+  Future<ApiResult<ApiResponse<List<Categorymodel>>>> getCategories() async {
     final result = await _networkService.get('categories');
     return result.when(
       success: (response) {
-        final categoryList =
-            (response.data['data'] as List)
-                .map((e) => Categorymodel.fromJson(e))
-                .toList();
-        return ApiResult.success(categoryList);
+        return ApiResult.success(
+          ApiResponse<List<Categorymodel>>.fromJson(
+            response.data,
+            (json) =>
+                (json as List)
+                    .map(
+                      (item) =>
+                          Categorymodel.fromJson(item as Map<String, dynamic>),
+                    )
+                    .toList(),
+          ),
+        );
       },
       failure: (error) {
         return ApiResult.failure(error);
@@ -26,34 +33,36 @@ class ProductRepository {
     );
   }
 
-  //   Future<ApiResult<ApiResponse<List<Product>>>> getProducts() async {
-  //   final result = await _networkService.get(
-  //     'products',
-  //     queryParameters: {'page': 1, 'limit': 20},
-  //   );
-  //   return result.when(
-  //     success: (response) {
-  //       return ApiResult.success(
-  //         ApiResponse<List<Product>>.fromJson(
-  //           response.data, // assuming response.data contains your JSON
-  //           (json) => (json as List)
-  //               .map((item) => Product.fromJson(item as Map<String, dynamic>))
-  //               .toList(),
-  //         ),
-  //       );
-  //     },
-  //     failure: (error) {
-  //       return ApiResult.failure(error);
-  //     },
-  //   );
-  // }
-
   Future<ApiResult<ApiResponse<ProductResponse>>> getProducts({
     int? page,
     int? limit,
   }) async {
     final result = await _networkService.get(
       'products',
+      queryParameters: {'page': page, 'limit': limit},
+    );
+    return result.when(
+      success: (response) {
+        return ApiResult.success(
+          ApiResponse<ProductResponse>.fromJson(
+            response.data,
+            (json) => ProductResponse.fromJson(json as Map<String, dynamic>),
+          ),
+        );
+      },
+      failure: (error) {
+        return ApiResult.failure(error);
+      },
+    );
+  }
+
+  Future<ApiResult<ApiResponse<ProductResponse>>> getProductsByCategory({
+    int? page,
+    int? limit,
+    int? categoryId,
+  }) async {
+    final result = await _networkService.get(
+      'products/category/$categoryId',
       queryParameters: {'page': page, 'limit': limit},
     );
     return result.when(

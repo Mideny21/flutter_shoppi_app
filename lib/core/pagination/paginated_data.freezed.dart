@@ -85,7 +85,7 @@ as String?,
 
 
 class _PaginatedData<T> implements PaginatedData<T> {
-  const _PaginatedData({final  List<T> items = const [], this.isLoading = false, this.isLoadingMore = false, this.currentPage = 1, this.totalPages = 0, this.totalItems = 0, this.itemsPerPage = 10, this.hasReachedMax = false, this.error}): _items = items;
+  const _PaginatedData({final  List<T> items = const [], this.isLoading = false, this.isLoadingMore = false, this.currentPage = 1, this.totalPages = 0, this.totalItems = 0, this.itemsPerPage = 16, this.hasReachedMax = false, this.error}): _items = items;
   
 
  final  List<T> _items;

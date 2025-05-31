@@ -32,14 +32,14 @@ class _AllHomeProductsViewState extends State<AllHomeProductsView> {
           ),
           delegate: SliverChildBuilderDelegate(
             (BuildContext context, int index) {
-              if (index >= state.allProducts.items.length) {
-                return Center(
-                  child: Padding(
-                    padding: EdgeInsets.all(16),
-                    child: CircularProgressIndicator(),
-                  ),
-                );
-              }
+              // if (index >= state.allProducts.items.length) {
+              //   return Center(
+              //     child: Padding(
+              //       padding: EdgeInsets.all(16),
+              //       child: CircularProgressIndicator(),
+              //     ),
+              //   );
+              // }
 
               final ProductModel product = widget.products[index];
               return ProductCard(product: product);
