@@ -61,22 +61,28 @@ class _HomeScreenState extends State<HomeScreen> {
               const SliverToBoxAdapter(child: SizedBox(height: 10)),
               const HomeCategoriesView(),
               const SliverToBoxAdapter(child: SizedBox(height: 10)),
-              if (state.allProducts.isLoading)
+              if (state.allProducts.isLoading &&
+                  state.allProducts.items.isEmpty)
                 const SliverToBoxAdapter(child: AppLoadingIndicator())
+              else if (state.allProducts.items.isEmpty &&
+                  !state.allProducts.isLoading)
+                const SliverToBoxAdapter(
+                  child: Center(child: Text("No products found")),
+                )
               else if (state.allProducts.items.isNotEmpty)
                 AllHomeProductsView(products: state.allProducts.items)
               else if (state.allProducts.isLoadingMore &&
                   !state.allProducts.hasReachedMax)
                 const SliverToBoxAdapter(
                   child: Padding(
-                    padding: EdgeInsets.all(16.0),
+                    padding: EdgeInsets.all(10.0),
                     child: Center(child: CircularProgressIndicator()),
                   ),
                 ),
               if (state.allProducts.hasReachedMax)
                 const SliverToBoxAdapter(
                   child: Padding(
-                    padding: EdgeInsets.all(16.0),
+                    padding: EdgeInsets.all(10.0),
                     child: Center(
                       child: Text(
                         'No more products to load',

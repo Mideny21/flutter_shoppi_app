@@ -67,59 +67,54 @@ class _AllProductsByCategoryScreenState
           log.i(
             'ProductByCategory Current Page ${state.categoryProducts.currentPage} of ${state.categoryProducts.totalPages}',
           );
+
           if (state.categoryProducts.isLoading &&
               state.categoryProducts.items.isEmpty) {
             return const Center(child: AppLoadingIndicator());
           } else if (state.categoryProducts.items.isNotEmpty) {
-            return GridView.builder(
+            return CustomScrollView(
               controller: _scrollController,
-              itemCount:
-                  state.categoryProducts.hasReachedMax
-                      ? state.categoryProducts.items.length +
-                          1 // +1 for "no more" message
-                      : state.categoryProducts.items.length +
-                          1, // +1 for loading indicator
-              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 200.0,
-                mainAxisSpacing: 10.0,
-                crossAxisSpacing: 3.0,
-                childAspectRatio:
-                    (MediaQuery.of(context).size.width /
-                        (MediaQuery.of(context).size.height / 1.75)),
-              ),
-              itemBuilder: (ctx, index) {
-                // Show products
-                if (index < state.categoryProducts.items.length) {
-                  final ProductModel product =
-                      state.categoryProducts.items[index];
-                  return ProductCard(product: product);
-                }
-
-                // Show loading or "no more" indicator at the bottom
-                return Container(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      if (state.categoryProducts.hasReachedMax)
-                        const Text(
-                          'No more products to load',
-                          style: TextStyle(fontSize: 16, color: Colors.grey),
-                          textAlign: TextAlign.center,
-                        )
-                      else if (state.categoryProducts.isLoadingMore)
-                        const CircularProgressIndicator()
-                      else
-                        const SizedBox(), // Empty space when not loading and not reached max
-                    ],
+              slivers: [
+                SliverGrid(
+                  delegate: SliverChildBuilderDelegate((context, index) {
+                    final product = state.categoryProducts.items[index];
+                    return ProductCard(product: product);
+                  }, childCount: state.categoryProducts.items.length),
+                  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                    maxCrossAxisExtent: 200.0,
+                    mainAxisSpacing: 10.0,
+                    crossAxisSpacing: 3.0,
+                    childAspectRatio:
+                        (MediaQuery.of(context).size.width /
+                            (MediaQuery.of(context).size.height / 1.75)),
                   ),
-                );
-              },
+                ),
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Center(
+                      child:
+                          state.categoryProducts.hasReachedMax
+                              ? const Text(
+                                'No more products to load',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.grey,
+                                ),
+                              )
+                              : state.categoryProducts.isLoadingMore
+                              ? const CircularProgressIndicator()
+                              : const SizedBox(),
+                    ),
+                  ),
+                ),
+              ],
             );
           } else if (state.categoryProducts.items.isEmpty &&
               !state.categoryProducts.isLoading) {
             return const Center(child: Text("No products found"));
           }
+
           return Container();
         },
       ),
