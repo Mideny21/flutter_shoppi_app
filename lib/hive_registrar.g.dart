@@ -4,11 +4,13 @@
 
 import 'package:hive_ce/hive.dart';
 import 'package:shoppi/features/authentication/model/user_data.dart';
+import 'package:shoppi/features/cart/model/cart.dart';
 import 'package:shoppi/features/language/model/app_settings.dart';
 
 extension HiveRegistrar on HiveInterface {
   void registerAdapters() {
     registerAdapter(AppSettingsAdapter());
+    registerAdapter(CartItemAdapter());
     registerAdapter(UserDataAdapter());
   }
 }
@@ -16,6 +18,7 @@ extension HiveRegistrar on HiveInterface {
 extension IsolatedHiveRegistrar on IsolatedHiveInterface {
   void registerAdapters() {
     registerAdapter(AppSettingsAdapter());
+    registerAdapter(CartItemAdapter());
     registerAdapter(UserDataAdapter());
   }
 }

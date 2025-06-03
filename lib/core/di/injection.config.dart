@@ -76,11 +76,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i1025.NetworkService>(
       () => _i1025.NetworkService(gh<_i667.DioClient>()),
     );
-    gh.lazySingleton<_i592.ProductRepository>(
-      () => _i592.ProductRepository(gh<_i1025.NetworkService>()),
-    );
     gh.lazySingleton<_i268.AuthRepository>(
       () => _i268.AuthRepository(gh<_i1025.NetworkService>()),
+    );
+    gh.lazySingleton<_i592.ProductRepository>(
+      () => _i592.ProductRepository(gh<_i1025.NetworkService>()),
     );
     gh.factory<_i28.ProductBloc>(
       () => _i28.ProductBloc(gh<_i485.ProductRepository>()),

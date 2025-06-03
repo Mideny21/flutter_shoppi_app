@@ -1,4 +1,5 @@
 import 'package:hive_ce_flutter/hive_flutter.dart';
+import 'package:shoppi/features/cart/cart.dart';
 import 'package:shoppi/features/language/model/app_settings.dart';
 
 Future<void> setup() async {
@@ -6,4 +7,6 @@ Future<void> setup() async {
   Hive.registerAdapter<AppSettings>(AppSettingsAdapter());
 
   await Hive.openBox<AppSettings>('app_settings');
+
+  Hive.registerAdapter<CartItem>(CartItemAdapter());
 }
