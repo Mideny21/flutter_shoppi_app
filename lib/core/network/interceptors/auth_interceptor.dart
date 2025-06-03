@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
-@injectable
+@lazySingleton
 class AuthInterceptor extends Interceptor {
   // Inject your auth service here if needed
   // final AuthService _authService;

@@ -13,6 +13,11 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:hive_ce_flutter/hive_flutter.dart' as _i919;
 import 'package:injectable/injectable.dart' as _i526;
 
+import '../../features/authentication/authentication.dart' as _i845;
+import '../../features/authentication/presentation/cubit/auth_cubit.dart'
+    as _i678;
+import '../../features/authentication/repository/auth_repository.dart' as _i268;
+import '../../features/authentication/services/auth_service.dart' as _i47;
 import '../../features/language/model/app_settings.dart' as _i822;
 import '../../features/language/presentation/cubit/app_setting_cubit.dart'
     as _i151;
@@ -44,8 +49,12 @@ extension GetItInjectableX on _i174.GetIt {
       () => registerModule.appSettingsBox,
       preResolve: true,
     );
-    gh.factory<_i745.AuthInterceptor>(() => _i745.AuthInterceptor());
+    await gh.factoryAsync<_i919.Box<_i845.UserData>>(
+      () => registerModule.userDataBox,
+      preResolve: true,
+    );
     gh.factory<_i151.AppSettingsCubit>(() => _i151.AppSettingsCubit());
+    gh.lazySingleton<_i745.AuthInterceptor>(() => _i745.AuthInterceptor());
     gh.lazySingleton<_i373.EnvConfig>(
       () => _i325.DevEnvConfig(),
       registerFor: {_dev},
@@ -61,14 +70,24 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i737.ProdEnvConfig(),
       registerFor: {_prod},
     );
-    gh.factory<_i1025.NetworkService>(
+    gh.factory<_i47.AuthService>(
+      () => _i47.AuthService(gh<_i919.Box<_i845.UserData>>()),
+    );
+    gh.lazySingleton<_i1025.NetworkService>(
       () => _i1025.NetworkService(gh<_i667.DioClient>()),
     );
-    gh.factory<_i592.ProductRepository>(
+    gh.lazySingleton<_i592.ProductRepository>(
       () => _i592.ProductRepository(gh<_i1025.NetworkService>()),
+    );
+    gh.lazySingleton<_i268.AuthRepository>(
+      () => _i268.AuthRepository(gh<_i1025.NetworkService>()),
     );
     gh.factory<_i28.ProductBloc>(
       () => _i28.ProductBloc(gh<_i485.ProductRepository>()),
+    );
+    gh.factory<_i678.AuthCubit>(
+      () =>
+          _i678.AuthCubit(gh<_i845.AuthRepository>(), gh<_i845.AuthService>()),
     );
     return this;
   }

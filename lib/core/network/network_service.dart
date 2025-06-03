@@ -5,7 +5,7 @@ import 'package:shoppi/core/network/api_service_wrapper.dart';
 import 'package:shoppi/core/network/dio_client.dart';
 import 'package:shoppi/core/utils/app_logger.dart';
 
-@injectable
+@lazySingleton
 class NetworkService {
   final DioClient _dioClient;
 

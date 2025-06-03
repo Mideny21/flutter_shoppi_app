@@ -4,7 +4,7 @@ import 'package:shoppi/core/network/api_result.dart';
 import 'package:shoppi/core/network/network_service.dart';
 import 'package:shoppi/features/products/products.dart';
 
-@injectable
+@lazySingleton
 class ProductRepository {
   final NetworkService _networkService;
 

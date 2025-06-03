@@ -26,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (!_scrollController.hasClients) return false;
     final maxScroll = _scrollController.position.maxScrollExtent;
     final currentScroll = _scrollController.offset;
-    return currentScroll >= (maxScroll * 0.8);
+    return currentScroll >= (maxScroll * 0.9);
   }
 
   @override
@@ -75,8 +75,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   !state.allProducts.hasReachedMax)
                 const SliverToBoxAdapter(
                   child: Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Center(child: CircularProgressIndicator()),
+                    padding: EdgeInsets.all(8.0),
+                    child: CircularProgressIndicator(),
                   ),
                 ),
               if (state.allProducts.hasReachedMax)
