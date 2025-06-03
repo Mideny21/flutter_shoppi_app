@@ -19,7 +19,7 @@ class AuthRepository {
       success: (response) {
         return ApiResult.success(
           ApiResponse<UserResponse>.fromJson(
-            response.data['data'],
+            response.data,
             (json) => UserResponse.fromJson(json as Map<String, dynamic>),
           ),
         );
@@ -35,10 +35,7 @@ class AuthRepository {
     return result.when(
       success: (response) {
         return ApiResult.success(
-          ApiResponse<bool>.fromJson(
-            response.data['success'],
-            (json) => json as bool,
-          ),
+          ApiResponse<bool>.fromJson(response.data, (json) => json as bool),
         );
       },
       failure: (error) {

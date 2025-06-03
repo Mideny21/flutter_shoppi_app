@@ -1,10 +1,12 @@
 import 'package:animations/animations.dart';
+import 'package:auto_route/auto_route.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoppi/features/authentication/authentication.dart';
 import 'package:shoppi/features/authentication/presentation/cubit/auth_cubit.dart';
 
+@RoutePage()
 class AuthPage extends StatelessWidget {
   const AuthPage({super.key});
 

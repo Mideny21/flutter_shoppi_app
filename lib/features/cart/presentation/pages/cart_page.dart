@@ -1,13 +1,16 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoppi/core/common/widgets/widget.dart';
 import 'package:shoppi/core/di/injection.dart';
+import 'package:shoppi/core/router/app_router.gr.dart';
 import 'package:shoppi/features/authentication/authentication.dart';
 import 'package:shoppi/features/cart/cart.dart';
 import 'package:shoppi/features/cart/presentation/cubit/cart_cubit.dart';
 
-class CartView extends StatelessWidget {
-  const CartView({super.key});
+@RoutePage()
+class CartPage extends StatelessWidget {
+  const CartPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,13 +20,11 @@ class CartView extends StatelessWidget {
       final authService = getIt<AuthService>();
       final userInfo = await authService.getUserData();
       if (userInfo == null) {
-        // context.goNamed(AppRoutes.auth.name);
+        context.router.push(AuthRoute());
       } else {
-        // ScaffoldMessenger.of(context).showSnackBar(
-        //                   SnackBar(
-        //                     content: Text(state.error),
-        //                   ),
-        //                 );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('user available')));
         // context.goNamed(AppRoutes.shippingaddress.name);
       }
     }

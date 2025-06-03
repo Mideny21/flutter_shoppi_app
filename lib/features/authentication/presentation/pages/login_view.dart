@@ -107,14 +107,14 @@ class _LoginPageState extends State<LoginPage> {
                       },
                     );
                   } else if (state.status == UserStatus.loaded) {
-                    // Navigator.pop(context);
+                    Navigator.pop(context);
                     // context.goNamed(AppRoutes.shippingaddress.name);
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Login Successfully ')),
                     );
                   } else if (state.status == UserStatus.error) {
-                    // Navigator.pop(context);
-                    context.pop();
+                    Navigator.pop(context);
+                    // context.pop();
                     ScaffoldMessenger.of(
                       context,
                     ).showSnackBar(SnackBar(content: Text(state.error)));

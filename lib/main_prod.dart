@@ -17,6 +17,6 @@ void main() async {
   );
   WidgetsFlutterBinding.ensureInitialized();
   await setup();
-  configureDependencies(Environment.prod);
+  await configureDependencies(Environment.prod);
   initializeApp();
 }

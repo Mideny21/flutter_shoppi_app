@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoppi/core/di/injection.dart';
 import 'package:shoppi/core/router/app_router.dart';
+import 'package:shoppi/features/authentication/presentation/cubit/auth_cubit.dart';
+import 'package:shoppi/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:shoppi/features/language/language.dart';
 import 'package:shoppi/features/language/model/app_settings.dart';
 import 'package:shoppi/features/products/presentation/bloc/product_bloc.dart';
@@ -18,6 +20,8 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => getIt<ProductBloc>()),
         BlocProvider(create: (context) => getIt<AppSettingsCubit>()),
+        BlocProvider(create: (context) => getIt<CartCubit>()..readAllCart()),
+        BlocProvider(create: (context) => getIt<AuthCubit>()),
       ],
       child: BlocBuilder<AppSettingsCubit, AppSettings>(
         builder: (context, state) {

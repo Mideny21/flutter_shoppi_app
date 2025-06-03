@@ -13,4 +13,5 @@ class ProductEvent with _$ProductEvent {
       _LoadProductsByCategory;
   const factory ProductEvent.loadMoreProductsByCategory(int id) =
       _LoadMoreProductsByCategory;
+  const factory ProductEvent.loadProduct(int id) = _LoadProduct;
 }

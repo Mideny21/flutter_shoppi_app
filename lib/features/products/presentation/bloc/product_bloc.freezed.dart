@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ProductState {
 
- String get error; ProductStatus get status; List<Categorymodel> get categories; PaginatedData<ProductModel> get allProducts; PaginatedData<ProductModel> get categoryProducts;
+ String get error; ProductStatus get status; List<Categorymodel> get categories; PaginatedData<ProductModel> get allProducts; PaginatedData<ProductModel> get categoryProducts; ProductModel? get product;
 /// Create a copy of ProductState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -26,16 +26,16 @@ $ProductStateCopyWith<ProductState> get copyWith => _$ProductStateCopyWithImpl<P
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProductState&&(identical(other.error, error) || other.error == error)&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other.categories, categories)&&(identical(other.allProducts, allProducts) || other.allProducts == allProducts)&&(identical(other.categoryProducts, categoryProducts) || other.categoryProducts == categoryProducts));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProductState&&(identical(other.error, error) || other.error == error)&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other.categories, categories)&&(identical(other.allProducts, allProducts) || other.allProducts == allProducts)&&(identical(other.categoryProducts, categoryProducts) || other.categoryProducts == categoryProducts)&&(identical(other.product, product) || other.product == product));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,error,status,const DeepCollectionEquality().hash(categories),allProducts,categoryProducts);
+int get hashCode => Object.hash(runtimeType,error,status,const DeepCollectionEquality().hash(categories),allProducts,categoryProducts,product);
 
 @override
 String toString() {
-  return 'ProductState(error: $error, status: $status, categories: $categories, allProducts: $allProducts, categoryProducts: $categoryProducts)';
+  return 'ProductState(error: $error, status: $status, categories: $categories, allProducts: $allProducts, categoryProducts: $categoryProducts, product: $product)';
 }
 
 
@@ -46,11 +46,11 @@ abstract mixin class $ProductStateCopyWith<$Res>  {
   factory $ProductStateCopyWith(ProductState value, $Res Function(ProductState) _then) = _$ProductStateCopyWithImpl;
 @useResult
 $Res call({
- String error, ProductStatus status, List<Categorymodel> categories, PaginatedData<ProductModel> allProducts, PaginatedData<ProductModel> categoryProducts
+ String error, ProductStatus status, List<Categorymodel> categories, PaginatedData<ProductModel> allProducts, PaginatedData<ProductModel> categoryProducts, ProductModel? product
 });
 
 
-$PaginatedDataCopyWith<ProductModel, $Res> get allProducts;$PaginatedDataCopyWith<ProductModel, $Res> get categoryProducts;
+$PaginatedDataCopyWith<ProductModel, $Res> get allProducts;$PaginatedDataCopyWith<ProductModel, $Res> get categoryProducts;$ProductModelCopyWith<$Res>? get product;
 
 }
 /// @nodoc
@@ -63,14 +63,15 @@ class _$ProductStateCopyWithImpl<$Res>
 
 /// Create a copy of ProductState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? error = null,Object? status = null,Object? categories = null,Object? allProducts = null,Object? categoryProducts = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? error = null,Object? status = null,Object? categories = null,Object? allProducts = null,Object? categoryProducts = null,Object? product = freezed,}) {
   return _then(_self.copyWith(
 error: null == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
 as String,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as ProductStatus,categories: null == categories ? _self.categories : categories // ignore: cast_nullable_to_non_nullable
 as List<Categorymodel>,allProducts: null == allProducts ? _self.allProducts : allProducts // ignore: cast_nullable_to_non_nullable
 as PaginatedData<ProductModel>,categoryProducts: null == categoryProducts ? _self.categoryProducts : categoryProducts // ignore: cast_nullable_to_non_nullable
-as PaginatedData<ProductModel>,
+as PaginatedData<ProductModel>,product: freezed == product ? _self.product : product // ignore: cast_nullable_to_non_nullable
+as ProductModel?,
   ));
 }
 /// Create a copy of ProductState
@@ -91,6 +92,18 @@ $PaginatedDataCopyWith<ProductModel, $Res> get categoryProducts {
   return $PaginatedDataCopyWith<ProductModel, $Res>(_self.categoryProducts, (value) {
     return _then(_self.copyWith(categoryProducts: value));
   });
+}/// Create a copy of ProductState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ProductModelCopyWith<$Res>? get product {
+    if (_self.product == null) {
+    return null;
+  }
+
+  return $ProductModelCopyWith<$Res>(_self.product!, (value) {
+    return _then(_self.copyWith(product: value));
+  });
 }
 }
 
@@ -99,7 +112,7 @@ $PaginatedDataCopyWith<ProductModel, $Res> get categoryProducts {
 
 
 class _ProductState implements ProductState {
-  const _ProductState({this.error = '', this.status = ProductStatus.initial, final  List<Categorymodel> categories = const <Categorymodel>[], this.allProducts = const PaginatedData<ProductModel>(), this.categoryProducts = const PaginatedData<ProductModel>()}): _categories = categories;
+  const _ProductState({this.error = '', this.status = ProductStatus.initial, final  List<Categorymodel> categories = const <Categorymodel>[], this.allProducts = const PaginatedData<ProductModel>(), this.categoryProducts = const PaginatedData<ProductModel>(), this.product = null}): _categories = categories;
   
 
 @override@JsonKey() final  String error;
@@ -113,6 +126,7 @@ class _ProductState implements ProductState {
 
 @override@JsonKey() final  PaginatedData<ProductModel> allProducts;
 @override@JsonKey() final  PaginatedData<ProductModel> categoryProducts;
+@override@JsonKey() final  ProductModel? product;
 
 /// Create a copy of ProductState
 /// with the given fields replaced by the non-null parameter values.
@@ -124,16 +138,16 @@ _$ProductStateCopyWith<_ProductState> get copyWith => __$ProductStateCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProductState&&(identical(other.error, error) || other.error == error)&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other._categories, _categories)&&(identical(other.allProducts, allProducts) || other.allProducts == allProducts)&&(identical(other.categoryProducts, categoryProducts) || other.categoryProducts == categoryProducts));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProductState&&(identical(other.error, error) || other.error == error)&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other._categories, _categories)&&(identical(other.allProducts, allProducts) || other.allProducts == allProducts)&&(identical(other.categoryProducts, categoryProducts) || other.categoryProducts == categoryProducts)&&(identical(other.product, product) || other.product == product));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,error,status,const DeepCollectionEquality().hash(_categories),allProducts,categoryProducts);
+int get hashCode => Object.hash(runtimeType,error,status,const DeepCollectionEquality().hash(_categories),allProducts,categoryProducts,product);
 
 @override
 String toString() {
-  return 'ProductState(error: $error, status: $status, categories: $categories, allProducts: $allProducts, categoryProducts: $categoryProducts)';
+  return 'ProductState(error: $error, status: $status, categories: $categories, allProducts: $allProducts, categoryProducts: $categoryProducts, product: $product)';
 }
 
 
@@ -144,11 +158,11 @@ abstract mixin class _$ProductStateCopyWith<$Res> implements $ProductStateCopyWi
   factory _$ProductStateCopyWith(_ProductState value, $Res Function(_ProductState) _then) = __$ProductStateCopyWithImpl;
 @override @useResult
 $Res call({
- String error, ProductStatus status, List<Categorymodel> categories, PaginatedData<ProductModel> allProducts, PaginatedData<ProductModel> categoryProducts
+ String error, ProductStatus status, List<Categorymodel> categories, PaginatedData<ProductModel> allProducts, PaginatedData<ProductModel> categoryProducts, ProductModel? product
 });
 
 
-@override $PaginatedDataCopyWith<ProductModel, $Res> get allProducts;@override $PaginatedDataCopyWith<ProductModel, $Res> get categoryProducts;
+@override $PaginatedDataCopyWith<ProductModel, $Res> get allProducts;@override $PaginatedDataCopyWith<ProductModel, $Res> get categoryProducts;@override $ProductModelCopyWith<$Res>? get product;
 
 }
 /// @nodoc
@@ -161,14 +175,15 @@ class __$ProductStateCopyWithImpl<$Res>
 
 /// Create a copy of ProductState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? error = null,Object? status = null,Object? categories = null,Object? allProducts = null,Object? categoryProducts = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? error = null,Object? status = null,Object? categories = null,Object? allProducts = null,Object? categoryProducts = null,Object? product = freezed,}) {
   return _then(_ProductState(
 error: null == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
 as String,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as ProductStatus,categories: null == categories ? _self._categories : categories // ignore: cast_nullable_to_non_nullable
 as List<Categorymodel>,allProducts: null == allProducts ? _self.allProducts : allProducts // ignore: cast_nullable_to_non_nullable
 as PaginatedData<ProductModel>,categoryProducts: null == categoryProducts ? _self.categoryProducts : categoryProducts // ignore: cast_nullable_to_non_nullable
-as PaginatedData<ProductModel>,
+as PaginatedData<ProductModel>,product: freezed == product ? _self.product : product // ignore: cast_nullable_to_non_nullable
+as ProductModel?,
   ));
 }
 
@@ -189,6 +204,18 @@ $PaginatedDataCopyWith<ProductModel, $Res> get categoryProducts {
   
   return $PaginatedDataCopyWith<ProductModel, $Res>(_self.categoryProducts, (value) {
     return _then(_self.copyWith(categoryProducts: value));
+  });
+}/// Create a copy of ProductState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ProductModelCopyWith<$Res>? get product {
+    if (_self.product == null) {
+    return null;
+  }
+
+  return $ProductModelCopyWith<$Res>(_self.product!, (value) {
+    return _then(_self.copyWith(product: value));
   });
 }
 }
@@ -475,6 +502,72 @@ class __$LoadMoreProductsByCategoryCopyWithImpl<$Res>
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? id = null,}) {
   return _then(_LoadMoreProductsByCategory(
+null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _LoadProduct implements ProductEvent {
+  const _LoadProduct(this.id);
+  
+
+ final  int id;
+
+/// Create a copy of ProductEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$LoadProductCopyWith<_LoadProduct> get copyWith => __$LoadProductCopyWithImpl<_LoadProduct>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoadProduct&&(identical(other.id, id) || other.id == id));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,id);
+
+@override
+String toString() {
+  return 'ProductEvent.loadProduct(id: $id)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$LoadProductCopyWith<$Res> implements $ProductEventCopyWith<$Res> {
+  factory _$LoadProductCopyWith(_LoadProduct value, $Res Function(_LoadProduct) _then) = __$LoadProductCopyWithImpl;
+@useResult
+$Res call({
+ int id
+});
+
+
+
+
+}
+/// @nodoc
+class __$LoadProductCopyWithImpl<$Res>
+    implements _$LoadProductCopyWith<$Res> {
+  __$LoadProductCopyWithImpl(this._self, this._then);
+
+  final _LoadProduct _self;
+  final $Res Function(_LoadProduct) _then;
+
+/// Create a copy of ProductEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? id = null,}) {
+  return _then(_LoadProduct(
 null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,
   ));

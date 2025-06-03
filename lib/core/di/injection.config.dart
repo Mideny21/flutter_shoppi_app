@@ -18,6 +18,9 @@ import '../../features/authentication/presentation/cubit/auth_cubit.dart'
     as _i678;
 import '../../features/authentication/repository/auth_repository.dart' as _i268;
 import '../../features/authentication/services/auth_service.dart' as _i47;
+import '../../features/cart/cart.dart' as _i699;
+import '../../features/cart/presentation/cubit/cart_cubit.dart' as _i499;
+import '../../features/cart/services/cart_service.dart' as _i64;
 import '../../features/language/model/app_settings.dart' as _i822;
 import '../../features/language/presentation/cubit/app_setting_cubit.dart'
     as _i151;
@@ -53,6 +56,10 @@ extension GetItInjectableX on _i174.GetIt {
       () => registerModule.userDataBox,
       preResolve: true,
     );
+    await gh.factoryAsync<_i919.Box<_i699.CartItem>>(
+      () => registerModule.cartBox,
+      preResolve: true,
+    );
     gh.factory<_i151.AppSettingsCubit>(() => _i151.AppSettingsCubit());
     gh.lazySingleton<_i745.AuthInterceptor>(() => _i745.AuthInterceptor());
     gh.lazySingleton<_i373.EnvConfig>(
@@ -63,6 +70,10 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i448.StagingEnvConfig(),
       registerFor: {_staging},
     );
+    gh.lazySingleton<_i64.CartService>(
+      () => _i64.CartService(gh<_i919.Box<_i699.CartItem>>()),
+    );
+    gh.factory<_i499.CartCubit>(() => _i499.CartCubit(gh<_i64.CartService>()));
     gh.lazySingleton<_i667.DioClient>(
       () => _i667.DioClient(gh<_i373.EnvConfig>(), gh<_i745.AuthInterceptor>()),
     );

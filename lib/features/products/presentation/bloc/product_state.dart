@@ -12,6 +12,7 @@ abstract class ProductState with _$ProductState {
     PaginatedData<ProductModel> allProducts,
     @Default(PaginatedData<ProductModel>())
     PaginatedData<ProductModel> categoryProducts,
+    @Default(null) ProductModel? product,
   }) = _ProductState;
 
   factory ProductState.initial() => const ProductState();
