@@ -22,10 +22,7 @@ class CartPage extends StatelessWidget {
       if (userInfo == null) {
         context.router.push(AuthRoute());
       } else {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text('user available')));
-        // context.goNamed(AppRoutes.shippingaddress.name);
+        context.router.push(AddShippingAddressRoute());
       }
     }
 
@@ -70,7 +67,7 @@ class CartPage extends StatelessWidget {
       body: BlocListener<CartCubit, List<CartItem>>(
         listener: (context, state) {
           if (cartCubit.state.isEmpty) {
-            // context.pushReplacementNamed(AppRoutes.homeview.name);
+            context.router.replace(HomeRoute());
           }
         },
         child: ListView.builder(

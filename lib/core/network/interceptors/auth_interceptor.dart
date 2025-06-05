@@ -1,23 +1,22 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:shoppi/features/authentication/authentication.dart';
 
-@lazySingleton
+@injectable
 class AuthInterceptor extends Interceptor {
-  // Inject your auth service here if needed
-  // final AuthService _authService;
-  // AuthInterceptor(this._authService);
+  final AuthService _authService;
+  AuthInterceptor(this._authService);
 
   @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    // Example of adding an auth token to requests
-    // final token = _authService.getToken();
-    // if (token != null) {
-    //   options.headers['Authorization'] = 'Bearer $token';
-    // }
+  void onRequest(
+    RequestOptions options,
+    RequestInterceptorHandler handler,
+  ) async {
+    final userInfo = await _authService.getUserData();
 
-    // For now, we'll just use a placeholder
-    // Remove this in production and use the commented code above
-    options.headers['Authorization'] = 'Bearer dummy-token';
+    if (userInfo != null) {
+      options.headers['Authorization'] = 'Bearer ${userInfo.accessToken}';
+    }
 
     return super.onRequest(options, handler);
   }
