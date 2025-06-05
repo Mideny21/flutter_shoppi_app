@@ -5,7 +5,7 @@ class LoggingInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     log.i(
-      'REQUEST[${options.method}] => PATH:  ${options.baseUrl}${options.path}${options.queryParameters}',
+      'REQUEST[${options.method}] => PATH: ${options.baseUrl}${options.path} => DATA: ${options.data} => QUERY PARAMS: ${options.queryParameters} => AUTH: ${options.headers}',
     );
 
     super.onRequest(options, handler);
@@ -14,9 +14,9 @@ class LoggingInterceptor extends Interceptor {
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
     log.i(
-      'RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.baseUrl}${response.requestOptions.path}',
+      'RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path} => DATA: ${response.data}',
     );
-    log.d('Response Data: ${response.data}');
+
     super.onResponse(response, handler);
   }
 

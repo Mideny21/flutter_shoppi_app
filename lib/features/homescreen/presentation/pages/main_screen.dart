@@ -14,7 +14,7 @@ class DashboardPage extends StatelessWidget {
       // list of your tab routes
       // routes used here must be declared as children
       // routes of /dashboard
-      routes: const [HomeRoute(), UserRoute(), OrdersRoute()],
+      routes: const [HomeRoute(), OrdersRoute(), UserRoute()],
       transitionBuilder:
           (context, child, animation) => FadeTransition(
             opacity: animation,

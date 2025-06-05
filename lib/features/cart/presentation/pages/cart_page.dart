@@ -22,7 +22,7 @@ class CartPage extends StatelessWidget {
       if (userInfo == null) {
         context.router.push(AuthRoute());
       } else {
-        context.router.push(AddShippingAddressRoute());
+        context.router.push(ShippingAddressRoute());
       }
     }
 

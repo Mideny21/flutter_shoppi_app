@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shoppi/core/router/app_router.gr.dart';
 import 'package:shoppi/core/utils/utils.dart';
 import 'package:shoppi/features/authentication/authentication.dart';
 import 'package:shoppi/features/authentication/presentation/cubit/auth_cubit.dart';
@@ -108,7 +109,7 @@ class _LoginPageState extends State<LoginPage> {
                     );
                   } else if (state.status == UserStatus.loaded) {
                     Navigator.pop(context);
-                    // context.goNamed(AppRoutes.shippingaddress.name);
+                    context.router.push(ShippingAddressRoute());
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Login Successfully ')),
                     );

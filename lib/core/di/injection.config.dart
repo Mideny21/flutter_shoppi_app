@@ -38,6 +38,7 @@ import '../modules/app_settings.dart' as _i814;
 import '../network/dio_client.dart' as _i667;
 import '../network/interceptors/auth_interceptor.dart' as _i745;
 import '../network/network_service.dart' as _i1025;
+import '../router/app_router.dart' as _i81;
 
 const String _dev = 'dev';
 const String _staging = 'staging';
@@ -64,6 +65,7 @@ extension GetItInjectableX on _i174.GetIt {
       preResolve: true,
     );
     gh.factory<_i151.AppSettingsCubit>(() => _i151.AppSettingsCubit());
+    gh.singleton<_i81.AppRouter>(() => _i81.AppRouter());
     gh.lazySingleton<_i373.EnvConfig>(
       () => _i325.DevEnvConfig(),
       registerFor: {_dev},
@@ -84,7 +86,8 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i47.AuthService(gh<_i919.Box<_i845.UserData>>()),
     );
     gh.factory<_i745.AuthInterceptor>(
-      () => _i745.AuthInterceptor(gh<_i845.AuthService>()),
+      () =>
+          _i745.AuthInterceptor(gh<_i845.AuthService>(), gh<_i81.AppRouter>()),
     );
     gh.lazySingleton<_i667.DioClient>(
       () => _i667.DioClient(gh<_i373.EnvConfig>(), gh<_i745.AuthInterceptor>()),
