@@ -26,7 +26,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
   ) async {
     emit(
       state.copyWith(
-        status: OrderStatus.isLoading,
+        status: OrderStatus.loading,
         fetchAdress: false,
         error: '',
       ),

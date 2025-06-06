@@ -35,7 +35,7 @@ class OrderRepository {
     );
   }
 
-  Future<ApiResult<ApiResponse<bool>>> createShippingAddress(
+  Future<ApiResult<bool>> createShippingAddress(
     ShippingAddressParam param,
   ) async {
     final result = await _networkService.post(
@@ -44,9 +44,7 @@ class OrderRepository {
     );
     return result.when(
       success: (response) {
-        return ApiResult.success(
-          ApiResponse<bool>.fromJson(response.data, (json) => json as bool),
-        );
+        return ApiResult.success(true);
       },
       failure: (error) {
         return ApiResult.failure(error);

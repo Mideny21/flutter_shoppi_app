@@ -109,6 +109,8 @@ class _LoginPageState extends State<LoginPage> {
                     );
                   } else if (state.status == UserStatus.loaded) {
                     Navigator.pop(context);
+                    // context.pop();
+
                     context.router.push(ShippingAddressRoute());
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Login Successfully ')),
