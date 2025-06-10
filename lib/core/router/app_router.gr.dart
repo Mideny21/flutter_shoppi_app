@@ -11,7 +11,6 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i15;
 import 'package:flutter/material.dart' as _i16;
-import 'package:shoppi/features/app_entry.dart' as _i3;
 import 'package:shoppi/features/authentication/presentation/pages/auth_view.dart'
     as _i4;
 import 'package:shoppi/features/cart/presentation/pages/cart_page.dart' as _i5;
@@ -22,7 +21,9 @@ import 'package:shoppi/features/homescreen/presentation/pages/main_screen.dart'
     as _i7;
 import 'package:shoppi/features/homescreen/presentation/pages/user.dart'
     as _i14;
-import 'package:shoppi/features/language/presentation/pages/choose_language.dart'
+import 'package:shoppi/features/onbaording/presentation/pages/app_entry.dart'
+    as _i3;
+import 'package:shoppi/features/onbaording/presentation/pages/choose_language.dart'
     as _i6;
 import 'package:shoppi/features/orders/orders.dart' as _i18;
 import 'package:shoppi/features/orders/presentation/pages/add_shipping_address.dart'

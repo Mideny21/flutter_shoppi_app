@@ -44,7 +44,7 @@ class OrderRepository {
     );
     return result.when(
       success: (response) {
-        return ApiResult.success(true);
+        return ApiResult.success(response.data['success'] as bool);
       },
       failure: (error) {
         return ApiResult.failure(error);

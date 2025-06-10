@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoppi/core/router/app_router.gr.dart';
 import 'package:shoppi/core/utils/app_logger.dart';
-import 'package:shoppi/features/language/language.dart';
+import 'package:shoppi/features/onbaording/language.dart';
 
 @RoutePage()
 class AppEntryScreen extends StatefulWidget {

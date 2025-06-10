@@ -21,9 +21,9 @@ import '../../features/authentication/services/auth_service.dart' as _i47;
 import '../../features/cart/cart.dart' as _i699;
 import '../../features/cart/presentation/cubit/cart_cubit.dart' as _i499;
 import '../../features/cart/services/cart_service.dart' as _i64;
-import '../../features/language/model/app_settings.dart' as _i822;
-import '../../features/language/presentation/cubit/app_setting_cubit.dart'
-    as _i151;
+import '../../features/onbaording/model/app_settings.dart' as _i857;
+import '../../features/onbaording/presentation/cubit/app_setting_cubit.dart'
+    as _i833;
 import '../../features/orders/orders.dart' as _i332;
 import '../../features/orders/presentation/bloc/order_bloc.dart' as _i298;
 import '../../features/orders/repository/order_repository.dart' as _i848;
@@ -52,7 +52,7 @@ extension GetItInjectableX on _i174.GetIt {
   }) async {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final registerModule = _$RegisterModule();
-    await gh.factoryAsync<_i919.Box<_i822.AppSettings>>(
+    await gh.factoryAsync<_i919.Box<_i857.AppSettings>>(
       () => registerModule.appSettingsBox,
       preResolve: true,
     );
@@ -64,7 +64,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => registerModule.cartBox,
       preResolve: true,
     );
-    gh.factory<_i151.AppSettingsCubit>(() => _i151.AppSettingsCubit());
+    gh.factory<_i833.AppSettingsCubit>(() => _i833.AppSettingsCubit());
     gh.singleton<_i81.AppRouter>(() => _i81.AppRouter());
     gh.lazySingleton<_i373.EnvConfig>(
       () => _i325.DevEnvConfig(),

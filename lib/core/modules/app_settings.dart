@@ -2,7 +2,7 @@ import 'package:hive_ce_flutter/hive_flutter.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shoppi/features/authentication/authentication.dart';
 import 'package:shoppi/features/cart/cart.dart';
-import 'package:shoppi/features/language/model/app_settings.dart';
+import 'package:shoppi/features/onbaording/model/app_settings.dart';
 
 @module
 abstract class RegisterModule {

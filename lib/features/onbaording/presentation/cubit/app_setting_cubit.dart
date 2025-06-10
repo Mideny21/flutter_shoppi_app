@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_ce_flutter/hive_flutter.dart';
 import 'package:injectable/injectable.dart';
-import 'package:shoppi/features/language/model/app_settings.dart';
+import 'package:shoppi/features/onbaording/model/app_settings.dart';
 
 @injectable
 class AppSettingsCubit extends Cubit<AppSettings> {

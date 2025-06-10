@@ -85,13 +85,13 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
             );
           } else if (state.status == OrderStatus.success &&
               state.orderResponse != null) {
-            context.pop();
+            Navigator.pop(context);
             cartcubit.clearCart();
             context.router.push(
               OrderSuccessfullyRoute(order: state.orderResponse!),
             );
           } else if (state.error != '') {
-            context.pop();
+            Navigator.pop(context);
             ScaffoldMessenger.of(
               context,
             ).showSnackBar(SnackBar(content: Text(state.error)));

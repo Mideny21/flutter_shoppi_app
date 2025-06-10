@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shoppi/features/orders/orders.dart';
@@ -49,14 +49,16 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     emit(state.copyWith(status: OrderStatus.submittingAdress, error: ''));
     final result = await _orderRepository.createShippingAddress(event.param);
     result.when(
-      success: (data) {
-        emit(
-          state.copyWith(
-            status: OrderStatus.initial,
-            fetchAdress: true,
-            addressSubmitted: true,
-          ),
-        );
+      success: (success) {
+        if (success) {
+          emit(
+            state.copyWith(
+              status: OrderStatus.initial,
+              fetchAdress: true,
+              addressSubmitted: true,
+            ),
+          );
+        }
       },
       failure: (error) {
         emit(state.copyWith(status: OrderStatus.initial, error: error.message));
@@ -103,7 +105,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
   ) async {
     emit(
       state.copyWith(
-        status: OrderStatus.loading,
+        status: OrderStatus.isLoading,
         fetchAdress: false,
         error: '',
       ),
