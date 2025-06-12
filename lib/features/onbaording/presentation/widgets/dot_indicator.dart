@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shoppi/core/utils/colors.dart';
 
 class DotIndicator extends StatelessWidget {
   final int itemCount;
@@ -19,11 +20,12 @@ class DotIndicator extends StatelessWidget {
         return AnimatedContainer(
           duration: const Duration(milliseconds: 300),
           margin: const EdgeInsets.symmetric(horizontal: 4),
-          width: isActive ? 12 : 8,
-          height: isActive ? 12 : 8,
+          width: isActive ? 40 : 30,
+          height: isActive ? 8 : 8,
           decoration: BoxDecoration(
-            color: isActive ? Colors.white : Colors.white54,
-            shape: BoxShape.circle,
+            color: isActive ? Palette.Primary : Colors.grey,
+            shape: BoxShape.rectangle,
+            borderRadius: BorderRadius.circular(5),
           ),
         );
       }),

@@ -17,6 +17,10 @@ class OnboardingCubit extends Cubit<int> {
     emit(_totalPages - 1);
   }
 
+  void updatePage(int pageIndex) {
+    emit(pageIndex);
+  }
+
   bool get isLastPage => state == _totalPages - 1;
 
   int get totalPages => _totalPages;

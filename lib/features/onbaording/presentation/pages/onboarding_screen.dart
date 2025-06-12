@@ -13,28 +13,50 @@ class OnboardingScreen extends StatefulWidget {
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
+  late final PageController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = PageController();
+
+    _controller.addListener(() {
+      final currentPage = _controller.page?.round();
+      if (currentPage != null) {
+        context.read<OnboardingCubit>().updatePage(currentPage);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final controller = PageController();
-
     final pages = [
       OnboardingPage(
-        title: 'Welcome',
-        description: 'This is the first onboarding screen.',
-        color: Colors.blueAccent,
-        controller: controller,
+        title: 'Find the Best Deals Daily',
+        description:
+            'Get exclusive discounts and limited-time offers on your favorite products',
+        svg: 'assets/vectors/shopping_bag.svg',
+        controller: _controller,
       ),
       OnboardingPage(
-        title: 'Discover',
-        description: 'This is the second onboarding screen.',
-        color: Colors.greenAccent,
-        controller: controller,
+        title: 'Shop with Ease and Speed',
+        description:
+            'Smooth navigation, secure payments, and fast delivery—all in one powerful app designed for you',
+        svg: 'assets/vectors/shopping_bag.svg',
+        controller: _controller,
       ),
       OnboardingPage(
-        title: 'Let\'s Start',
-        description: 'This is the last onboarding screen.',
-        color: Colors.deepPurpleAccent,
-        controller: controller,
+        title: 'Real-Time Order Tracking',
+        description:
+            'Know where your order is, every step of the way. From purchase to delivery, we’ve got you covered.',
+        svg: 'assets/vectors/shopping_bag.svg',
+        controller: _controller,
       ),
     ];
 
@@ -42,13 +64,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       body: SafeArea(
         child: BlocListener<OnboardingCubit, int>(
           listener: (context, state) {
-            controller.jumpToPage(state);
+            // Only jump if user didn't swipe manually (to avoid loops)
+            if (_controller.page?.round() != state) {
+              _controller.jumpToPage(state);
+            }
           },
-          child: PageView(
-            controller: controller,
-            physics: const NeverScrollableScrollPhysics(),
-            children: pages,
-          ),
+          child: PageView(controller: _controller, children: pages),
         ),
       ),
     );
