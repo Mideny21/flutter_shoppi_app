@@ -3,6 +3,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:shoppi/core/router/app_router.gr.dart';
+import 'package:shoppi/core/utils/utils.dart';
 
 @RoutePage()
 class DashboardPage extends StatelessWidget {
@@ -14,7 +15,7 @@ class DashboardPage extends StatelessWidget {
       // list of your tab routes
       // routes used here must be declared as children
       // routes of /dashboard
-      routes: const [HomeRoute(), OrdersRoute(), UserRoute()],
+      routes: const [HomeRoute(), OrdersRoute(), ProfileRoute()],
       transitionBuilder:
           (context, child, animation) => FadeTransition(
             opacity: animation,
@@ -37,14 +38,17 @@ class DashboardPage extends StatelessWidget {
               tabsRouter.setActiveIndex(index);
             },
             items: [
-              BottomNavigationBarItem(label: 'Home', icon: Icon(Icons.person)),
+              BottomNavigationBarItem(
+                label: 'Home',
+                icon: Icon(Icons.home_outlined, color: Palette.Primary),
+              ),
               BottomNavigationBarItem(
                 label: 'Orders',
-                icon: Icon(Icons.person),
+                icon: Icon(Icons.shopping_bag_outlined, color: Palette.Primary),
               ),
               BottomNavigationBarItem(
                 label: 'Settings',
-                icon: Icon(Icons.person),
+                icon: Icon(Icons.settings_outlined, color: Palette.Primary),
               ),
             ],
           ),

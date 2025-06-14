@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shoppi/core/utils/utils.dart';
+import 'package:shoppi/features/onbaording/presentation/cubit/app_setting_cubit.dart';
 import 'package:shoppi/features/onbaording/presentation/cubit/on_boarding_cubit.dart';
 import 'package:shoppi/features/onbaording/presentation/widgets/dot_indicator.dart';
 
@@ -87,9 +88,11 @@ class OnboardingPage extends StatelessWidget {
                 ),
                 onPressed: () {
                   if (cubit.isLastPage) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Onboarding Completed!')),
-                    );
+                    context.read<AppSettingsCubit>().markOnboardingComplete();
+                    // context.router.replace(const DashboardRoute());
+                    // ScaffoldMessenger.of(context).showSnackBar(
+                    //   const SnackBar(content: Text('Onboarding Completed!')),
+                    // );
                   } else {
                     cubit.nextPage();
                     controller.nextPage(
