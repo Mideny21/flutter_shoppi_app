@@ -41,6 +41,7 @@ import '../network/dio_client.dart' as _i667;
 import '../network/interceptors/auth_interceptor.dart' as _i745;
 import '../network/network_service.dart' as _i1025;
 import '../router/app_router.dart' as _i81;
+import '../router/app_router_guard.dart' as _i865;
 
 const String _dev = 'dev';
 const String _staging = 'staging';
@@ -88,9 +89,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i47.AuthService>(
       () => _i47.AuthService(gh<_i919.Box<_i845.UserData>>()),
     );
+    gh.factory<_i865.AuthGuard>(() => _i865.AuthGuard(gh<_i845.AuthService>()));
     gh.factory<_i745.AuthInterceptor>(
-      () =>
-          _i745.AuthInterceptor(gh<_i845.AuthService>(), gh<_i81.AppRouter>()),
+      () => _i745.AuthInterceptor(gh<_i845.AuthService>()),
     );
     gh.lazySingleton<_i667.DioClient>(
       () => _i667.DioClient(gh<_i373.EnvConfig>(), gh<_i745.AuthInterceptor>()),

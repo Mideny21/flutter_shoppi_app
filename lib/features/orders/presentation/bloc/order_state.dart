@@ -1,11 +1,12 @@
 part of 'order_bloc.dart';
 
-enum OrderStatus {
+enum OrderStatus { initial, isloading, success, failure, submittingOrder }
+
+enum ShippingAddressStatus {
   initial,
   loading,
-  success,
   failure,
-  isLoading,
+  addressLoaded,
   submittingAdress,
 }
 
@@ -13,6 +14,8 @@ enum OrderStatus {
 abstract class OrderState with _$OrderState {
   const factory OrderState({
     @Default(OrderStatus.initial) OrderStatus status,
+    @Default(ShippingAddressStatus.initial)
+    ShippingAddressStatus shippingaddressStatus,
     @Default('') String error,
     @Default([]) List<ShippingAddressModel> addresses,
     @Default([]) List<Orders> orders,

@@ -16,16 +16,6 @@ class CartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final cartCubit = context.watch<CartCubit>();
 
-    void handleCheckout() async {
-      final authService = getIt<AuthService>();
-      final userInfo = await authService.getUserData();
-      if (userInfo == null) {
-        context.router.push(AuthRoute());
-      } else {
-        context.router.push(ShippingAddressRoute());
-      }
-    }
-
     return Scaffold(
       appBar: AppBar(title: const Text("My cart"), centerTitle: true),
       bottomSheet: Container(
@@ -56,7 +46,7 @@ class CartPage extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               CustomButton(
-                tap: handleCheckout,
+                tap: () => context.router.push(ShippingAddressRoute()),
                 text:
                     'Checkout ${cartCubit.calculateTotalPrice().toStringAsFixed(2)}/=',
               ),

@@ -2,15 +2,17 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shoppi/core/router/app_router.gr.dart';
+
 import 'package:shoppi/core/utils/utils.dart';
 import 'package:shoppi/features/authentication/authentication.dart';
 import 'package:shoppi/features/authentication/presentation/cubit/auth_cubit.dart';
 
 import '../../../../core/common/widgets/widget.dart';
 
+@RoutePage()
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  final Function(bool?) onResult;
+  const LoginPage({Key? key, required this.onResult}) : super(key: key);
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -111,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
                     Navigator.pop(context);
                     // context.pop();
 
-                    context.router.push(ShippingAddressRoute());
+                    widget.onResult.call(true);
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Login Successfully ')),
                     );
@@ -155,11 +157,7 @@ class _LoginPageState extends State<LoginPage> {
                           decoration: TextDecoration.none,
                           color: Palette.mainColor,
                         ),
-                        recognizer:
-                            TapGestureRecognizer()
-                              ..onTap = () {
-                                context.read<AuthCubit>().onLoginToggle();
-                              },
+                        recognizer: TapGestureRecognizer()..onTap = () {},
                       ),
                     ],
                   ),

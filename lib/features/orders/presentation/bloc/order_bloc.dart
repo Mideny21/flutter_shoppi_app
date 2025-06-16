@@ -26,7 +26,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
   ) async {
     emit(
       state.copyWith(
-        status: OrderStatus.loading,
+        shippingaddressStatus: ShippingAddressStatus.loading,
         fetchAdress: false,
         error: '',
       ),
@@ -34,10 +34,20 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     final result = await _orderRepository.fetchUserAddress();
     result.when(
       success: (data) {
-        emit(state.copyWith(status: OrderStatus.success, addresses: data.data));
+        emit(
+          state.copyWith(
+            shippingaddressStatus: ShippingAddressStatus.addressLoaded,
+            addresses: data.data,
+          ),
+        );
       },
       failure: (error) {
-        emit(state.copyWith(status: OrderStatus.initial, error: error.message));
+        emit(
+          state.copyWith(
+            shippingaddressStatus: ShippingAddressStatus.initial,
+            error: error.message,
+          ),
+        );
       },
     );
   }
@@ -46,14 +56,19 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     _CreateShippingAddress event,
     Emitter<OrderState> emit,
   ) async {
-    emit(state.copyWith(status: OrderStatus.submittingAdress, error: ''));
+    emit(
+      state.copyWith(
+        shippingaddressStatus: ShippingAddressStatus.submittingAdress,
+        error: '',
+      ),
+    );
     final result = await _orderRepository.createShippingAddress(event.param);
     result.when(
       success: (success) {
         if (success) {
           emit(
             state.copyWith(
-              status: OrderStatus.initial,
+              shippingaddressStatus: ShippingAddressStatus.initial,
               fetchAdress: true,
               addressSubmitted: true,
             ),
@@ -79,7 +94,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
   ) async {
     emit(
       state.copyWith(
-        status: OrderStatus.isLoading,
+        status: OrderStatus.submittingOrder,
         orderResponse: null,
         addressSubmitted: false,
         fetchAdress: false,
@@ -105,7 +120,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
   ) async {
     emit(
       state.copyWith(
-        status: OrderStatus.isLoading,
+        status: OrderStatus.isloading,
         fetchAdress: false,
         error: '',
       ),

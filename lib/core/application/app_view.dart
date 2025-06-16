@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoppi/core/di/injection.dart';
+import 'package:shoppi/core/router/app_route_observer.dart';
 import 'package:shoppi/core/router/app_router.dart';
 import 'package:shoppi/features/authentication/presentation/cubit/auth_cubit.dart';
 import 'package:shoppi/features/cart/presentation/cubit/cart_cubit.dart';
@@ -33,7 +34,9 @@ class MyApp extends StatelessWidget {
         builder: (context, state) {
           return MaterialApp.router(
             debugShowCheckedModeBanner: false,
-            routerConfig: appRouter.config(),
+            routerConfig: appRouter.config(
+              navigatorObservers: () => [MyObserver()],
+            ),
             title: FlavorConfig.instance.values.appName,
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,

@@ -84,7 +84,8 @@ class _AddShippingAddressScreenState extends State<AddShippingAddressScreen> {
                 const SizedBox(height: 20),
                 BlocConsumer<OrderBloc, OrderState>(
                   listener: (context, state) {
-                    if (state.status == OrderStatus.submittingAdress) {
+                    if (state.shippingaddressStatus ==
+                        ShippingAddressStatus.submittingAdress) {
                       showDialog(
                         context: context,
                         builder: (context) {

@@ -7,6 +7,7 @@ import 'package:shoppi/core/utils/utils.dart';
 import 'package:shoppi/features/authentication/authentication.dart';
 import 'package:shoppi/features/authentication/presentation/cubit/auth_cubit.dart';
 
+@RoutePage()
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
 

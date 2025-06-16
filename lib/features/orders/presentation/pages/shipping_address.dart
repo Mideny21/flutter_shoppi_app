@@ -76,7 +76,7 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
         listener: (context, state) {
           // TODO: implement listener
 
-          if (state.status == OrderStatus.isLoading) {
+          if (state.status == OrderStatus.submittingOrder) {
             showDialog(
               context: context,
               builder: (context) {
@@ -85,11 +85,13 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
             );
           } else if (state.status == OrderStatus.success &&
               state.orderResponse != null) {
-            Navigator.pop(context);
-            cartcubit.clearCart();
+            // context.pop();
+
+            // Navigator.pop(context);
             context.router.push(
               OrderSuccessfullyRoute(order: state.orderResponse!),
             );
+            cartcubit.clearCart();
           } else if (state.error != '') {
             Navigator.pop(context);
             ScaffoldMessenger.of(
@@ -106,7 +108,6 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
       ),
       body: BlocListener<OrderBloc, OrderState>(
         listener: (context, state) {
-          // TODO: implement listener
           if (state.fetchAdress) {
             BlocProvider.of<OrderBloc>(
               context,
@@ -115,7 +116,7 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
         },
         child: BlocBuilder<OrderBloc, OrderState>(
           builder: (context, state) {
-            if (state.status == OrderStatus.loading) {
+            if (state.shippingaddressStatus == ShippingAddressStatus.loading) {
               return const AppLoadingIndicator();
             } else if (state.addresses.isNotEmpty) {
               return ListView.builder(
@@ -142,8 +143,8 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
                           borderRadius: BorderRadius.circular(10),
                           color:
                               selectedIndex == index
-                                  ? Palette.mainColor.withOpacity(0.3)
-                                  : Colors.grey.withOpacity(0.4),
+                                  ? Palette.mainColor.withValues(alpha: .3)
+                                  : Colors.grey.withValues(alpha: 0.4),
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(15),

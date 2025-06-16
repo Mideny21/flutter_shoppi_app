@@ -307,7 +307,7 @@ String toString() {
 /// @nodoc
 mixin _$OrderState {
 
- OrderStatus get status; String get error; List<ShippingAddressModel> get addresses; List<Orders> get orders; int? get shippingAddressId; bool get fetchAdress; bool get addressSubmitted; OrderReponse? get orderResponse;
+ OrderStatus get status; ShippingAddressStatus get shippingaddressStatus; String get error; List<ShippingAddressModel> get addresses; List<Orders> get orders; int? get shippingAddressId; bool get fetchAdress; bool get addressSubmitted; OrderReponse? get orderResponse;
 /// Create a copy of OrderState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -318,16 +318,16 @@ $OrderStateCopyWith<OrderState> get copyWith => _$OrderStateCopyWithImpl<OrderSt
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is OrderState&&(identical(other.status, status) || other.status == status)&&(identical(other.error, error) || other.error == error)&&const DeepCollectionEquality().equals(other.addresses, addresses)&&const DeepCollectionEquality().equals(other.orders, orders)&&(identical(other.shippingAddressId, shippingAddressId) || other.shippingAddressId == shippingAddressId)&&(identical(other.fetchAdress, fetchAdress) || other.fetchAdress == fetchAdress)&&(identical(other.addressSubmitted, addressSubmitted) || other.addressSubmitted == addressSubmitted)&&(identical(other.orderResponse, orderResponse) || other.orderResponse == orderResponse));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is OrderState&&(identical(other.status, status) || other.status == status)&&(identical(other.shippingaddressStatus, shippingaddressStatus) || other.shippingaddressStatus == shippingaddressStatus)&&(identical(other.error, error) || other.error == error)&&const DeepCollectionEquality().equals(other.addresses, addresses)&&const DeepCollectionEquality().equals(other.orders, orders)&&(identical(other.shippingAddressId, shippingAddressId) || other.shippingAddressId == shippingAddressId)&&(identical(other.fetchAdress, fetchAdress) || other.fetchAdress == fetchAdress)&&(identical(other.addressSubmitted, addressSubmitted) || other.addressSubmitted == addressSubmitted)&&(identical(other.orderResponse, orderResponse) || other.orderResponse == orderResponse));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,status,error,const DeepCollectionEquality().hash(addresses),const DeepCollectionEquality().hash(orders),shippingAddressId,fetchAdress,addressSubmitted,orderResponse);
+int get hashCode => Object.hash(runtimeType,status,shippingaddressStatus,error,const DeepCollectionEquality().hash(addresses),const DeepCollectionEquality().hash(orders),shippingAddressId,fetchAdress,addressSubmitted,orderResponse);
 
 @override
 String toString() {
-  return 'OrderState(status: $status, error: $error, addresses: $addresses, orders: $orders, shippingAddressId: $shippingAddressId, fetchAdress: $fetchAdress, addressSubmitted: $addressSubmitted, orderResponse: $orderResponse)';
+  return 'OrderState(status: $status, shippingaddressStatus: $shippingaddressStatus, error: $error, addresses: $addresses, orders: $orders, shippingAddressId: $shippingAddressId, fetchAdress: $fetchAdress, addressSubmitted: $addressSubmitted, orderResponse: $orderResponse)';
 }
 
 
@@ -338,7 +338,7 @@ abstract mixin class $OrderStateCopyWith<$Res>  {
   factory $OrderStateCopyWith(OrderState value, $Res Function(OrderState) _then) = _$OrderStateCopyWithImpl;
 @useResult
 $Res call({
- OrderStatus status, String error, List<ShippingAddressModel> addresses, List<Orders> orders, int? shippingAddressId, bool fetchAdress, bool addressSubmitted, OrderReponse? orderResponse
+ OrderStatus status, ShippingAddressStatus shippingaddressStatus, String error, List<ShippingAddressModel> addresses, List<Orders> orders, int? shippingAddressId, bool fetchAdress, bool addressSubmitted, OrderReponse? orderResponse
 });
 
 
@@ -355,10 +355,11 @@ class _$OrderStateCopyWithImpl<$Res>
 
 /// Create a copy of OrderState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? status = null,Object? error = null,Object? addresses = null,Object? orders = null,Object? shippingAddressId = freezed,Object? fetchAdress = null,Object? addressSubmitted = null,Object? orderResponse = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? status = null,Object? shippingaddressStatus = null,Object? error = null,Object? addresses = null,Object? orders = null,Object? shippingAddressId = freezed,Object? fetchAdress = null,Object? addressSubmitted = null,Object? orderResponse = freezed,}) {
   return _then(_self.copyWith(
 status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
-as OrderStatus,error: null == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
+as OrderStatus,shippingaddressStatus: null == shippingaddressStatus ? _self.shippingaddressStatus : shippingaddressStatus // ignore: cast_nullable_to_non_nullable
+as ShippingAddressStatus,error: null == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
 as String,addresses: null == addresses ? _self.addresses : addresses // ignore: cast_nullable_to_non_nullable
 as List<ShippingAddressModel>,orders: null == orders ? _self.orders : orders // ignore: cast_nullable_to_non_nullable
 as List<Orders>,shippingAddressId: freezed == shippingAddressId ? _self.shippingAddressId : shippingAddressId // ignore: cast_nullable_to_non_nullable
@@ -388,10 +389,11 @@ $OrderReponseCopyWith<$Res>? get orderResponse {
 
 
 class _OrderState implements OrderState {
-  const _OrderState({this.status = OrderStatus.initial, this.error = '', final  List<ShippingAddressModel> addresses = const [], final  List<Orders> orders = const [], this.shippingAddressId = null, this.fetchAdress = false, this.addressSubmitted = false, this.orderResponse = null}): _addresses = addresses,_orders = orders;
+  const _OrderState({this.status = OrderStatus.initial, this.shippingaddressStatus = ShippingAddressStatus.initial, this.error = '', final  List<ShippingAddressModel> addresses = const [], final  List<Orders> orders = const [], this.shippingAddressId = null, this.fetchAdress = false, this.addressSubmitted = false, this.orderResponse = null}): _addresses = addresses,_orders = orders;
   
 
 @override@JsonKey() final  OrderStatus status;
+@override@JsonKey() final  ShippingAddressStatus shippingaddressStatus;
 @override@JsonKey() final  String error;
  final  List<ShippingAddressModel> _addresses;
 @override@JsonKey() List<ShippingAddressModel> get addresses {
@@ -422,16 +424,16 @@ _$OrderStateCopyWith<_OrderState> get copyWith => __$OrderStateCopyWithImpl<_Ord
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _OrderState&&(identical(other.status, status) || other.status == status)&&(identical(other.error, error) || other.error == error)&&const DeepCollectionEquality().equals(other._addresses, _addresses)&&const DeepCollectionEquality().equals(other._orders, _orders)&&(identical(other.shippingAddressId, shippingAddressId) || other.shippingAddressId == shippingAddressId)&&(identical(other.fetchAdress, fetchAdress) || other.fetchAdress == fetchAdress)&&(identical(other.addressSubmitted, addressSubmitted) || other.addressSubmitted == addressSubmitted)&&(identical(other.orderResponse, orderResponse) || other.orderResponse == orderResponse));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _OrderState&&(identical(other.status, status) || other.status == status)&&(identical(other.shippingaddressStatus, shippingaddressStatus) || other.shippingaddressStatus == shippingaddressStatus)&&(identical(other.error, error) || other.error == error)&&const DeepCollectionEquality().equals(other._addresses, _addresses)&&const DeepCollectionEquality().equals(other._orders, _orders)&&(identical(other.shippingAddressId, shippingAddressId) || other.shippingAddressId == shippingAddressId)&&(identical(other.fetchAdress, fetchAdress) || other.fetchAdress == fetchAdress)&&(identical(other.addressSubmitted, addressSubmitted) || other.addressSubmitted == addressSubmitted)&&(identical(other.orderResponse, orderResponse) || other.orderResponse == orderResponse));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,status,error,const DeepCollectionEquality().hash(_addresses),const DeepCollectionEquality().hash(_orders),shippingAddressId,fetchAdress,addressSubmitted,orderResponse);
+int get hashCode => Object.hash(runtimeType,status,shippingaddressStatus,error,const DeepCollectionEquality().hash(_addresses),const DeepCollectionEquality().hash(_orders),shippingAddressId,fetchAdress,addressSubmitted,orderResponse);
 
 @override
 String toString() {
-  return 'OrderState(status: $status, error: $error, addresses: $addresses, orders: $orders, shippingAddressId: $shippingAddressId, fetchAdress: $fetchAdress, addressSubmitted: $addressSubmitted, orderResponse: $orderResponse)';
+  return 'OrderState(status: $status, shippingaddressStatus: $shippingaddressStatus, error: $error, addresses: $addresses, orders: $orders, shippingAddressId: $shippingAddressId, fetchAdress: $fetchAdress, addressSubmitted: $addressSubmitted, orderResponse: $orderResponse)';
 }
 
 
@@ -442,7 +444,7 @@ abstract mixin class _$OrderStateCopyWith<$Res> implements $OrderStateCopyWith<$
   factory _$OrderStateCopyWith(_OrderState value, $Res Function(_OrderState) _then) = __$OrderStateCopyWithImpl;
 @override @useResult
 $Res call({
- OrderStatus status, String error, List<ShippingAddressModel> addresses, List<Orders> orders, int? shippingAddressId, bool fetchAdress, bool addressSubmitted, OrderReponse? orderResponse
+ OrderStatus status, ShippingAddressStatus shippingaddressStatus, String error, List<ShippingAddressModel> addresses, List<Orders> orders, int? shippingAddressId, bool fetchAdress, bool addressSubmitted, OrderReponse? orderResponse
 });
 
 
@@ -459,10 +461,11 @@ class __$OrderStateCopyWithImpl<$Res>
 
 /// Create a copy of OrderState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? status = null,Object? error = null,Object? addresses = null,Object? orders = null,Object? shippingAddressId = freezed,Object? fetchAdress = null,Object? addressSubmitted = null,Object? orderResponse = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? status = null,Object? shippingaddressStatus = null,Object? error = null,Object? addresses = null,Object? orders = null,Object? shippingAddressId = freezed,Object? fetchAdress = null,Object? addressSubmitted = null,Object? orderResponse = freezed,}) {
   return _then(_OrderState(
 status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
-as OrderStatus,error: null == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
+as OrderStatus,shippingaddressStatus: null == shippingaddressStatus ? _self.shippingaddressStatus : shippingaddressStatus // ignore: cast_nullable_to_non_nullable
+as ShippingAddressStatus,error: null == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
 as String,addresses: null == addresses ? _self._addresses : addresses // ignore: cast_nullable_to_non_nullable
 as List<ShippingAddressModel>,orders: null == orders ? _self._orders : orders // ignore: cast_nullable_to_non_nullable
 as List<Orders>,shippingAddressId: freezed == shippingAddressId ? _self.shippingAddressId : shippingAddressId // ignore: cast_nullable_to_non_nullable
