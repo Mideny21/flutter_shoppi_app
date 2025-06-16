@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoppi/core/common/widgets/widget.dart';
 import 'package:shoppi/core/router/app_router.gr.dart';
+import 'package:shoppi/core/utils/app_logger.dart';
 import 'package:shoppi/core/utils/utils.dart';
 import 'package:shoppi/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:shoppi/features/orders/orders.dart';
@@ -85,13 +86,15 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
             );
           } else if (state.status == OrderStatus.success &&
               state.orderResponse != null) {
-            // context.pop();
+            Navigator.pop(context);
 
-            // Navigator.pop(context);
-            context.router.push(
-              OrderSuccessfullyRoute(order: state.orderResponse!),
+            showDialog(
+              context: context,
+              barrierDismissible: false,
+              builder: (BuildContext context) {
+                return OrderSuccessfully(order: state.orderResponse!);
+              },
             );
-            cartcubit.clearCart();
           } else if (state.error != '') {
             Navigator.pop(context);
             ScaffoldMessenger.of(

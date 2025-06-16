@@ -1,10 +1,8 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:injectable/injectable.dart';
 import 'package:shoppi/core/di/injection.dart';
 import 'package:shoppi/core/router/app_router.gr.dart';
 import 'package:shoppi/core/router/app_router_guard.dart';
 
-@singleton
 @AutoRouterConfig(replaceInRouteName: 'Screen|Page,Route')
 class AppRouter extends RootStackRouter {
   @override
@@ -31,7 +29,6 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: ProductDetailRoute.page),
     AutoRoute(page: AddShippingAddressRoute.page, guards: [getIt<AuthGuard>()]),
     AutoRoute(page: ShippingAddressRoute.page, guards: [getIt<AuthGuard>()]),
-    AutoRoute(page: OrderSuccessfullyRoute.page),
     AutoRoute(page: OnboardingRoute.page),
   ];
 }

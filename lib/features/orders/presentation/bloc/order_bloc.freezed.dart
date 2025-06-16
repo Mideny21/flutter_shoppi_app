@@ -305,6 +305,38 @@ String toString() {
 
 
 /// @nodoc
+
+
+class _ResetOrderState implements OrderEvent {
+  const _ResetOrderState();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ResetOrderState);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'OrderEvent.reset()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
 mixin _$OrderState {
 
  OrderStatus get status; ShippingAddressStatus get shippingaddressStatus; String get error; List<ShippingAddressModel> get addresses; List<Orders> get orders; int? get shippingAddressId; bool get fetchAdress; bool get addressSubmitted; OrderReponse? get orderResponse;

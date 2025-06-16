@@ -40,7 +40,6 @@ import '../modules/app_settings.dart' as _i814;
 import '../network/dio_client.dart' as _i667;
 import '../network/interceptors/auth_interceptor.dart' as _i745;
 import '../network/network_service.dart' as _i1025;
-import '../router/app_router.dart' as _i81;
 import '../router/app_router_guard.dart' as _i865;
 
 const String _dev = 'dev';
@@ -68,7 +67,6 @@ extension GetItInjectableX on _i174.GetIt {
       preResolve: true,
     );
     gh.factory<_i833.AppSettingsCubit>(() => _i833.AppSettingsCubit());
-    gh.singleton<_i81.AppRouter>(() => _i81.AppRouter());
     gh.lazySingleton<_i389.OnboardingCubit>(() => _i389.OnboardingCubit());
     gh.lazySingleton<_i373.EnvConfig>(
       () => _i325.DevEnvConfig(),

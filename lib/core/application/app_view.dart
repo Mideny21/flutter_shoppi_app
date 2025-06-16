@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appRouter = getIt<AppRouter>();
+    final appRouter = AppRouter();
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => getIt<ProductBloc>()),

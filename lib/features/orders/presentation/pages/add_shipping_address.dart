@@ -93,11 +93,11 @@ class _AddShippingAddressScreenState extends State<AddShippingAddressScreen> {
                         },
                       );
                     } else if (state.addressSubmitted) {
-                      context.pop();
-
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('Address submitted...')),
                       );
+                      context.pop();
+
                       // context.pop();
                     } else if (state.error != '') {
                       context.pop();

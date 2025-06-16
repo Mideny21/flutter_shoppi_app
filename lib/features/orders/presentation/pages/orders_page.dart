@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoppi/core/common/widgets/widget.dart';
 import 'package:shoppi/core/utils/colors.dart';
 import 'package:shoppi/features/orders/orders.dart';
+import 'package:shoppi/features/orders/presentation/widgets/history_orders.dart';
 
 @RoutePage()
 class OrdersPage extends StatefulWidget {
@@ -15,6 +16,12 @@ class OrdersPage extends StatefulWidget {
 }
 
 class _OrdersPageState extends State<OrdersPage> {
+  @override
+  void initState() {
+    BlocProvider.of<OrderBloc>(context).add(OrderEvent.fetchOrders());
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,11 +36,11 @@ class _OrdersPageState extends State<OrdersPage> {
         initialIndex: 0,
         child: Column(
           children: [
-            SizedBox(height: 8),
+            SizedBox(height: 10),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Container(
-                height: 35,
+                height: 45,
                 margin: const EdgeInsets.symmetric(horizontal: 10),
                 decoration: BoxDecoration(
                   color: Palette.Grey.withValues(alpha: 0.1),
@@ -69,12 +76,9 @@ class _OrdersPageState extends State<OrdersPage> {
                 ),
               ),
             ),
-            SizedBox(height: 8),
+            SizedBox(height: 10),
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 3.0),
-                child: TabBarView(children: [OngoingOrders(), Container()]),
-              ),
+              child: TabBarView(children: [OngoingOrders(), HistoryOrders()]),
             ),
           ],
         ),

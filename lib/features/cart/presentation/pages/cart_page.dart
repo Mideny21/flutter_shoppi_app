@@ -7,6 +7,7 @@ import 'package:shoppi/core/router/app_router.gr.dart';
 import 'package:shoppi/features/authentication/authentication.dart';
 import 'package:shoppi/features/cart/cart.dart';
 import 'package:shoppi/features/cart/presentation/cubit/cart_cubit.dart';
+import 'package:shoppi/features/orders/orders.dart';
 
 @RoutePage()
 class CartPage extends StatelessWidget {
@@ -46,7 +47,10 @@ class CartPage extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               CustomButton(
-                tap: () => context.router.push(ShippingAddressRoute()),
+                tap: () {
+                  context.read<OrderBloc>().add(const OrderEvent.reset());
+                  context.router.push(ShippingAddressRoute());
+                },
                 text:
                     'Checkout ${cartCubit.calculateTotalPrice().toStringAsFixed(2)}/=',
               ),

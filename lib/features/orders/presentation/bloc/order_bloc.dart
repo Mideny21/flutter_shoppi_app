@@ -18,6 +18,11 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     on<_CreateOrder>(_onCreateOrder);
     on<_SelectShipppingAddress>(_onSelectShippingAddress);
     on<_FetchOrders>(_onFetchOrders);
+    on<_ResetOrderState>(_onResetOrderState);
+  }
+
+  void _onResetOrderState(_ResetOrderState event, Emitter<OrderState> emit) {
+    emit(OrderState.initial());
   }
 
   Future<void> _onfetchUserAddress(

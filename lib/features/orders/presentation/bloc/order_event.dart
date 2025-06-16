@@ -9,4 +9,5 @@ class OrderEvent with _$OrderEvent {
       _SelectShipppingAddress;
   const factory OrderEvent.createOrder(OrderParams param) = _CreateOrder;
   const factory OrderEvent.fetchOrders() = _FetchOrders;
+  const factory OrderEvent.reset() = _ResetOrderState;
 }

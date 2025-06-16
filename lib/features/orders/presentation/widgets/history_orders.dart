@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:shoppi/core/common/widgets/widget.dart';
 import 'package:shoppi/features/orders/orders.dart';
+import 'package:shoppi/features/orders/presentation/widgets/ongoing_orders.dart';
 
-class OngoingOrders extends StatefulWidget {
-  const OngoingOrders({Key? key}) : super(key: key);
+class HistoryOrders extends StatelessWidget {
+  const HistoryOrders({super.key});
 
-  @override
-  State<OngoingOrders> createState() => _OngoingOrdersState();
-}
-
-class _OngoingOrdersState extends State<OngoingOrders> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<OrderBloc, OrderState>(
@@ -21,12 +16,12 @@ class _OngoingOrdersState extends State<OngoingOrders> {
         } else if (state.orders.isEmpty) {
           return Center(child: Text('No orders yet!'));
         } else if (state.orders.isNotEmpty) {
-          var ongoingorders =
-              state.orders.where((e) => e.status != 'DELIVERED').toList();
+          var historyorders =
+              state.orders.where((e) => e.status == 'DELIVERED').toList();
           return ListView.builder(
-            itemCount: ongoingorders.length,
+            itemCount: historyorders.length,
             itemBuilder: (context, index) {
-              final Orders order = ongoingorders[index];
+              final Orders order = historyorders[index];
               return Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 10,
@@ -127,26 +122,6 @@ class _OngoingOrdersState extends State<OngoingOrders> {
         }
         return Container();
       },
-    );
-  }
-}
-
-class OrderDetails extends StatelessWidget {
-  final String value;
-  final String title;
-  const OrderDetails({Key? key, required this.value, required this.title})
-    : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Text.rich(
-      TextSpan(
-        text: '$title: ',
-        style: TextStyle(fontWeight: FontWeight.w500, color: Colors.grey),
-        children: [
-          TextSpan(text: value, style: TextStyle(color: Colors.black)),
-        ],
-      ),
     );
   }
 }
