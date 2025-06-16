@@ -92,7 +92,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 },
                 builder: (context, state) {
                   return Text(
-                    '$state/=',
+                    '${moneyFormatter.format(double.parse(state ?? '0')).toString()}/=',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   );
                 },

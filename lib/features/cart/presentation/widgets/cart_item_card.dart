@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shoppi/core/utils/utils.dart';
 import 'package:shoppi/features/cart/cart.dart';
 import 'package:shoppi/features/cart/presentation/cubit/cart_cubit.dart';
 
@@ -56,7 +57,7 @@ class CartItemCard extends StatelessWidget {
                   children: [
                     SizedBox(
                       width: MediaQuery.sizeOf(context).width * 0.18,
-                      child: Text(item.price.toString()),
+                      child: Text(moneyFormatter.format(item.price).toString()),
                     ),
                     SizedBox(width: MediaQuery.sizeOf(context).width * 0.03),
                     QuantitButton(

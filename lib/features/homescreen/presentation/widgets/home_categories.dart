@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoppi/core/common/widgets/widget.dart';
 import 'package:shoppi/core/router/app_router.gr.dart';
+import 'package:shoppi/core/utils/utils.dart';
 import 'package:shoppi/features/products/products.dart';
 
 class HomeCategoriesView extends StatefulWidget {
@@ -51,7 +52,15 @@ class _HomeCategoriesViewState extends State<HomeCategoriesView> {
                           },
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 4),
-                            child: Chip(label: Text(category.name)),
+                            child: Chip(
+                              label: Text(category.name),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                side: BorderSide(
+                                  color: Palette.Primary.withValues(alpha: 0.5),
+                                ),
+                              ),
+                            ),
                           ),
                         );
                       },

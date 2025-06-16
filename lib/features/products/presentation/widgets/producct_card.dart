@@ -4,6 +4,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:shoppi/core/common/widgets/widget.dart';
 import 'package:shoppi/core/router/app_router.gr.dart';
+import 'package:shoppi/core/utils/utils.dart';
 import 'package:shoppi/features/products/model/model.dart';
 
 class ProductCard extends StatelessWidget {
@@ -40,7 +41,7 @@ class ProductCard extends StatelessWidget {
               style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
             ),
             Text(
-              '${product.price}/=',
+              'Tsh ${moneyFormatter.format(double.parse(product.price)).toString()}',
               style: TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.w600,

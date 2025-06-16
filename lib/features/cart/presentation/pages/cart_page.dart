@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoppi/core/common/widgets/widget.dart';
 import 'package:shoppi/core/di/injection.dart';
 import 'package:shoppi/core/router/app_router.gr.dart';
+import 'package:shoppi/core/utils/utils.dart';
 import 'package:shoppi/features/authentication/authentication.dart';
 import 'package:shoppi/features/cart/cart.dart';
 import 'package:shoppi/features/cart/presentation/cubit/cart_cubit.dart';
@@ -37,7 +38,7 @@ class CartPage extends StatelessWidget {
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                   ),
                   Text(
-                    cartCubit.calculateTotalPrice().toStringAsFixed(2),
+                    '${moneyFormatter.format(cartCubit.calculateTotalPrice())}/=',
                     style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w500,
@@ -52,7 +53,7 @@ class CartPage extends StatelessWidget {
                   context.router.push(ShippingAddressRoute());
                 },
                 text:
-                    'Checkout ${cartCubit.calculateTotalPrice().toStringAsFixed(2)}/=',
+                    'Checkout ${moneyFormatter.format(cartCubit.calculateTotalPrice())}/=',
               ),
             ],
           ),
