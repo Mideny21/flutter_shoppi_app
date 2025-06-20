@@ -56,6 +56,43 @@ class ProductRepository {
     );
   }
 
+  Future<ApiResult<ApiResponse<ProductResponse>>> searchProducts({
+    String? keyword,
+    int? page,
+    int? limit,
+    int? categoryId,
+    String? minPrice,
+    String? maxPrice,
+  }) async {
+    final queryParams = {
+      // if (keyword != null) 'search': keyword,
+      if (page != null) 'page': page,
+      if (limit != null) 'limit': limit,
+      if (categoryId != null) 'categoryId': categoryId,
+      if (minPrice != null) 'minPrice': minPrice,
+      if (maxPrice != null) 'maxPrice': maxPrice,
+    };
+
+    final result = await _networkService.get(
+      'products/search',
+      queryParameters: queryParams,
+    );
+
+    return result.when(
+      success: (response) {
+        return ApiResult.success(
+          ApiResponse<ProductResponse>.fromJson(
+            response.data,
+            (json) => ProductResponse.fromJson(json as Map<String, dynamic>),
+          ),
+        );
+      },
+      failure: (error) {
+        return ApiResult.failure(error);
+      },
+    );
+  }
+
   Future<ApiResult<ApiResponse<ProductResponse>>> getProductsByCategory({
     int? page,
     int? limit,

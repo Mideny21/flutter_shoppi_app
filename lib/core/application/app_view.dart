@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoppi/core/di/injection.dart';
 import 'package:shoppi/core/router/app_route_observer.dart';
 import 'package:shoppi/core/router/app_router.dart';
+import 'package:shoppi/core/utils/utils.dart';
 import 'package:shoppi/features/authentication/presentation/cubit/auth_cubit.dart';
 import 'package:shoppi/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:shoppi/features/onbaording/language.dart';
@@ -42,8 +43,9 @@ class MyApp extends StatelessWidget {
             supportedLocales: AppLocalizations.supportedLocales,
             locale: Locale(state.localeCode),
             theme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+              colorScheme: ColorScheme.fromSeed(seedColor: Palette.mainColor),
               useMaterial3: true,
+              scaffoldBackgroundColor: Colors.white,
             ),
 
             // builder: (_, child) {

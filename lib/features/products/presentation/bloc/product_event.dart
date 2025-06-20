@@ -14,4 +14,13 @@ class ProductEvent with _$ProductEvent {
   const factory ProductEvent.loadMoreProductsByCategory(int id) =
       _LoadMoreProductsByCategory;
   const factory ProductEvent.loadProduct(int id) = _LoadProduct;
+  const factory ProductEvent.updateSearchKeyword(String keyword) =
+      _UpdateSearchKeyword;
+  const factory ProductEvent.updateFilters({
+    int? categoryId,
+    String? minPrice,
+    String? maxPrice,
+  }) = _UpdateFilters;
+  const factory ProductEvent.searchProducts() = _SearchProducts;
+  const factory ProductEvent.loadMoreSearchProducts() = _LoadMoreSearchProducts;
 }

@@ -21,6 +21,10 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     on<_LoadProductsByCategory>(_onLoadProductsByCategory);
     on<_LoadMoreProductsByCategory>(_onLoadMoreProductsByCategory);
     on<_LoadProduct>(_onLoadProduct);
+    on<_SearchProducts>(_onSearchProducts);
+    on<_LoadMoreSearchProducts>(_onLoadMoresearchproducts);
+    on<_UpdateSearchKeyword>(_onUpdateSearchKeyword);
+    on<_UpdateFilters>(_onUpateFilters);
   }
 
   Future<void> onGetAllCategories(
@@ -130,6 +134,137 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         emit(
           state.copyWith(
             allProducts: state.allProducts.copyWith(
+              isLoadingMore: false,
+              error: error.message,
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  FutureOr<void> _onUpdateSearchKeyword(
+    _UpdateSearchKeyword event,
+    Emitter<ProductState> emit,
+  ) {
+    emit(state.copyWith(searchKeyword: event.keyword));
+  }
+
+  FutureOr<void> _onUpateFilters(
+    _UpdateFilters event,
+    Emitter<ProductState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        selectedCategoryId: event.categoryId,
+        minPrice: event.minPrice,
+        maxPrice: event.maxPrice,
+      ),
+    );
+  }
+
+  // SEARCHING PRODUCTS
+  Future<void> _onSearchProducts(
+    _SearchProducts event,
+    Emitter<ProductState> emit,
+  ) async {
+    emit(
+      state.copyWith(
+        searchResults: state.searchResults.copyWith(
+          isLoading: true,
+          error: null,
+        ),
+      ),
+    );
+
+    final result = await _productRepository.searchProducts(
+      keyword: state.searchKeyword,
+      categoryId: state.selectedCategoryId,
+      minPrice: state.minPrice,
+      maxPrice: state.maxPrice,
+      page: 1,
+      limit: state.searchResults.itemsPerPage,
+    );
+
+    result.when(
+      success: (data) {
+        emit(
+          state.copyWith(
+            searchResults: state.searchResults.copyWith(
+              isLoading: false,
+              items: data.data.data,
+              currentPage: data.data.meta.currentPage,
+              totalPages: data.data.meta.totalPages,
+              totalItems: data.data.meta.totalItems,
+              itemsPerPage: data.data.meta.itemsPerPage,
+              hasReachedMax:
+                  data.data.meta.currentPage >= data.data.meta.totalPages,
+            ),
+          ),
+        );
+      },
+      failure: (error) {
+        emit(
+          state.copyWith(
+            searchResults: state.searchResults.copyWith(
+              isLoading: false,
+              error: error.message,
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Future<void> _onLoadMoresearchproducts(
+    _LoadMoreSearchProducts event,
+    Emitter<ProductState> emit,
+  ) async {
+    if (state.searchResults.hasReachedMax ||
+        state.searchResults.isLoadingMore) {
+      return;
+    }
+
+    final nextPage = state.searchResults.currentPage + 1;
+
+    emit(
+      state.copyWith(
+        searchResults: state.searchResults.copyWith(isLoadingMore: true),
+      ),
+    );
+
+    final results = await _productRepository.searchProducts(
+      keyword: state.searchKeyword,
+      categoryId: state.selectedCategoryId,
+      minPrice: state.minPrice,
+      maxPrice: state.maxPrice,
+      page: nextPage,
+      limit: state.searchResults.itemsPerPage,
+    );
+
+    results.when(
+      success: (data) {
+        final newItems = List<ProductModel>.from(state.searchResults.items)
+          ..addAll(data.data.data);
+        emit(
+          state.copyWith(
+            searchResults: state.searchResults.copyWith(
+              isLoadingMore: false,
+              items: newItems,
+              currentPage: data.data.meta.currentPage,
+              totalPages: data.data.meta.totalPages,
+              totalItems: data.data.meta.totalItems,
+              itemsPerPage: data.data.meta.itemsPerPage,
+              hasReachedMax:
+                  data.data.meta.currentPage >= data.data.meta.totalPages,
+            ),
+          ),
+        );
+      },
+      failure: (error) {
+        emit(
+          state.copyWith(
+            searchResults: state.searchResults.copyWith(
               isLoadingMore: false,
               error: error.message,
             ),
