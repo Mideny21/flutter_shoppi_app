@@ -65,7 +65,7 @@ class ProductRepository {
     String? maxPrice,
   }) async {
     final queryParams = {
-      // if (keyword != null) 'search': keyword,
+      if (keyword != null) 'keyword': keyword,
       if (page != null) 'page': page,
       if (limit != null) 'limit': limit,
       if (categoryId != null) 'categoryId': categoryId,

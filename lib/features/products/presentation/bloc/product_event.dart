@@ -23,4 +23,5 @@ class ProductEvent with _$ProductEvent {
   }) = _UpdateFilters;
   const factory ProductEvent.searchProducts() = _SearchProducts;
   const factory ProductEvent.loadMoreSearchProducts() = _LoadMoreSearchProducts;
+  const factory ProductEvent.resetSearchState() = _ResetSearchState;
 }

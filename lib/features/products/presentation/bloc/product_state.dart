@@ -19,6 +19,8 @@ abstract class ProductState with _$ProductState {
     String? minPrice,
     String? maxPrice,
     @Default(null) ProductModel? product,
+    @Default(false) bool hasSearched,
+    @Default(0) int activeFiltersCount,
   }) = _ProductState;
 
   factory ProductState.initial() => const ProductState();

@@ -25,6 +25,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     on<_LoadMoreSearchProducts>(_onLoadMoresearchproducts);
     on<_UpdateSearchKeyword>(_onUpdateSearchKeyword);
     on<_UpdateFilters>(_onUpateFilters);
+    on<_ResetSearchState>(_onResetSearchState);
   }
 
   Future<void> onGetAllCategories(
@@ -154,11 +155,36 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     _UpdateFilters event,
     Emitter<ProductState> emit,
   ) {
+    final count =
+        [
+          event.categoryId,
+          event.minPrice,
+          event.maxPrice,
+        ].where((e) => e != null).length;
+
     emit(
       state.copyWith(
         selectedCategoryId: event.categoryId,
         minPrice: event.minPrice,
         maxPrice: event.maxPrice,
+        activeFiltersCount: count,
+      ),
+    );
+  }
+
+  FutureOr<void> _onResetSearchState(
+    _ResetSearchState event,
+    Emitter<ProductState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        searchKeyword: '',
+        hasSearched: false,
+        searchResults: PaginatedData<ProductModel>(),
+        selectedCategoryId: null,
+        minPrice: null,
+        maxPrice: null,
+        activeFiltersCount: 0,
       ),
     );
   }
@@ -170,6 +196,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
   ) async {
     emit(
       state.copyWith(
+        hasSearched: true,
         searchResults: state.searchResults.copyWith(
           isLoading: true,
           error: null,

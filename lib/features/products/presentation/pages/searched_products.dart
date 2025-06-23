@@ -5,6 +5,7 @@ import 'package:shoppi/core/common/widgets/widget.dart';
 import 'package:shoppi/core/utils/app_logger.dart';
 import 'package:shoppi/core/utils/colors.dart';
 import 'package:shoppi/features/products/products.dart';
+import 'package:badges/badges.dart' as badges;
 
 @RoutePage()
 class SearchProductScreen extends StatefulWidget {
@@ -16,6 +17,7 @@ class SearchProductScreen extends StatefulWidget {
 
 class _SearchProductScreenState extends State<SearchProductScreen> {
   late ScrollController _scrollController;
+  late ProductBloc _productBloc;
 
   void _onScroll() {
     if (_isBottom) {
@@ -39,8 +41,17 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _productBloc = context.read<ProductBloc>();
+  }
+
+  @override
   void dispose() {
     _scrollController.dispose();
+
+    _productBloc.add(ProductEvent.resetSearchState());
+
     super.dispose();
   }
 
@@ -52,14 +63,14 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
         toolbarHeight: 60,
         automaticallyImplyLeading: false,
         //  backgroundColor: AppColors.buttonColor.withOpacity(0.8),
-        title: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(2),
-            color: Colors.white,
-          ),
-          child: Row(
-            children: [
-              Expanded(
+        title: Row(
+          children: [
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(2),
+                  color: Colors.white,
+                ),
                 child: TextFormField(
                   onFieldSubmitted: (input) {
                     context.read<ProductBloc>().add(
@@ -96,28 +107,56 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
                         Navigator.pop(context);
                       },
                     ),
+                    suffixIcon: IconButton(
+                      iconSize: 26,
+
+                      ///  color: AppColors.buttonColor.withOpacity(0.8),
+                      icon: const Icon(Icons.search),
+                      onPressed: () {
+                        context.read<ProductBloc>().add(
+                          ProductEvent.searchProducts(),
+                        );
+                      },
+                    ),
                     hintStyle: TextStyle(fontSize: 16),
                     hintText: "Search...",
                   ),
                 ),
               ),
-              IconButton(
-                onPressed: () {
-                  showModalBottomSheet(
-                    context: context,
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(16),
-                      ),
-                    ),
-                    isScrollControlled: true,
-                    builder: (_) => const FilterSheet(),
-                  );
-                },
-                icon: Icon(Icons.filter_list_rounded),
-              ),
-            ],
-          ),
+            ),
+            BlocBuilder<ProductBloc, ProductState>(
+              builder: (context, state) {
+                return badges.Badge(
+                  showBadge: state.activeFiltersCount > 0,
+                  badgeContent: Text(
+                    '${state.activeFiltersCount}',
+                    style: const TextStyle(color: Colors.white, fontSize: 12),
+                  ),
+                  badgeStyle: badges.BadgeStyle(
+                    badgeColor: Palette.mainColor,
+                    elevation: 0,
+                    padding: const EdgeInsets.all(6),
+                  ),
+                  position: badges.BadgePosition.topEnd(top: -6, end: -6),
+                  child: IconButton(
+                    onPressed: () {
+                      showModalBottomSheet(
+                        context: context,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(16),
+                          ),
+                        ),
+                        isScrollControlled: true,
+                        builder: (_) => const FilterSheet(),
+                      );
+                    },
+                    icon: const Icon(Icons.filter_list_rounded),
+                  ),
+                );
+              },
+            ),
+          ],
         ),
       ),
       body: BlocBuilder<ProductBloc, ProductState>(
@@ -169,140 +208,13 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
               ],
             );
           } else if (state.searchResults.items.isEmpty &&
-              !state.searchResults.isLoading) {
+              !state.searchResults.isLoading &&
+              state.hasSearched) {
             return const Center(child: Text("No products found"));
           }
 
           return Container();
         },
-      ),
-    );
-  }
-}
-
-class FilterSheet extends StatefulWidget {
-  const FilterSheet({super.key});
-
-  @override
-  State<FilterSheet> createState() => _FilterSheetState();
-}
-
-class _FilterSheetState extends State<FilterSheet> {
-  final TextEditingController _minPriceController = TextEditingController();
-  final TextEditingController _maxPriceController = TextEditingController();
-
-  int _selectedCategory = -1;
-
-  @override
-  void dispose() {
-    _minPriceController.dispose();
-    _maxPriceController.dispose();
-    super.dispose();
-  }
-
-  void _applyFilters() {
-    context.read<ProductBloc>().add(
-      ProductEvent.updateFilters(
-        categoryId: _selectedCategory,
-        minPrice: _minPriceController.text,
-        maxPrice: _maxPriceController.text,
-      ),
-    );
-
-    Navigator.pop(context); // Close the bottom sheet
-
-    // You can then use this data however you want
-    // print("Filters Applied:");
-    // print("Min Price: $minPrice");
-    // print("Max Price: $maxPrice");
-    print("Category: $_selectedCategory");
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        bottom: MediaQuery.of(context).viewInsets.bottom,
-      ),
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Text(
-                "Filter Products",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 16),
-              Row(
-                children: [
-                  Expanded(
-                    child: TextFormField(
-                      controller: _minPriceController,
-                      keyboardType: TextInputType.number,
-                      decoration: const InputDecoration(
-                        labelText: "Min Price",
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: TextFormField(
-                      controller: _maxPriceController,
-                      keyboardType: TextInputType.number,
-                      decoration: const InputDecoration(
-                        labelText: "Max Price",
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-
-              const SizedBox(height: 16),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Category",
-                  style: Theme.of(context).textTheme.labelMedium,
-                ),
-              ),
-              const SizedBox(height: 8),
-              BlocBuilder<ProductBloc, ProductState>(
-                builder: (context, state) {
-                  return Wrap(
-                    spacing: 10,
-                    children:
-                        state.categories.isEmpty
-                            ? []
-                            : state.categories.map((cat) {
-                              final isSelected = _selectedCategory == cat.id;
-                              return ChoiceChip(
-                                label: Text(cat.name),
-                                selected: isSelected,
-                                onSelected: (_) {
-                                  setState(() {
-                                    _selectedCategory = cat.id;
-                                  });
-                                },
-                              );
-                            }).toList(),
-                  );
-                },
-              ),
-              const SizedBox(height: 24),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: _applyFilters,
-                  child: const Text("Apply Filters"),
-                ),
-              ),
-            ],
-          ),
-        ),
       ),
     );
   }
