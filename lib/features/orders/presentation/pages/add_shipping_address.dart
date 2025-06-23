@@ -107,7 +107,10 @@ class _AddShippingAddressScreenState extends State<AddShippingAddressScreen> {
                     }
                   },
                   builder: (context, state) {
-                    return CustomButton(tap: _submit, text: 'Save Address');
+                    return CustomNeumorphicButton(
+                      onTap: _submit,
+                      text: 'Save Address',
+                    );
                   },
                 ),
               ],

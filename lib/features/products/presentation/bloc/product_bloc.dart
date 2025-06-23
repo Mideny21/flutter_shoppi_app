@@ -256,7 +256,10 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
 
     emit(
       state.copyWith(
-        searchResults: state.searchResults.copyWith(isLoadingMore: true),
+        searchResults: state.searchResults.copyWith(
+          isLoadingMore: true,
+          hasStartedLoadingMore: true,
+        ),
       ),
     );
 
@@ -278,6 +281,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
             searchResults: state.searchResults.copyWith(
               isLoadingMore: false,
               items: newItems,
+              //  hasStartedLoadingMore: false,
               currentPage: data.data.meta.currentPage,
               totalPages: data.data.meta.totalPages,
               totalItems: data.data.meta.totalItems,

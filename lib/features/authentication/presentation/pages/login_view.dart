@@ -131,10 +131,10 @@ class _LoginPageState extends State<LoginPage> {
                       horizontal: 8,
                       vertical: 5,
                     ),
-                    child: CustomButton(
-                      tap: _login,
+                    child: CustomNeumorphicButton(
+                      onTap: _login,
                       text: 'login',
-                      textColor: Colors.white,
+                      // textColor: Colors.white,
                     ),
                   );
                 },

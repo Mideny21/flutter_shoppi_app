@@ -47,13 +47,14 @@ class CartPage extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 10),
-              CustomButton(
-                tap: () {
+
+              CustomNeumorphicButton(
+                text:
+                    'Checkout ${moneyFormatter.format(cartCubit.calculateTotalPrice())}/=',
+                onTap: () {
                   context.read<OrderBloc>().add(const OrderEvent.reset());
                   context.router.push(ShippingAddressRoute());
                 },
-                text:
-                    'Checkout ${moneyFormatter.format(cartCubit.calculateTotalPrice())}/=',
               ),
             ],
           ),

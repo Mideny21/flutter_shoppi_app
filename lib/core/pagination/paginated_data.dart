@@ -8,6 +8,7 @@ sealed class PaginatedData<T> with _$PaginatedData<T> {
     @Default([]) List<T> items,
     @Default(false) bool isLoading,
     @Default(false) bool isLoadingMore,
+    @Default(false) bool hasStartedLoadingMore,
     @Default(1) int currentPage,
     @Default(0) int totalPages,
     @Default(0) int totalItems,

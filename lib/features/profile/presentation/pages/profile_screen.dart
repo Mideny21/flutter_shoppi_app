@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:shoppi/core/common/widgets/widget.dart';
 import 'package:shoppi/core/utils/utils.dart';
 
 @RoutePage()
@@ -18,6 +19,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         backgroundColor: Palette.Primary,
         title: Text('Settings', style: TextStyle(color: Colors.white)),
         centerTitle: true,
+        automaticallyImplyLeading: false,
       ),
       body: SafeArea(
         child: Padding(
@@ -52,7 +54,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   const Spacer(),
                   IconButton(
-                    icon: Icon(Icons.logout, color: Palette.Primary),
+                    icon: Icon(Icons.logout, color: Colors.red),
                     onPressed: () {
                       // TODO: Add logout logic
                     },
@@ -92,6 +94,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 onTap: () {},
               ),
               const Divider(height: 1),
+              const SizedBox(height: 20),
             ],
           ),
         ),

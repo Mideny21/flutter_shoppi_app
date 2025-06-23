@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shoppi/core/common/widgets/widget.dart';
 import 'package:shoppi/features/products/products.dart';
 
 class FilterSheet extends StatefulWidget {
@@ -60,13 +61,7 @@ class _FilterSheetState extends State<FilterSheet> {
       _maxPriceController.clear();
     });
 
-    context.read<ProductBloc>().add(
-      ProductEvent.updateFilters(
-        categoryId: null,
-        minPrice: null,
-        maxPrice: null,
-      ),
-    );
+    context.read<ProductBloc>().add(ProductEvent.resetSearchState());
 
     Navigator.pop(context);
   }
@@ -162,9 +157,9 @@ class _FilterSheetState extends State<FilterSheet> {
                       ),
                       const SizedBox(width: 12),
                       Expanded(
-                        child: ElevatedButton(
-                          onPressed: _applyFilters,
-                          child: const Text("Apply Filters"),
+                        child: CustomNeumorphicButton(
+                          onTap: _applyFilters,
+                          text: ' Apply Filters',
                         ),
                       ),
                     ],

@@ -99,12 +99,17 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               ),
               SizedBox(
                 width: MediaQuery.sizeOf(context).width * 0.4,
-                child: CustomButton(
-                  tap: !added ? submitToCart : null,
-                  textColor: added ? Palette.mainColor : Colors.white,
-                  backgroundColor: added ? Colors.white : Palette.mainColor,
+
+                child: CustomNeumorphicButton(
                   text: added ? "Added" : "Add To cart",
+                  onTap: !added ? submitToCart : null,
                 ),
+                // child: CustomButton(
+                //   tap: !added ? submitToCart : null,
+                //   textColor: added ? Palette.mainColor : Colors.white,
+                //   backgroundColor: added ? Colors.white : Palette.mainColor,
+                //   text: added ? "Added" : "Add To cart",
+                // ),
               ),
             ],
           ),

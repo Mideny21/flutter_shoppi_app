@@ -103,8 +103,8 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
           }
         },
         builder: (context, state) {
-          return CustomButton(
-            tap: addressId == null ? null : handleSubmitOrder,
+          return CustomNeumorphicButton(
+            onTap: addressId == null ? null : handleSubmitOrder,
             text: 'Confirm Order',
           );
         },
@@ -173,8 +173,9 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
                   children: [
                     const Text('No address'),
                     const SizedBox(height: 10),
-                    CustomButton(
-                      tap: () => context.router.push(AddShippingAddressRoute()),
+                    CustomNeumorphicButton(
+                      onTap:
+                          () => context.router.push(AddShippingAddressRoute()),
                       text: 'Add Address',
                     ),
                   ],

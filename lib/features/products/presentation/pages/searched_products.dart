@@ -159,62 +159,72 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
           ],
         ),
       ),
-      body: BlocBuilder<ProductBloc, ProductState>(
-        builder: (context, state) {
-          log.i(
-            'ProductBySearch Current Page ${state.searchResults.currentPage} of ${state.searchResults.totalPages}',
-          );
+      body: Column(
+        children: [
+          SizedBox(height: 10),
+          Expanded(
+            child: BlocBuilder<ProductBloc, ProductState>(
+              builder: (context, state) {
+                log.i(
+                  'ProductBySearch Current Page ${state.searchResults.currentPage} of ${state.searchResults.totalPages}',
+                );
 
-          if (state.searchResults.isLoading &&
-              state.searchResults.items.isEmpty) {
-            return const Center(child: AppLoadingIndicator());
-          } else if (state.searchResults.items.isNotEmpty) {
-            return CustomScrollView(
-              controller: _scrollController,
-              slivers: [
-                SliverGrid(
-                  delegate: SliverChildBuilderDelegate((context, index) {
-                    final product = state.searchResults.items[index];
-                    return ProductCard(product: product);
-                  }, childCount: state.searchResults.items.length),
-                  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 200.0,
-                    mainAxisSpacing: 10.0,
-                    crossAxisSpacing: 3.0,
-                    childAspectRatio:
-                        (MediaQuery.of(context).size.width /
-                            (MediaQuery.of(context).size.height / 1.75)),
-                  ),
-                ),
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    child: Center(
-                      child:
-                          state.searchResults.hasReachedMax
-                              ? const Text(
-                                'No more products to load',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.grey,
-                                ),
-                              )
-                              : state.searchResults.isLoadingMore
-                              ? const CircularProgressIndicator()
-                              : const SizedBox(),
-                    ),
-                  ),
-                ),
-              ],
-            );
-          } else if (state.searchResults.items.isEmpty &&
-              !state.searchResults.isLoading &&
-              state.hasSearched) {
-            return const Center(child: Text("No products found"));
-          }
+                if (state.searchResults.isLoading &&
+                    state.searchResults.items.isEmpty) {
+                  return const Center(child: AppLoadingIndicator());
+                } else if (state.searchResults.items.isNotEmpty) {
+                  return CustomScrollView(
+                    controller: _scrollController,
+                    slivers: [
+                      SliverGrid(
+                        delegate: SliverChildBuilderDelegate((context, index) {
+                          final product = state.searchResults.items[index];
+                          return ProductCard(product: product);
+                        }, childCount: state.searchResults.items.length),
+                        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                          maxCrossAxisExtent: 200.0,
+                          mainAxisSpacing: 10.0,
+                          crossAxisSpacing: 3.0,
+                          childAspectRatio:
+                              (MediaQuery.of(context).size.width /
+                                  (MediaQuery.of(context).size.height / 1.75)),
+                        ),
+                      ),
+                      SliverToBoxAdapter(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: Center(
+                            child:
+                                state.searchResults.hasReachedMax &&
+                                        state
+                                            .searchResults
+                                            .hasStartedLoadingMore
+                                    ? const Text(
+                                      'No more products to load',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.grey,
+                                      ),
+                                    )
+                                    : state.searchResults.isLoadingMore
+                                    ? const CircularProgressIndicator()
+                                    : const SizedBox(),
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                } else if (state.searchResults.items.isEmpty &&
+                    !state.searchResults.isLoading &&
+                    state.hasSearched) {
+                  return const Center(child: Text("No products found"));
+                }
 
-          return Container();
-        },
+                return Container();
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

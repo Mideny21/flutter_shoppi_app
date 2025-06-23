@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$PaginatedData<T> {
 
- List<T> get items; bool get isLoading; bool get isLoadingMore; int get currentPage; int get totalPages; int get totalItems; int get itemsPerPage; bool get hasReachedMax; String? get error;
+ List<T> get items; bool get isLoading; bool get isLoadingMore; bool get hasStartedLoadingMore; int get currentPage; int get totalPages; int get totalItems; int get itemsPerPage; bool get hasReachedMax; String? get error;
 /// Create a copy of PaginatedData
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -26,16 +26,16 @@ $PaginatedDataCopyWith<T, PaginatedData<T>> get copyWith => _$PaginatedDataCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PaginatedData<T>&&const DeepCollectionEquality().equals(other.items, items)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isLoadingMore, isLoadingMore) || other.isLoadingMore == isLoadingMore)&&(identical(other.currentPage, currentPage) || other.currentPage == currentPage)&&(identical(other.totalPages, totalPages) || other.totalPages == totalPages)&&(identical(other.totalItems, totalItems) || other.totalItems == totalItems)&&(identical(other.itemsPerPage, itemsPerPage) || other.itemsPerPage == itemsPerPage)&&(identical(other.hasReachedMax, hasReachedMax) || other.hasReachedMax == hasReachedMax)&&(identical(other.error, error) || other.error == error));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PaginatedData<T>&&const DeepCollectionEquality().equals(other.items, items)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isLoadingMore, isLoadingMore) || other.isLoadingMore == isLoadingMore)&&(identical(other.hasStartedLoadingMore, hasStartedLoadingMore) || other.hasStartedLoadingMore == hasStartedLoadingMore)&&(identical(other.currentPage, currentPage) || other.currentPage == currentPage)&&(identical(other.totalPages, totalPages) || other.totalPages == totalPages)&&(identical(other.totalItems, totalItems) || other.totalItems == totalItems)&&(identical(other.itemsPerPage, itemsPerPage) || other.itemsPerPage == itemsPerPage)&&(identical(other.hasReachedMax, hasReachedMax) || other.hasReachedMax == hasReachedMax)&&(identical(other.error, error) || other.error == error));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(items),isLoading,isLoadingMore,currentPage,totalPages,totalItems,itemsPerPage,hasReachedMax,error);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(items),isLoading,isLoadingMore,hasStartedLoadingMore,currentPage,totalPages,totalItems,itemsPerPage,hasReachedMax,error);
 
 @override
 String toString() {
-  return 'PaginatedData<$T>(items: $items, isLoading: $isLoading, isLoadingMore: $isLoadingMore, currentPage: $currentPage, totalPages: $totalPages, totalItems: $totalItems, itemsPerPage: $itemsPerPage, hasReachedMax: $hasReachedMax, error: $error)';
+  return 'PaginatedData<$T>(items: $items, isLoading: $isLoading, isLoadingMore: $isLoadingMore, hasStartedLoadingMore: $hasStartedLoadingMore, currentPage: $currentPage, totalPages: $totalPages, totalItems: $totalItems, itemsPerPage: $itemsPerPage, hasReachedMax: $hasReachedMax, error: $error)';
 }
 
 
@@ -46,7 +46,7 @@ abstract mixin class $PaginatedDataCopyWith<T,$Res>  {
   factory $PaginatedDataCopyWith(PaginatedData<T> value, $Res Function(PaginatedData<T>) _then) = _$PaginatedDataCopyWithImpl;
 @useResult
 $Res call({
- List<T> items, bool isLoading, bool isLoadingMore, int currentPage, int totalPages, int totalItems, int itemsPerPage, bool hasReachedMax, String? error
+ List<T> items, bool isLoading, bool isLoadingMore, bool hasStartedLoadingMore, int currentPage, int totalPages, int totalItems, int itemsPerPage, bool hasReachedMax, String? error
 });
 
 
@@ -63,11 +63,12 @@ class _$PaginatedDataCopyWithImpl<T,$Res>
 
 /// Create a copy of PaginatedData
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? items = null,Object? isLoading = null,Object? isLoadingMore = null,Object? currentPage = null,Object? totalPages = null,Object? totalItems = null,Object? itemsPerPage = null,Object? hasReachedMax = null,Object? error = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? items = null,Object? isLoading = null,Object? isLoadingMore = null,Object? hasStartedLoadingMore = null,Object? currentPage = null,Object? totalPages = null,Object? totalItems = null,Object? itemsPerPage = null,Object? hasReachedMax = null,Object? error = freezed,}) {
   return _then(_self.copyWith(
 items: null == items ? _self.items : items // ignore: cast_nullable_to_non_nullable
 as List<T>,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,isLoadingMore: null == isLoadingMore ? _self.isLoadingMore : isLoadingMore // ignore: cast_nullable_to_non_nullable
+as bool,hasStartedLoadingMore: null == hasStartedLoadingMore ? _self.hasStartedLoadingMore : hasStartedLoadingMore // ignore: cast_nullable_to_non_nullable
 as bool,currentPage: null == currentPage ? _self.currentPage : currentPage // ignore: cast_nullable_to_non_nullable
 as int,totalPages: null == totalPages ? _self.totalPages : totalPages // ignore: cast_nullable_to_non_nullable
 as int,totalItems: null == totalItems ? _self.totalItems : totalItems // ignore: cast_nullable_to_non_nullable
@@ -85,7 +86,7 @@ as String?,
 
 
 class _PaginatedData<T> implements PaginatedData<T> {
-  const _PaginatedData({final  List<T> items = const [], this.isLoading = false, this.isLoadingMore = false, this.currentPage = 1, this.totalPages = 0, this.totalItems = 0, this.itemsPerPage = 16, this.hasReachedMax = false, this.error}): _items = items;
+  const _PaginatedData({final  List<T> items = const [], this.isLoading = false, this.isLoadingMore = false, this.hasStartedLoadingMore = false, this.currentPage = 1, this.totalPages = 0, this.totalItems = 0, this.itemsPerPage = 16, this.hasReachedMax = false, this.error}): _items = items;
   
 
  final  List<T> _items;
@@ -97,6 +98,7 @@ class _PaginatedData<T> implements PaginatedData<T> {
 
 @override@JsonKey() final  bool isLoading;
 @override@JsonKey() final  bool isLoadingMore;
+@override@JsonKey() final  bool hasStartedLoadingMore;
 @override@JsonKey() final  int currentPage;
 @override@JsonKey() final  int totalPages;
 @override@JsonKey() final  int totalItems;
@@ -114,16 +116,16 @@ _$PaginatedDataCopyWith<T, _PaginatedData<T>> get copyWith => __$PaginatedDataCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PaginatedData<T>&&const DeepCollectionEquality().equals(other._items, _items)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isLoadingMore, isLoadingMore) || other.isLoadingMore == isLoadingMore)&&(identical(other.currentPage, currentPage) || other.currentPage == currentPage)&&(identical(other.totalPages, totalPages) || other.totalPages == totalPages)&&(identical(other.totalItems, totalItems) || other.totalItems == totalItems)&&(identical(other.itemsPerPage, itemsPerPage) || other.itemsPerPage == itemsPerPage)&&(identical(other.hasReachedMax, hasReachedMax) || other.hasReachedMax == hasReachedMax)&&(identical(other.error, error) || other.error == error));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PaginatedData<T>&&const DeepCollectionEquality().equals(other._items, _items)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isLoadingMore, isLoadingMore) || other.isLoadingMore == isLoadingMore)&&(identical(other.hasStartedLoadingMore, hasStartedLoadingMore) || other.hasStartedLoadingMore == hasStartedLoadingMore)&&(identical(other.currentPage, currentPage) || other.currentPage == currentPage)&&(identical(other.totalPages, totalPages) || other.totalPages == totalPages)&&(identical(other.totalItems, totalItems) || other.totalItems == totalItems)&&(identical(other.itemsPerPage, itemsPerPage) || other.itemsPerPage == itemsPerPage)&&(identical(other.hasReachedMax, hasReachedMax) || other.hasReachedMax == hasReachedMax)&&(identical(other.error, error) || other.error == error));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_items),isLoading,isLoadingMore,currentPage,totalPages,totalItems,itemsPerPage,hasReachedMax,error);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_items),isLoading,isLoadingMore,hasStartedLoadingMore,currentPage,totalPages,totalItems,itemsPerPage,hasReachedMax,error);
 
 @override
 String toString() {
-  return 'PaginatedData<$T>(items: $items, isLoading: $isLoading, isLoadingMore: $isLoadingMore, currentPage: $currentPage, totalPages: $totalPages, totalItems: $totalItems, itemsPerPage: $itemsPerPage, hasReachedMax: $hasReachedMax, error: $error)';
+  return 'PaginatedData<$T>(items: $items, isLoading: $isLoading, isLoadingMore: $isLoadingMore, hasStartedLoadingMore: $hasStartedLoadingMore, currentPage: $currentPage, totalPages: $totalPages, totalItems: $totalItems, itemsPerPage: $itemsPerPage, hasReachedMax: $hasReachedMax, error: $error)';
 }
 
 
@@ -134,7 +136,7 @@ abstract mixin class _$PaginatedDataCopyWith<T,$Res> implements $PaginatedDataCo
   factory _$PaginatedDataCopyWith(_PaginatedData<T> value, $Res Function(_PaginatedData<T>) _then) = __$PaginatedDataCopyWithImpl;
 @override @useResult
 $Res call({
- List<T> items, bool isLoading, bool isLoadingMore, int currentPage, int totalPages, int totalItems, int itemsPerPage, bool hasReachedMax, String? error
+ List<T> items, bool isLoading, bool isLoadingMore, bool hasStartedLoadingMore, int currentPage, int totalPages, int totalItems, int itemsPerPage, bool hasReachedMax, String? error
 });
 
 
@@ -151,11 +153,12 @@ class __$PaginatedDataCopyWithImpl<T,$Res>
 
 /// Create a copy of PaginatedData
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? items = null,Object? isLoading = null,Object? isLoadingMore = null,Object? currentPage = null,Object? totalPages = null,Object? totalItems = null,Object? itemsPerPage = null,Object? hasReachedMax = null,Object? error = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? items = null,Object? isLoading = null,Object? isLoadingMore = null,Object? hasStartedLoadingMore = null,Object? currentPage = null,Object? totalPages = null,Object? totalItems = null,Object? itemsPerPage = null,Object? hasReachedMax = null,Object? error = freezed,}) {
   return _then(_PaginatedData<T>(
 items: null == items ? _self._items : items // ignore: cast_nullable_to_non_nullable
 as List<T>,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,isLoadingMore: null == isLoadingMore ? _self.isLoadingMore : isLoadingMore // ignore: cast_nullable_to_non_nullable
+as bool,hasStartedLoadingMore: null == hasStartedLoadingMore ? _self.hasStartedLoadingMore : hasStartedLoadingMore // ignore: cast_nullable_to_non_nullable
 as bool,currentPage: null == currentPage ? _self.currentPage : currentPage // ignore: cast_nullable_to_non_nullable
 as int,totalPages: null == totalPages ? _self.totalPages : totalPages // ignore: cast_nullable_to_non_nullable
 as int,totalItems: null == totalItems ? _self.totalItems : totalItems // ignore: cast_nullable_to_non_nullable
