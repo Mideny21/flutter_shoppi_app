@@ -37,7 +37,8 @@ class _AddShippingAddressScreenState extends State<AddShippingAddressScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Add Shipping Address"), centerTitle: true),
+      appBar: CustomAppBar(title: "Add Shipping Address", showBackButton: true),
+
       body: SingleChildScrollView(
         child: Form(
           key: _formKey,

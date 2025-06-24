@@ -62,7 +62,6 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Palette.White,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -208,7 +207,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 3),
                   BlocConsumer<AuthCubit, AuthState>(
                     listener: (context, state) {
                       // TODO: implement listener
@@ -235,13 +234,9 @@ class _SignUpPageState extends State<SignUpPage> {
                           horizontal: 8,
                           vertical: 5,
                         ),
-                        child: CustomButton(
-                          height: 45,
-                          fontSize: 20,
-                          // onloading: state is UserSignUpLoading,
-                          tap: _signUp,
+                        child: CustomNeumorphicButton(
+                          onTap: _signUp,
                           text: 'Sign Up',
-                          textColor: Colors.white,
                         ),
                       );
                     },
@@ -250,7 +245,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   Center(
                     child: Text.rich(
                       TextSpan(
-                        text: "have an account? ",
+                        text: "Have an account? ",
                         style: const TextStyle(
                           color: Color(0xff667085),
                           fontSize: 18,
@@ -267,7 +262,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             recognizer:
                                 TapGestureRecognizer()
                                   ..onTap = () {
-                                    context.read<AuthCubit>().onLoginToggle();
+                                    context.pop();
                                   },
                           ),
                         ],

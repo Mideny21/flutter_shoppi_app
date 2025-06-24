@@ -19,7 +19,8 @@ class CartPage extends StatelessWidget {
     final cartCubit = context.watch<CartCubit>();
 
     return Scaffold(
-      appBar: AppBar(title: const Text("My cart"), centerTitle: true),
+      appBar: CustomAppBar(title: 'My cart', showBackButton: true),
+
       bottomSheet: Container(
         decoration: const BoxDecoration(
           color: Colors.white,
@@ -70,7 +71,7 @@ class CartPage extends StatelessWidget {
           itemCount: cartCubit.state.length,
           itemBuilder: (ctx, index) {
             return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
               child: CartItemCard(index: index),
             );
           },

@@ -38,16 +38,17 @@ class _HomeSearchBarState extends State<HomeSearchBar> {
           },
           decoration: InputDecoration(
             filled: true,
-            fillColor: Colors.grey.withAlpha(50),
+            fillColor: Colors.white,
             labelText: "Search",
             labelStyle: TextStyle(
               color: Colors.grey,
               fontWeight: FontWeight.w500,
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-              borderSide: BorderSide(color: Colors.transparent),
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide(color: Colors.grey),
             ),
+            contentPadding: EdgeInsets.symmetric(horizontal: 10),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(15),
               borderSide: BorderSide(color: Colors.transparent),

@@ -33,8 +33,8 @@ class CustomNeumorphicButton extends StatelessWidget {
     final bool isPressed = shape == NeumorphicShapeType.pressed;
 
     final double offset = isFlat ? 0 : depth.abs();
-    final double blur = isFlat ? 0 : depth.abs() * 3;
-    final double spread = isFlat ? 0 : 1.5;
+    final double blur = isFlat ? 0 : depth.abs() * 2;
+    final double spread = isFlat ? 0 : 1.0;
 
     final lightShadowOffset =
         isConcave || isPressed
@@ -80,7 +80,7 @@ class CustomNeumorphicButton extends StatelessWidget {
                     if (shape == NeumorphicShapeType.convex)
                       BoxShadow(
                         color: Colors.white.withValues(alpha: 0.08),
-                        blurRadius: 8,
+                        blurRadius: 5,
                         spreadRadius: -1,
                         offset: Offset(-2, -2),
                       ),

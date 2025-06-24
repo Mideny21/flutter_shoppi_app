@@ -37,33 +37,48 @@ class _HomeCategoriesViewState extends State<HomeCategoriesView> {
                   if (state.status == ProductStatus.loading) {
                     return const AppLoadingIndicator(vertical: true);
                   } else if (state.categories.isNotEmpty) {
-                    return ListView.builder(
-                      itemCount: state.categories.length,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (ctx, index) {
-                        final Categorymodel category = state.categories[index];
-                        return InkWell(
-                          onTap: () {
-                            context.router.push(
-                              AllProductsByCategoryRoute(
-                                categoryModel: category,
+                    return Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children:
+                          state.categories.map((category) {
+                            return InkWell(
+                              onTap: () {
+                                context.router.push(
+                                  AllProductsByCategoryRoute(
+                                    categoryModel: category,
+                                  ),
+                                );
+                              },
+                              child: LayoutBuilder(
+                                builder: (context, constraints) {
+                                  // You can set a min width to make it responsive
+                                  double itemWidth =
+                                      MediaQuery.of(context).size.width / 3 -
+                                      12;
+
+                                  return SizedBox(
+                                    width: itemWidth,
+                                    child: Chip(
+                                      label: Center(
+                                        child: Text(
+                                          category.name,
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                      backgroundColor: Colors.white,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        side: const BorderSide(
+                                          color: Colors.grey,
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
                               ),
                             );
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 4),
-                            child: Chip(
-                              label: Text(category.name),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                side: BorderSide(
-                                  color: Palette.Primary.withValues(alpha: 0.5),
-                                ),
-                              ),
-                            ),
-                          ),
-                        );
-                      },
+                          }).toList(),
                     );
                   }
 

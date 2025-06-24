@@ -17,6 +17,7 @@ class HomeSliverAppBar extends StatelessWidget {
       backgroundColor: Colors.white,
       pinned: true,
       expandedHeight: 50.0,
+      automaticallyImplyLeading: false,
       title: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5),
         child: Row(

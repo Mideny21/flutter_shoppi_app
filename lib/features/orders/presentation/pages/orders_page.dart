@@ -25,12 +25,8 @@ class _OrdersPageState extends State<OrdersPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: Palette.Primary,
-        title: Text('Orders', style: TextStyle(color: Colors.white)),
-        centerTitle: true,
-      ),
+      appBar: CustomAppBar(title: 'Orders'),
+
       body: DefaultTabController(
         length: 2,
         initialIndex: 0,

@@ -152,6 +152,11 @@ class _FilterSheetState extends State<FilterSheet> {
                       Expanded(
                         child: OutlinedButton(
                           onPressed: _resetFilters,
+                          style: OutlinedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
                           child: const Text("Reset"),
                         ),
                       ),

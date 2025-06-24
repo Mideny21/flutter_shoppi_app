@@ -33,6 +33,8 @@ class DashboardPage extends StatelessWidget {
           body: child,
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: tabsRouter.activeIndex,
+            backgroundColor: Colors.white,
+            elevation: 8,
             onTap: (index) {
               // here we switch between tabs
               tabsRouter.setActiveIndex(index);

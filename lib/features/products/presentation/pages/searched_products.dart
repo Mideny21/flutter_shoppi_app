@@ -62,7 +62,7 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
         elevation: 5,
         toolbarHeight: 60,
         automaticallyImplyLeading: false,
-        //  backgroundColor: AppColors.buttonColor.withOpacity(0.8),
+        backgroundColor: Palette.Primary,
         title: Row(
           children: [
             Expanded(
@@ -133,7 +133,7 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
                     style: const TextStyle(color: Colors.white, fontSize: 12),
                   ),
                   badgeStyle: badges.BadgeStyle(
-                    badgeColor: Palette.mainColor,
+                    badgeColor: Colors.red,
                     elevation: 0,
                     padding: const EdgeInsets.all(6),
                   ),
@@ -151,7 +151,10 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
                         builder: (_) => const FilterSheet(),
                       );
                     },
-                    icon: const Icon(Icons.filter_list_rounded),
+                    icon: const Icon(
+                      Icons.filter_list_rounded,
+                      color: Colors.white,
+                    ),
                   ),
                 );
               },

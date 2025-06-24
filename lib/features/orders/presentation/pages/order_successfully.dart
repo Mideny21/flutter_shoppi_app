@@ -48,8 +48,8 @@ class OrderSuccessfully extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 10),
-                CustomButton(
-                  tap: () => cartcubit.clearCart(),
+                CustomNeumorphicButton(
+                  onTap: () => cartcubit.clearCart(),
                   text: 'Back To Home',
                 ),
               ],

@@ -57,66 +57,73 @@ class _AllProductsByCategoryScreenState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: CustomAppBar(
+        title: widget.categoryModel.name,
         leading: BackButton(onPressed: () => context.pop()),
-        title: Text(widget.categoryModel.name),
-        centerTitle: true,
       ),
-      body: BlocBuilder<ProductBloc, ProductState>(
-        builder: (context, state) {
-          log.i(
-            'ProductByCategory Current Page ${state.categoryProducts.currentPage} of ${state.categoryProducts.totalPages}',
-          );
 
-          if (state.categoryProducts.isLoading &&
-              state.categoryProducts.items.isEmpty) {
-            return const Center(child: AppLoadingIndicator());
-          } else if (state.categoryProducts.items.isNotEmpty) {
-            return CustomScrollView(
-              controller: _scrollController,
-              slivers: [
-                SliverGrid(
-                  delegate: SliverChildBuilderDelegate((context, index) {
-                    final product = state.categoryProducts.items[index];
-                    return ProductCard(product: product);
-                  }, childCount: state.categoryProducts.items.length),
-                  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 200.0,
-                    mainAxisSpacing: 10.0,
-                    crossAxisSpacing: 3.0,
-                    childAspectRatio:
-                        (MediaQuery.of(context).size.width /
-                            (MediaQuery.of(context).size.height / 1.75)),
-                  ),
-                ),
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    child: Center(
-                      child:
-                          state.categoryProducts.hasReachedMax
-                              ? const Text(
-                                'No more products to load',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.grey,
-                                ),
-                              )
-                              : state.categoryProducts.isLoadingMore
-                              ? const CircularProgressIndicator()
-                              : const SizedBox(),
-                    ),
-                  ),
-                ),
-              ],
-            );
-          } else if (state.categoryProducts.items.isEmpty &&
-              !state.categoryProducts.isLoading) {
-            return const Center(child: Text("No products found"));
-          }
+      body: Column(
+        children: [
+          SizedBox(height: 12),
+          Expanded(
+            child: BlocBuilder<ProductBloc, ProductState>(
+              builder: (context, state) {
+                log.i(
+                  'ProductByCategory Current Page ${state.categoryProducts.currentPage} of ${state.categoryProducts.totalPages}',
+                );
 
-          return Container();
-        },
+                if (state.categoryProducts.isLoading &&
+                    state.categoryProducts.items.isEmpty) {
+                  return const Center(child: AppLoadingIndicator());
+                } else if (state.categoryProducts.items.isNotEmpty) {
+                  return CustomScrollView(
+                    controller: _scrollController,
+                    slivers: [
+                      SliverGrid(
+                        delegate: SliverChildBuilderDelegate((context, index) {
+                          final product = state.categoryProducts.items[index];
+                          return ProductCard(product: product);
+                        }, childCount: state.categoryProducts.items.length),
+                        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                          maxCrossAxisExtent: 200.0,
+                          mainAxisSpacing: 10.0,
+                          crossAxisSpacing: 3.0,
+                          childAspectRatio:
+                              (MediaQuery.of(context).size.width /
+                                  (MediaQuery.of(context).size.height / 1.75)),
+                        ),
+                      ),
+                      SliverToBoxAdapter(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: Center(
+                            child:
+                                state.categoryProducts.hasReachedMax
+                                    ? const Text(
+                                      'No more products to load',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.grey,
+                                      ),
+                                    )
+                                    : state.categoryProducts.isLoadingMore
+                                    ? const CircularProgressIndicator()
+                                    : const SizedBox(),
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                } else if (state.categoryProducts.items.isEmpty &&
+                    !state.categoryProducts.isLoading) {
+                  return const Center(child: Text("No products found"));
+                }
+
+                return Container();
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

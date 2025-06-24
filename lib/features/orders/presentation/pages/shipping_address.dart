@@ -63,9 +63,9 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Select Shipping Address'),
-        centerTitle: true,
+      appBar: CustomAppBar(
+        title: 'Select Shipping Address',
+        showBackButton: true,
         actions: [
           IconButton(
             onPressed: () => context.router.push(AddShippingAddressRoute()),
@@ -73,6 +73,7 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
           ),
         ],
       ),
+
       bottomNavigationBar: BlocConsumer<OrderBloc, OrderState>(
         listener: (context, state) {
           // TODO: implement listener
@@ -103,9 +104,12 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
           }
         },
         builder: (context, state) {
-          return CustomNeumorphicButton(
-            onTap: addressId == null ? null : handleSubmitOrder,
-            text: 'Confirm Order',
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+            child: CustomNeumorphicButton(
+              onTap: handleSubmitOrder,
+              text: 'Confirm Order',
+            ),
           );
         },
       ),
@@ -123,6 +127,7 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
               return const AppLoadingIndicator();
             } else if (state.addresses.isNotEmpty) {
               return ListView.builder(
+                padding: EdgeInsets.only(bottom: 80, top: 10),
                 itemCount: state.addresses.length,
                 itemBuilder: (ctx, index) {
                   final ShippingAddressModel data = state.addresses[index];
@@ -147,14 +152,20 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
                           color:
                               selectedIndex == index
                                   ? Palette.mainColor.withValues(alpha: .3)
-                                  : Colors.grey.withValues(alpha: 0.4),
+                                  : Colors.white12,
+                          border: Border.all(
+                            color: Colors.grey.withValues(alpha: .8),
+                          ),
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(15),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Icon(Icons.location_pin),
+                              const Icon(
+                                Icons.location_pin,
+                                color: Colors.grey,
+                              ),
                               Text('${data.city}, ${data.street}'),
                             ],
                           ),

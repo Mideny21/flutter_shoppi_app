@@ -15,12 +15,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Palette.Primary,
-        title: Text('Settings', style: TextStyle(color: Colors.white)),
-        centerTitle: true,
-        automaticallyImplyLeading: false,
-      ),
+      appBar: CustomAppBar(title: 'Settings'),
+
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
