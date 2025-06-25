@@ -3,7 +3,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoppi/core/common/widgets/widget.dart';
+import 'package:shoppi/core/utils/utils.dart';
 import 'package:shoppi/features/orders/orders.dart';
+import 'package:toastification/toastification.dart';
 
 @RoutePage()
 class AddShippingAddressScreen extends StatefulWidget {
@@ -94,17 +96,21 @@ class _AddShippingAddressScreenState extends State<AddShippingAddressScreen> {
                         },
                       );
                     } else if (state.addressSubmitted) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Address submitted...')),
+                      ToastHelper.showSuccess(
+                        context: context,
+                        title: 'Success',
+                        message: 'Address Submitted Successfully',
                       );
-                      context.pop();
 
-                      // context.pop();
+                      context.pop();
                     } else if (state.error != '') {
                       context.pop();
-                      ScaffoldMessenger.of(
-                        context,
-                      ).showSnackBar(SnackBar(content: Text(state.error)));
+
+                      ToastHelper.showError(
+                        context: context,
+                        title: 'Error',
+                        message: state.error,
+                      );
                     }
                   },
                   builder: (context, state) {

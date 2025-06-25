@@ -45,9 +45,9 @@ class CartItemCard extends StatelessWidget {
                         cartcubit.removeItem(index);
                       },
                       child: const Icon(
-                        Icons.close,
+                        Icons.delete_outline_outlined,
                         size: 25,
-                        color: Colors.grey,
+                        color: Colors.redAccent,
                       ),
                     ),
                   ],

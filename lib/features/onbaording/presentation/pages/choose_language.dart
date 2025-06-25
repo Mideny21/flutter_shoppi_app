@@ -75,8 +75,8 @@ class _ChangeLanguageScreenState extends State<ChangeLanguageScreen> {
                   }
                 },
                 builder: (context, state) {
-                  return CustomButton(
-                    tap: () => context.router.push(OnboardingRoute()),
+                  return CustomNeumorphicButton(
+                    onTap: () => context.router.push(OnboardingRoute()),
                     text: AppLocalizations.of(context)!.continue_text,
                   );
                 },

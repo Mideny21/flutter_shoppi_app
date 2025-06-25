@@ -30,12 +30,16 @@ class _SignUpPageState extends State<SignUpPage> {
   _signUp() {
     if (_formKey.currentState!.validate()) {
       if (!check) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Please accept term and conditions")),
+        ToastHelper.showError(
+          context: context,
+          title: 'Error',
+          message: 'Please accept term and conditions',
         );
       } else if (passwordController.text != confirmPasswordController.text) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Password does not match")),
+        ToastHelper.showError(
+          context: context,
+          title: 'Error',
+          message: 'Password does not match',
         );
       } else {
         var signupParam = CreateUserParam(
@@ -220,12 +224,13 @@ class _SignUpPageState extends State<SignUpPage> {
                         );
                       } else if (state.status == UserStatus.loaded) {
                         context.pop();
-                        context.read<AuthCubit>().onLoginToggle();
                       } else if (state.status == UserStatus.error) {
                         context.pop();
-                        ScaffoldMessenger.of(
-                          context,
-                        ).showSnackBar(SnackBar(content: Text(state.error)));
+                        ToastHelper.showError(
+                          context: context,
+                          title: 'Error',
+                          message: state.error,
+                        );
                       }
                     },
                     builder: (context, state) {

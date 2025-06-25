@@ -11,6 +11,7 @@ import 'package:shoppi/features/onbaording/model/app_settings.dart';
 import 'package:shoppi/features/onbaording/presentation/cubit/on_boarding_cubit.dart';
 import 'package:shoppi/features/orders/orders.dart';
 import 'package:shoppi/features/products/presentation/bloc/product_bloc.dart';
+import 'package:toastification/toastification.dart';
 import '../app_flavor/flavors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -33,24 +34,31 @@ class MyApp extends StatelessWidget {
       ],
       child: BlocBuilder<AppSettingsCubit, AppSettings>(
         builder: (context, state) {
-          return MaterialApp.router(
-            debugShowCheckedModeBanner: false,
-            routerConfig: appRouter.config(
-              navigatorObservers: () => [MyObserver()],
+          return ToastificationConfigProvider(
+            config: const ToastificationConfig(
+              alignment: Alignment.topCenter,
+              animationDuration: Duration(milliseconds: 500),
             ),
-            title: FlavorConfig.instance.values.appName,
-            localizationsDelegates: AppLocalizations.localizationsDelegates,
-            supportedLocales: AppLocalizations.supportedLocales,
-            locale: Locale(state.localeCode),
-            theme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(seedColor: Palette.mainColor),
-              useMaterial3: true,
-              scaffoldBackgroundColor: Colors.white,
-            ),
+            child: MaterialApp.router(
+              debugShowCheckedModeBanner: false,
+              routerConfig: appRouter.config(
+                navigatorObservers: () => [MyObserver()],
+              ),
 
-            // builder: (_, child) {
-            //   return FlavorBanner(child: child ?? const SizedBox());
-            // },
+              title: FlavorConfig.instance.values.appName,
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              supportedLocales: AppLocalizations.supportedLocales,
+              locale: Locale(state.localeCode),
+              theme: ThemeData(
+                colorScheme: ColorScheme.fromSeed(seedColor: Palette.mainColor),
+                useMaterial3: true,
+                scaffoldBackgroundColor: Colors.white,
+              ),
+
+              // builder: (_, child) {
+              //   return FlavorBanner(child: child ?? const SizedBox());
+              // },
+            ),
           );
         },
       ),

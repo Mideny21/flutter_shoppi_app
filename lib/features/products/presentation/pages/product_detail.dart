@@ -9,6 +9,7 @@ import 'package:shoppi/core/utils/utils.dart';
 import 'package:shoppi/features/cart/cart.dart';
 import 'package:shoppi/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:shoppi/features/products/products.dart';
+import 'package:toastification/toastification.dart';
 
 @RoutePage()
 class ProductDetailPage extends StatefulWidget {
@@ -67,9 +68,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         setState(() {
           added = true;
         });
-
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("${product.name} added to cart")),
+        ToastHelper.showSuccess(
+          context: context,
+          title: 'Success',
+          message: '${product.name} added to cart',
         );
       }
     }

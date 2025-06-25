@@ -34,9 +34,12 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
     var cartcubit = context.read<CartCubit>();
     handleSubmitOrder() {
       if (addressId == null) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text('Please shipping address')));
+        ToastHelper.showError(
+          context: context,
+          title: 'Error',
+          message: 'Please shipping address',
+        );
+
         return;
       } else {
         List<OrderItem> items =
@@ -98,9 +101,11 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
             );
           } else if (state.error != '') {
             Navigator.pop(context);
-            ScaffoldMessenger.of(
-              context,
-            ).showSnackBar(SnackBar(content: Text(state.error)));
+            ToastHelper.showError(
+              context: context,
+              title: 'Error',
+              message: state.error,
+            );
           }
         },
         builder: (context, state) {

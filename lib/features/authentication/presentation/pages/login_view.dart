@@ -7,6 +7,7 @@ import 'package:shoppi/core/router/app_router.gr.dart';
 import 'package:shoppi/core/utils/utils.dart';
 import 'package:shoppi/features/authentication/authentication.dart';
 import 'package:shoppi/features/authentication/presentation/cubit/auth_cubit.dart';
+import 'package:toastification/toastification.dart';
 
 import '../../../../core/common/widgets/widget.dart';
 
@@ -107,18 +108,20 @@ class _LoginPageState extends State<LoginPage> {
                       );
                     } else if (state.status == UserStatus.loaded) {
                       Navigator.pop(context);
-                      // context.pop();
 
                       widget.onResult.call(true);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Login Successfully ')),
+                      ToastHelper.showSuccess(
+                        context: context,
+                        title: 'Success',
+                        message: 'Login Successfully',
                       );
                     } else if (state.status == UserStatus.error) {
                       Navigator.pop(context);
-                      // context.pop();
-                      ScaffoldMessenger.of(
-                        context,
-                      ).showSnackBar(SnackBar(content: Text(state.error)));
+                      ToastHelper.showError(
+                        context: context,
+                        title: 'Error',
+                        message: state.error,
+                      );
                     }
                   },
                   builder: (context, state) {
