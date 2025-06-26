@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:shoppi/core/common/widgets/widget.dart';
+import 'package:shoppi/core/router/app_router.gr.dart';
 import 'package:shoppi/core/utils/utils.dart';
 
 @RoutePage()
@@ -63,13 +64,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
               SettingsTile(
                 icon: Icons.person_outline,
                 title: 'User Profile',
-                onTap: () {},
+                onTap: () => context.router.push(UserProfileRoute()),
               ),
               const Divider(height: 1),
               SettingsTile(
-                icon: Icons.lock_outline,
-                title: 'Change Password',
-                onTap: () {},
+                icon: Icons.language_outlined,
+                title: 'Change Language',
+                onTap: () => context.router.push(ChooseLangauageRoute()),
               ),
               const Divider(height: 1),
               SettingsTile(

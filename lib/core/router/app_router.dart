@@ -13,6 +13,8 @@ class AppRouter extends RootStackRouter {
   List<AutoRoute> get routes => [
     AutoRoute(page: AppEntryRoute.page, initial: true),
     AutoRoute(page: ChangeLanguageRoute.page),
+    AutoRoute(page: ChooseLangauageRoute.page),
+
     AutoRoute(
       page: DashboardRoute.page,
       children: [
@@ -28,6 +30,8 @@ class AppRouter extends RootStackRouter {
 
     AutoRoute(page: CartRoute.page),
     AutoRoute(page: UserRoute.page),
+    AutoRoute(page: UserProfileRoute.page),
+
     AutoRoute(page: ProductDetailRoute.page),
     AutoRoute(page: AddShippingAddressRoute.page, guards: [getIt<AuthGuard>()]),
     AutoRoute(page: ShippingAddressRoute.page, guards: [getIt<AuthGuard>()]),

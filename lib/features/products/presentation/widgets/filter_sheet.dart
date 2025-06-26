@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoppi/core/common/widgets/widget.dart';
+import 'package:shoppi/core/utils/utils.dart';
 import 'package:shoppi/features/products/products.dart';
 
 class FilterSheet extends StatefulWidget {
@@ -45,9 +46,13 @@ class _FilterSheetState extends State<FilterSheet> {
       ProductEvent.updateFilters(
         categoryId: _selectedCategory != -1 ? _selectedCategory : null,
         minPrice:
-            _minPriceController.text != '' ? _minPriceController.text : null,
+            _minPriceController.text != ''
+                ? _minPriceController.text.replaceAll(',', '')
+                : null,
         maxPrice:
-            _maxPriceController.text != '' ? _maxPriceController.text : null,
+            _maxPriceController.text != ''
+                ? _maxPriceController.text.replaceAll(',', '')
+                : null,
       ),
     );
 
@@ -93,24 +98,21 @@ class _FilterSheetState extends State<FilterSheet> {
                   Row(
                     children: [
                       Expanded(
-                        child: TextFormField(
+                        child: InputFields(
                           controller: _minPriceController,
-                          keyboardType: TextInputType.number,
-                          decoration: const InputDecoration(
-                            labelText: "Min Price",
-                            border: OutlineInputBorder(),
-                          ),
+                          inputFormatters: [NumericTextFormatter()],
+                          hintText: '',
+                          title: 'Min Price',
                         ),
                       ),
                       const SizedBox(width: 12),
                       Expanded(
-                        child: TextFormField(
+                        child: InputFields(
                           controller: _maxPriceController,
-                          keyboardType: TextInputType.number,
-                          decoration: const InputDecoration(
-                            labelText: "Max Price",
-                            border: OutlineInputBorder(),
-                          ),
+                          inputFormatters: [NumericTextFormatter()],
+
+                          hintText: '',
+                          title: 'Max Price',
                         ),
                       ),
                     ],
@@ -128,7 +130,7 @@ class _FilterSheetState extends State<FilterSheet> {
                   ),
                   const SizedBox(height: 8),
                   Wrap(
-                    spacing: 10,
+                    spacing: 4,
                     children:
                         state.categories.map((cat) {
                           final isSelected = _selectedCategory == cat.id;

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:shoppi/core/utils/utils.dart';
 
 class InputFields extends StatelessWidget {
@@ -14,6 +15,7 @@ class InputFields extends StatelessWidget {
   final String prefixStyle;
   final Color fillColor;
   final TextEditingController controller;
+  List<TextInputFormatter>? inputFormatters;
   InputFields({
     super.key,
     required this.hintText,
@@ -26,8 +28,9 @@ class InputFields extends StatelessWidget {
     this.autoFocus = false,
     this.keyboard = TextInputType.text,
     required this.controller,
-    required this.validator,
+    this.validator,
     this.prefixIcon,
+    this.inputFormatters,
   });
 
   @override
@@ -51,6 +54,7 @@ class InputFields extends StatelessWidget {
           // onFieldSubmitted: (_) {
           //   // FocusScope.of(context).requestFocus(_passwordFocusNode);
           // },
+          inputFormatters: inputFormatters,
           obscureText: obscureText,
           validator: validator,
           controller: controller,

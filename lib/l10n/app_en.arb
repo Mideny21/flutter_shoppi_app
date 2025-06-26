@@ -2,5 +2,6 @@
     "helloWorld":"Hello world",
     "continue_text":"Continue",
     "choose_language":"Choose Your Language",
+    "change_language":"Change Language",
     "select_preferred_language":"Select your preferred language to use \n Shopping"
 }
