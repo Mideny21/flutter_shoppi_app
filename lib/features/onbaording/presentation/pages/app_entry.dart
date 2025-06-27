@@ -77,7 +77,7 @@ class _AppEntryScreenState extends State<AppEntryScreen>
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Image.asset(
-                      'assets/images/samsung.jpeg',
+                      'assets/images/shoppi.png',
                       width: MediaQuery.sizeOf(context).width / 2,
                     ),
                   ],
