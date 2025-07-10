@@ -39,7 +39,7 @@ class CartPage extends StatelessWidget {
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                   ),
                   Text(
-                    '${moneyFormatter.format(cartCubit.calculateTotalPrice())}/=',
+                    '\$ ${moneyFormatter.format(cartCubit.calculateTotalPrice())}',
                     style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w500,
@@ -50,8 +50,7 @@ class CartPage extends StatelessWidget {
               const SizedBox(height: 10),
 
               CustomNeumorphicButton(
-                text:
-                    'Checkout ${moneyFormatter.format(cartCubit.calculateTotalPrice())}/=',
+                text: 'Checkout',
                 onTap: () {
                   context.read<OrderBloc>().add(const OrderEvent.reset());
                   context.router.push(ShippingAddressRoute());

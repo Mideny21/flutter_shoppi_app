@@ -39,7 +39,9 @@ class AuthCubit extends Cubit<AuthState> {
     final result = await _authRepository.register(param);
     await result.when(
       success: (data) async {
-        emit(state.copyWith(status: UserStatus.loaded, showLogin: true));
+        if (data) {
+          emit(state.copyWith(status: UserStatus.success));
+        }
       },
       failure: (error) {
         emit(state.copyWith(status: UserStatus.error, error: error.message));

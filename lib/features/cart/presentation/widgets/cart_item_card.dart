@@ -33,13 +33,15 @@ class CartItemCard extends StatelessWidget {
           ),
           SizedBox(width: MediaQuery.sizeOf(context).width * 0.03),
           SizedBox(
-            width: MediaQuery.sizeOf(context).width * 0.5,
+            width: MediaQuery.sizeOf(context).width * 0.55,
             child: Column(
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(item.name),
+                    Expanded(
+                      child: Text(item.name, overflow: TextOverflow.ellipsis),
+                    ),
                     InkWell(
                       onTap: () {
                         cartcubit.removeItem(index);
@@ -57,7 +59,9 @@ class CartItemCard extends StatelessWidget {
                   children: [
                     SizedBox(
                       width: MediaQuery.sizeOf(context).width * 0.18,
-                      child: Text(moneyFormatter.format(item.price).toString()),
+                      child: Text(
+                        '\$ ${moneyFormatter.format(item.price).toString()}',
+                      ),
                     ),
                     SizedBox(width: MediaQuery.sizeOf(context).width * 0.03),
                     QuantitButton(

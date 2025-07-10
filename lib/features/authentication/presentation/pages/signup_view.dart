@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoppi/core/common/widgets/widget.dart';
+import 'package:shoppi/core/router/app_router.gr.dart';
 import 'package:shoppi/core/utils/utils.dart';
 import 'package:shoppi/features/authentication/authentication.dart';
 import 'package:shoppi/features/authentication/presentation/cubit/auth_cubit.dart';
@@ -222,7 +223,13 @@ class _SignUpPageState extends State<SignUpPage> {
                             return const LoadingDialog();
                           },
                         );
-                      } else if (state.status == UserStatus.loaded) {
+                      } else if (state.status == UserStatus.success) {
+                        context.pop();
+                        ToastHelper.showSuccess(
+                          context: context,
+                          title: 'Success',
+                          message: "Sign up Successfully!",
+                        );
                         context.pop();
                       } else if (state.status == UserStatus.error) {
                         context.pop();

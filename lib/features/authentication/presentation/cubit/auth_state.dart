@@ -1,6 +1,6 @@
 part of 'auth_cubit.dart';
 
-enum UserStatus { initial, loading, loaded, error }
+enum UserStatus { initial, loading, loaded, error, success }
 
 @freezed
 abstract class AuthState with _$AuthState {

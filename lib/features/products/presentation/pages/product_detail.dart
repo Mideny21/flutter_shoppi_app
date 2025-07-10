@@ -94,7 +94,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 },
                 builder: (context, state) {
                   return Text(
-                    '${moneyFormatter.format(double.parse(state ?? '0')).toString()}/=',
+                    '\$ ${moneyFormatter.format(double.parse(state ?? '0')).toString()}',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   );
                 },
@@ -117,112 +117,111 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           ),
         ),
       ),
-      body: SafeArea(
-        child: BlocBuilder<ProductBloc, ProductState>(
-          builder: (context, state) {
-            if (state.status == ProductStatus.loading) {
-              return const Center(child: AppLoadingIndicator());
-            } else if (state.product != null) {
-              final ProductModel product = state.product!;
-              return CustomScrollView(
-                slivers: [
-                  SliverAppBar(
-                    expandedHeight: 400,
-                    floating: true,
-                    leading: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        width: 8,
-                        height: 8,
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          shape: BoxShape.circle,
-                        ),
-                        child: BackButton(
-                          onPressed: () {
-                            context.pop();
+      body: BlocBuilder<ProductBloc, ProductState>(
+        builder: (context, state) {
+          if (state.status == ProductStatus.loading) {
+            return const Center(child: AppLoadingIndicator());
+          } else if (state.product != null) {
+            final ProductModel product = state.product!;
+            return CustomScrollView(
+              slivers: [
+                SliverAppBar(
+                  expandedHeight: 400,
+                  floating: true,
+                  leading: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      width: 8,
+                      height: 8,
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                      ),
+                      child: BackButton(
+                        onPressed: () {
+                          context.pop();
 
-                            // if (context.canPop()) {
-                            //   context.pop();
-                            // } else {
-                            //   context.router.replace(const HomeRoute());
-                            // }
+                          // if (context.canPop()) {
+                          //   context.pop();
+                          // } else {
+                          //   context.router.replace(const HomeRoute());
+                          // }
+                        },
+                      ),
+                    ),
+                  ),
+                  flexibleSpace: FlexibleSpaceBar(
+                    background: Swiper(
+                      itemBuilder: (BuildContext context, int index) {
+                        return FadeInImage.assetNetwork(
+                          placeholder: 'assets/images/loading.gif',
+                          image: product.productImage![index].url,
+                          fit: BoxFit.cover,
+                        );
+                      },
+                      itemCount: product.productImage?.length ?? 0,
+                      loop: false,
+                      pagination: SwiperPagination(
+                        margin: const EdgeInsets.all(0.0),
+                        builder: SwiperCustomPagination(
+                          builder: (
+                            BuildContext context,
+                            SwiperPluginConfig config,
+                          ) {
+                            return ConstrainedBox(
+                              constraints: const BoxConstraints.expand(
+                                height: 25,
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.only(right: 10.0),
+                                child: Text(
+                                  "${config.activeIndex + 1}/${config.itemCount}",
+                                  textAlign: TextAlign.right,
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Palette.mainColor,
+                                  ),
+                                ),
+                              ),
+                            );
                           },
                         ),
                       ),
                     ),
-                    flexibleSpace: FlexibleSpaceBar(
-                      background: Swiper(
-                        itemBuilder: (BuildContext context, int index) {
-                          return FadeInImage.assetNetwork(
-                            placeholder: 'assets/images/loading.gif',
-                            image: product.productImage![index].url,
-                            fit: BoxFit.cover,
-                          );
-                        },
-                        itemCount: product.productImage?.length ?? 0,
-                        loop: false,
-                        pagination: SwiperPagination(
-                          margin: const EdgeInsets.all(0.0),
-                          builder: SwiperCustomPagination(
-                            builder: (
-                              BuildContext context,
-                              SwiperPluginConfig config,
-                            ) {
-                              return ConstrainedBox(
-                                constraints: const BoxConstraints.expand(
-                                  height: 25,
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.only(right: 10.0),
-                                  child: Text(
-                                    "${config.activeIndex + 1}/${config.itemCount}",
-                                    textAlign: TextAlign.right,
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      color: Palette.mainColor,
-                                    ),
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
+                  ),
+                ),
+                const SliverToBoxAdapter(child: SizedBox(height: 10)),
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Text(
+                      product.name,
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
-                  const SliverToBoxAdapter(child: SizedBox(height: 10)),
-                  SliverToBoxAdapter(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Text(
-                        product.name,
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
+                ),
+                const SliverToBoxAdapter(child: SizedBox(height: 10)),
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Text(
+                      product.description,
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.grey,
                       ),
                     ),
                   ),
-                  const SliverToBoxAdapter(child: SizedBox(height: 10)),
-                  SliverToBoxAdapter(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Text(
-                        product.description,
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              );
-            }
-            return Container();
-          },
-        ),
+                ),
+              ],
+            );
+          }
+          return Container();
+        },
       ),
     );
   }

@@ -30,13 +30,14 @@ class AuthRepository {
     );
   }
 
-  Future<ApiResult<ApiResponse<bool>>> register(CreateUserParam param) async {
-    final result = await _networkService.post('auth/signup');
+  Future<ApiResult<bool>> register(CreateUserParam param) async {
+    final result = await _networkService.post(
+      'auth/signup',
+      data: param.toJson(),
+    );
     return result.when(
       success: (response) {
-        return ApiResult.success(
-          ApiResponse<bool>.fromJson(response.data, (json) => json as bool),
-        );
+        return ApiResult.success(response.data['success'] as bool);
       },
       failure: (error) {
         return ApiResult.failure(error);

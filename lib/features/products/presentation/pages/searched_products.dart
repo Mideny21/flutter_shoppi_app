@@ -184,13 +184,9 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
                           final product = state.searchResults.items[index];
                           return ProductCard(product: product);
                         }, childCount: state.searchResults.items.length),
-                        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                          maxCrossAxisExtent: 200.0,
-                          mainAxisSpacing: 10.0,
-                          crossAxisSpacing: 3.0,
-                          childAspectRatio:
-                              (MediaQuery.of(context).size.width /
-                                  (MediaQuery.of(context).size.height / 1.75)),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio: 3.4 / 4,
                         ),
                       ),
                       SliverToBoxAdapter(

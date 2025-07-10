@@ -49,7 +49,7 @@ class HistoryOrders extends StatelessWidget {
                         OrderDetails(
                           title: 'Total',
                           value:
-                              '  ${moneyFormatter.format(order.totalPrice.toDouble()).toString()}/=',
+                              '\$ ${moneyFormatter.format(order.totalPrice.toDouble()).toString()}',
                         ),
 
                         Text.rich(
@@ -129,7 +129,7 @@ class HistoryOrders extends StatelessWidget {
                                     ),
                                     Spacer(),
                                     Text(
-                                      '${moneyFormatter.format(double.parse(e.total)).toString()}/=',
+                                      '\$ ${moneyFormatter.format(double.parse(e.total)).toString()}',
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                       ),

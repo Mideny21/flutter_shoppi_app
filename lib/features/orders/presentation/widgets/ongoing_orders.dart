@@ -50,7 +50,7 @@ class _OngoingOrdersState extends State<OngoingOrders> {
                         OrderDetails(
                           title: 'Total',
                           value:
-                              '  ${moneyFormatter.format(order.totalPrice.toDouble()).toString()}/=',
+                              '\$ ${moneyFormatter.format(order.totalPrice.toDouble()).toString()}',
                         ),
 
                         Text.rich(
@@ -132,7 +132,7 @@ class _OngoingOrdersState extends State<OngoingOrders> {
                                     ),
                                     Spacer(),
                                     Text(
-                                      '${moneyFormatter.format(double.parse(e.total)).toString()}/=',
+                                      '\$ ${moneyFormatter.format(double.parse(e.total)).toString()}',
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                       ),

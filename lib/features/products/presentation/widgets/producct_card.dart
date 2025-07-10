@@ -27,24 +27,26 @@ class ProductCard extends StatelessWidget {
               image: product.productImage!.first.url,
               height: (MediaQuery.of(context).size.height / 1.85) * 0.35,
             ),
-            // Image.network(product.productImage!.first.url,
-            //     height: (MediaQuery.of(context).size.height / 1.85) * 0.35,
-            //     fit: BoxFit.cover,
-            //     width: double.infinity),
-            SizedBox(height: 8),
+
+            SizedBox(height: 2),
             Text(
               product.name,
-              style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                color: Colors.black87,
+                fontWeight: FontWeight.w500,
+              ),
             ),
             Text(
               'stock: ${product.stock}',
-              style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
+              style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w700),
             ),
             Text(
-              'Tsh ${moneyFormatter.format(double.parse(product.price)).toString()}',
+              '\$ ${moneyFormatter.format(double.parse(product.price)).toString()}',
               style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.w600,
+                color: Colors.black54,
+                fontWeight: FontWeight.w700,
               ),
             ),
           ],
