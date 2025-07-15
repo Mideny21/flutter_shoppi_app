@@ -54,10 +54,6 @@ class MyApp extends StatelessWidget {
                 useMaterial3: true,
                 scaffoldBackgroundColor: Colors.white,
               ),
-
-              // builder: (_, child) {
-              //   return FlavorBanner(child: child ?? const SizedBox());
-              // },
             ),
           );
         },
