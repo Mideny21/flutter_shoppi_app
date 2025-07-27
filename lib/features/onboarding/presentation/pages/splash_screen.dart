@@ -23,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen>
       if (!appSettings.isOpen) {
         context.router.replace(const ChooseLanguageRoute());
       } else {
-        context.router.replace(const HomeRoute());
+        context.router.replace(const DashboardRoute());
       }
     }
   }

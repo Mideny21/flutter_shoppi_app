@@ -5,7 +5,7 @@ import 'package:shoppi/core/network/dio_config/env_config.dart';
 @LazySingleton(as: EnvConfig)
 class DevEnvConfig implements EnvConfig {
   @override
-  String get baseUrl => "http://localhost:3000/api/";
+  String get baseUrl => "http://192.168.0.32:3000/api/";
 
   @override
   int get connectionTimeout => 30000;

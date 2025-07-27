@@ -8,6 +8,7 @@ import 'package:shoppi/core/router/app_router.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shoppi/features/onboarding/onbording.dart';
 import 'package:shoppi/features/onboarding/presentation/cubit/app_settings.dart';
+import 'package:shoppi/features/products/products.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -16,7 +17,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final appRouter = getIt<AppRouter>();
     return MultiBlocProvider(
-      providers: [BlocProvider(create: (context) => getIt<AppSettingsCubit>())],
+      providers: [
+        BlocProvider(create: (context) => getIt<AppSettingsCubit>()),
+        BlocProvider(create: (context) => getIt<ProductBloc>()),
+      ],
       child: BlocBuilder<AppSettingsCubit, AppSettings>(
         builder: (context, state) {
           return MaterialApp.router(

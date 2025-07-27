@@ -16,6 +16,9 @@ import 'package:injectable/injectable.dart' as _i526;
 import '../../features/onboarding/onbording.dart' as _i413;
 import '../../features/onboarding/presentation/cubit/app_settings.dart'
     as _i119;
+import '../../features/products/presentation/bloc/product_bloc.dart' as _i28;
+import '../../features/products/products.dart' as _i485;
+import '../../features/products/repository/product_repository.dart' as _i592;
 import '../modules/app_config.dart' as _i414;
 import '../network/dio_client.dart' as _i667;
 import '../network/dio_config/env_config.dart' as _i284;
@@ -42,6 +45,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => appConfigModule.appSettingsBox,
       preResolve: true,
     );
+    gh.factory<_i1071.AuthInterceptor>(() => _i1071.AuthInterceptor());
     gh.factory<_i119.AppSettingsCubit>(() => _i119.AppSettingsCubit());
     gh.lazySingleton<_i81.AppRouter>(() => _i81.AppRouter());
     gh.lazySingleton<_i284.EnvConfig>(
@@ -62,6 +66,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i284.EnvConfig>(
       () => _i609.ProdEnvConfig(),
       registerFor: {_prod},
+    );
+    gh.lazySingleton<_i592.ProductRepository>(
+      () => _i592.ProductRepository(gh<_i1025.NetworkService>()),
+    );
+    gh.factory<_i28.ProductBloc>(
+      () => _i28.ProductBloc(gh<_i485.ProductRepository>()),
     );
     return this;
   }
