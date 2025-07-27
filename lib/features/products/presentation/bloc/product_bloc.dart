@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:shoppi/core/pagination/pagination.dart';
 import 'package:shoppi/features/products/products.dart';
 
 part 'product_state.dart';

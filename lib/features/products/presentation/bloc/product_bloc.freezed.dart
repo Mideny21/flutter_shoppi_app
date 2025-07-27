@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ProductState {
 
- ProductStatus get productStatus; CategoryStatus get categoryStatus; List<Categorymodel> get categories; String get error;
+ ProductStatus get productStatus; CategoryStatus get categoryStatus; List<Categorymodel> get categories; PaginatedData<ProductModel> get allproducts; String get error;
 /// Create a copy of ProductState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $ProductStateCopyWith<ProductState> get copyWith => _$ProductStateCopyWithImpl<P
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProductState&&(identical(other.productStatus, productStatus) || other.productStatus == productStatus)&&(identical(other.categoryStatus, categoryStatus) || other.categoryStatus == categoryStatus)&&const DeepCollectionEquality().equals(other.categories, categories)&&(identical(other.error, error) || other.error == error));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProductState&&(identical(other.productStatus, productStatus) || other.productStatus == productStatus)&&(identical(other.categoryStatus, categoryStatus) || other.categoryStatus == categoryStatus)&&const DeepCollectionEquality().equals(other.categories, categories)&&(identical(other.allproducts, allproducts) || other.allproducts == allproducts)&&(identical(other.error, error) || other.error == error));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,productStatus,categoryStatus,const DeepCollectionEquality().hash(categories),error);
+int get hashCode => Object.hash(runtimeType,productStatus,categoryStatus,const DeepCollectionEquality().hash(categories),allproducts,error);
 
 @override
 String toString() {
-  return 'ProductState(productStatus: $productStatus, categoryStatus: $categoryStatus, categories: $categories, error: $error)';
+  return 'ProductState(productStatus: $productStatus, categoryStatus: $categoryStatus, categories: $categories, allproducts: $allproducts, error: $error)';
 }
 
 
@@ -45,11 +45,11 @@ abstract mixin class $ProductStateCopyWith<$Res>  {
   factory $ProductStateCopyWith(ProductState value, $Res Function(ProductState) _then) = _$ProductStateCopyWithImpl;
 @useResult
 $Res call({
- ProductStatus productStatus, CategoryStatus categoryStatus, List<Categorymodel> categories, String error
+ ProductStatus productStatus, CategoryStatus categoryStatus, List<Categorymodel> categories, PaginatedData<ProductModel> allproducts, String error
 });
 
 
-
+$PaginatedDataCopyWith<ProductModel, $Res> get allproducts;
 
 }
 /// @nodoc
@@ -62,16 +62,26 @@ class _$ProductStateCopyWithImpl<$Res>
 
 /// Create a copy of ProductState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? productStatus = null,Object? categoryStatus = null,Object? categories = null,Object? error = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? productStatus = null,Object? categoryStatus = null,Object? categories = null,Object? allproducts = null,Object? error = null,}) {
   return _then(_self.copyWith(
 productStatus: null == productStatus ? _self.productStatus : productStatus // ignore: cast_nullable_to_non_nullable
 as ProductStatus,categoryStatus: null == categoryStatus ? _self.categoryStatus : categoryStatus // ignore: cast_nullable_to_non_nullable
 as CategoryStatus,categories: null == categories ? _self.categories : categories // ignore: cast_nullable_to_non_nullable
-as List<Categorymodel>,error: null == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
+as List<Categorymodel>,allproducts: null == allproducts ? _self.allproducts : allproducts // ignore: cast_nullable_to_non_nullable
+as PaginatedData<ProductModel>,error: null == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
-
+/// Create a copy of ProductState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$PaginatedDataCopyWith<ProductModel, $Res> get allproducts {
+  
+  return $PaginatedDataCopyWith<ProductModel, $Res>(_self.allproducts, (value) {
+    return _then(_self.copyWith(allproducts: value));
+  });
+}
 }
 
 
@@ -153,10 +163,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ProductStatus productStatus,  CategoryStatus categoryStatus,  List<Categorymodel> categories,  String error)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ProductStatus productStatus,  CategoryStatus categoryStatus,  List<Categorymodel> categories,  PaginatedData<ProductModel> allproducts,  String error)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ProductState() when $default != null:
-return $default(_that.productStatus,_that.categoryStatus,_that.categories,_that.error);case _:
+return $default(_that.productStatus,_that.categoryStatus,_that.categories,_that.allproducts,_that.error);case _:
   return orElse();
 
 }
@@ -174,10 +184,10 @@ return $default(_that.productStatus,_that.categoryStatus,_that.categories,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ProductStatus productStatus,  CategoryStatus categoryStatus,  List<Categorymodel> categories,  String error)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ProductStatus productStatus,  CategoryStatus categoryStatus,  List<Categorymodel> categories,  PaginatedData<ProductModel> allproducts,  String error)  $default,) {final _that = this;
 switch (_that) {
 case _ProductState():
-return $default(_that.productStatus,_that.categoryStatus,_that.categories,_that.error);case _:
+return $default(_that.productStatus,_that.categoryStatus,_that.categories,_that.allproducts,_that.error);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -194,10 +204,10 @@ return $default(_that.productStatus,_that.categoryStatus,_that.categories,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ProductStatus productStatus,  CategoryStatus categoryStatus,  List<Categorymodel> categories,  String error)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ProductStatus productStatus,  CategoryStatus categoryStatus,  List<Categorymodel> categories,  PaginatedData<ProductModel> allproducts,  String error)?  $default,) {final _that = this;
 switch (_that) {
 case _ProductState() when $default != null:
-return $default(_that.productStatus,_that.categoryStatus,_that.categories,_that.error);case _:
+return $default(_that.productStatus,_that.categoryStatus,_that.categories,_that.allproducts,_that.error);case _:
   return null;
 
 }
@@ -209,7 +219,7 @@ return $default(_that.productStatus,_that.categoryStatus,_that.categories,_that.
 
 
 class _ProductState implements ProductState {
-  const _ProductState({this.productStatus = ProductStatus.initial, this.categoryStatus = CategoryStatus.initial, final  List<Categorymodel> categories = const <Categorymodel>[], this.error = ''}): _categories = categories;
+  const _ProductState({this.productStatus = ProductStatus.initial, this.categoryStatus = CategoryStatus.initial, final  List<Categorymodel> categories = const <Categorymodel>[], this.allproducts = const PaginatedData<ProductModel>(), this.error = ''}): _categories = categories;
   
 
 @override@JsonKey() final  ProductStatus productStatus;
@@ -221,6 +231,7 @@ class _ProductState implements ProductState {
   return EqualUnmodifiableListView(_categories);
 }
 
+@override@JsonKey() final  PaginatedData<ProductModel> allproducts;
 @override@JsonKey() final  String error;
 
 /// Create a copy of ProductState
@@ -233,16 +244,16 @@ _$ProductStateCopyWith<_ProductState> get copyWith => __$ProductStateCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProductState&&(identical(other.productStatus, productStatus) || other.productStatus == productStatus)&&(identical(other.categoryStatus, categoryStatus) || other.categoryStatus == categoryStatus)&&const DeepCollectionEquality().equals(other._categories, _categories)&&(identical(other.error, error) || other.error == error));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProductState&&(identical(other.productStatus, productStatus) || other.productStatus == productStatus)&&(identical(other.categoryStatus, categoryStatus) || other.categoryStatus == categoryStatus)&&const DeepCollectionEquality().equals(other._categories, _categories)&&(identical(other.allproducts, allproducts) || other.allproducts == allproducts)&&(identical(other.error, error) || other.error == error));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,productStatus,categoryStatus,const DeepCollectionEquality().hash(_categories),error);
+int get hashCode => Object.hash(runtimeType,productStatus,categoryStatus,const DeepCollectionEquality().hash(_categories),allproducts,error);
 
 @override
 String toString() {
-  return 'ProductState(productStatus: $productStatus, categoryStatus: $categoryStatus, categories: $categories, error: $error)';
+  return 'ProductState(productStatus: $productStatus, categoryStatus: $categoryStatus, categories: $categories, allproducts: $allproducts, error: $error)';
 }
 
 
@@ -253,11 +264,11 @@ abstract mixin class _$ProductStateCopyWith<$Res> implements $ProductStateCopyWi
   factory _$ProductStateCopyWith(_ProductState value, $Res Function(_ProductState) _then) = __$ProductStateCopyWithImpl;
 @override @useResult
 $Res call({
- ProductStatus productStatus, CategoryStatus categoryStatus, List<Categorymodel> categories, String error
+ ProductStatus productStatus, CategoryStatus categoryStatus, List<Categorymodel> categories, PaginatedData<ProductModel> allproducts, String error
 });
 
 
-
+@override $PaginatedDataCopyWith<ProductModel, $Res> get allproducts;
 
 }
 /// @nodoc
@@ -270,17 +281,27 @@ class __$ProductStateCopyWithImpl<$Res>
 
 /// Create a copy of ProductState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? productStatus = null,Object? categoryStatus = null,Object? categories = null,Object? error = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? productStatus = null,Object? categoryStatus = null,Object? categories = null,Object? allproducts = null,Object? error = null,}) {
   return _then(_ProductState(
 productStatus: null == productStatus ? _self.productStatus : productStatus // ignore: cast_nullable_to_non_nullable
 as ProductStatus,categoryStatus: null == categoryStatus ? _self.categoryStatus : categoryStatus // ignore: cast_nullable_to_non_nullable
 as CategoryStatus,categories: null == categories ? _self._categories : categories // ignore: cast_nullable_to_non_nullable
-as List<Categorymodel>,error: null == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
+as List<Categorymodel>,allproducts: null == allproducts ? _self.allproducts : allproducts // ignore: cast_nullable_to_non_nullable
+as PaginatedData<ProductModel>,error: null == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
 
-
+/// Create a copy of ProductState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$PaginatedDataCopyWith<ProductModel, $Res> get allproducts {
+  
+  return $PaginatedDataCopyWith<ProductModel, $Res>(_self.allproducts, (value) {
+    return _then(_self.copyWith(allproducts: value));
+  });
+}
 }
 
 /// @nodoc
@@ -327,11 +348,13 @@ extension ProductEventPatterns on ProductEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _LoadCategories value)?  loadCategories,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _LoadCategories value)?  loadCategories,TResult Function( _LoadProducts value)?  loadProducts,TResult Function( _LoadMoreProducts value)?  loadMoreProducts,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _LoadCategories() when loadCategories != null:
-return loadCategories(_that);case _:
+return loadCategories(_that);case _LoadProducts() when loadProducts != null:
+return loadProducts(_that);case _LoadMoreProducts() when loadMoreProducts != null:
+return loadMoreProducts(_that);case _:
   return orElse();
 
 }
@@ -349,11 +372,13 @@ return loadCategories(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _LoadCategories value)  loadCategories,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _LoadCategories value)  loadCategories,required TResult Function( _LoadProducts value)  loadProducts,required TResult Function( _LoadMoreProducts value)  loadMoreProducts,}){
 final _that = this;
 switch (_that) {
 case _LoadCategories():
-return loadCategories(_that);case _:
+return loadCategories(_that);case _LoadProducts():
+return loadProducts(_that);case _LoadMoreProducts():
+return loadMoreProducts(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -370,11 +395,13 @@ return loadCategories(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _LoadCategories value)?  loadCategories,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _LoadCategories value)?  loadCategories,TResult? Function( _LoadProducts value)?  loadProducts,TResult? Function( _LoadMoreProducts value)?  loadMoreProducts,}){
 final _that = this;
 switch (_that) {
 case _LoadCategories() when loadCategories != null:
-return loadCategories(_that);case _:
+return loadCategories(_that);case _LoadProducts() when loadProducts != null:
+return loadProducts(_that);case _LoadMoreProducts() when loadMoreProducts != null:
+return loadMoreProducts(_that);case _:
   return null;
 
 }
@@ -391,10 +418,12 @@ return loadCategories(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loadCategories,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loadCategories,TResult Function()?  loadProducts,TResult Function()?  loadMoreProducts,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _LoadCategories() when loadCategories != null:
-return loadCategories();case _:
+return loadCategories();case _LoadProducts() when loadProducts != null:
+return loadProducts();case _LoadMoreProducts() when loadMoreProducts != null:
+return loadMoreProducts();case _:
   return orElse();
 
 }
@@ -412,10 +441,12 @@ return loadCategories();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loadCategories,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loadCategories,required TResult Function()  loadProducts,required TResult Function()  loadMoreProducts,}) {final _that = this;
 switch (_that) {
 case _LoadCategories():
-return loadCategories();case _:
+return loadCategories();case _LoadProducts():
+return loadProducts();case _LoadMoreProducts():
+return loadMoreProducts();case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -432,10 +463,12 @@ return loadCategories();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loadCategories,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loadCategories,TResult? Function()?  loadProducts,TResult? Function()?  loadMoreProducts,}) {final _that = this;
 switch (_that) {
 case _LoadCategories() when loadCategories != null:
-return loadCategories();case _:
+return loadCategories();case _LoadProducts() when loadProducts != null:
+return loadProducts();case _LoadMoreProducts() when loadMoreProducts != null:
+return loadMoreProducts();case _:
   return null;
 
 }
@@ -467,6 +500,70 @@ int get hashCode => runtimeType.hashCode;
 @override
 String toString() {
   return 'ProductEvent.loadCategories()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _LoadProducts implements ProductEvent {
+  const _LoadProducts();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoadProducts);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'ProductEvent.loadProducts()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _LoadMoreProducts implements ProductEvent {
+  const _LoadMoreProducts();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoadMoreProducts);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'ProductEvent.loadMoreProducts()';
 }
 
 

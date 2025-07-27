@@ -10,6 +10,9 @@ abstract class ProductState with _$ProductState {
     @Default(ProductStatus.initial) ProductStatus productStatus,
     @Default(CategoryStatus.initial) CategoryStatus categoryStatus,
     @Default(<Categorymodel>[]) List<Categorymodel> categories,
+    @Default(PaginatedData<ProductModel>())
+    PaginatedData<ProductModel> allproducts,
+
     @Default('') String error,
   }) = _ProductState;
 
