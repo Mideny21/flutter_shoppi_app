@@ -2,8 +2,10 @@
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:shoppi/core/di/injection.dart';
 import 'package:shoppi/core/router/app_router.gr.dart';
 import 'package:shoppi/core/utils/utils.dart';
+import 'package:shoppi/features/authentication/authentication.dart';
 
 @RoutePage()
 class DashboardPage extends StatelessWidget {
@@ -11,6 +13,7 @@ class DashboardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authService = getIt<AuthService>();
     return AutoTabsRouter(
       // list of your tab routes
       // routes used here must be declared as children
@@ -23,22 +26,43 @@ class DashboardPage extends StatelessWidget {
             child: child,
           ),
       builder: (context, child) {
-        // obtain the scoped TabsRouter controller using context
         final tabsRouter = AutoTabsRouter.of(context);
-        // Here we're building our Scaffold inside of AutoTabsRouter
-        // to access the tabsRouter controller provided in this context
-        //
-        // alternatively, you could use a global key
+
+        Future<void> onTabSelected(int index) async {
+          if (index == 1 || index == 2) {
+            final isLoggedIn = await authService.isAuthenticated();
+            if (!isLoggedIn) {
+              if (!context.mounted) return;
+              final router = AutoRouter.of(context);
+              bool? success;
+
+              await router.push(
+                LoginRoute(
+                  onResult: (result) {
+                    success = result;
+                    if (success == true) {
+                      router.pop();
+                    }
+                  },
+                ),
+              );
+
+              if (success == true) {
+                tabsRouter.setActiveIndex(index);
+              }
+              return;
+            }
+          }
+          tabsRouter.setActiveIndex(index);
+        }
+
         return Scaffold(
           body: child,
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: tabsRouter.activeIndex,
             backgroundColor: Colors.white,
             elevation: 8,
-            onTap: (index) {
-              // here we switch between tabs
-              tabsRouter.setActiveIndex(index);
-            },
+            onTap: onTabSelected,
             items: [
               BottomNavigationBarItem(
                 label: 'Home',

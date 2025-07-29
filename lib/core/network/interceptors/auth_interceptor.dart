@@ -1,7 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:shoppi/core/router/app_router.dart';
-import 'package:shoppi/core/router/app_router.gr.dart';
 
 import 'package:shoppi/features/authentication/authentication.dart';
 
