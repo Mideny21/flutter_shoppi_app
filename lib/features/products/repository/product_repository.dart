@@ -49,4 +49,28 @@ class ProductRepository {
       },
     );
   }
+
+  Future<ApiResult<ApiResponse<ProductResponse>>> getProductsByCategory({
+    int? page,
+    int? limit,
+    int? categoryId,
+  }) async {
+    final result = await _networkService.get(
+      'products/category/$categoryId',
+      queryParameters: {'page': page, 'limit': limit},
+    );
+    return result.when(
+      success: (response) {
+        return ApiResult.success(
+          ApiResponse<ProductResponse>.fromJson(
+            response.data,
+            (json) => ProductResponse.fromJson(json as Map<String, dynamic>),
+          ),
+        );
+      },
+      failure: (failure) {
+        return ApiResult.failure(failure);
+      },
+    );
+  }
 }

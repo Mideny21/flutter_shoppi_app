@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoppi/core/common/widgets/widget.dart';
+import 'package:shoppi/core/router/app_router.gr.dart';
 import 'package:shoppi/features/products/products.dart';
 
 class HomeCategoriesView extends StatefulWidget {
@@ -40,7 +42,13 @@ class _HomeCategoriesViewState extends State<HomeCategoriesView> {
                       children:
                           state.categories.map((category) {
                             return InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                context.router.push(
+                                  AllProductsByCategoryRoute(
+                                    categorymodel: category,
+                                  ),
+                                );
+                              },
                               child: LayoutBuilder(
                                 builder: (context, constraints) {
                                   double itemWidth =
