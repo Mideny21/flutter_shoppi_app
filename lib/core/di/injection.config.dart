@@ -17,6 +17,7 @@ import '../../features/authentication/authentication.dart' as _i845;
 import '../../features/authentication/presentation/cubit/auth_cubit.dart'
     as _i678;
 import '../../features/authentication/repository/auth_repository.dart' as _i268;
+import '../../features/authentication/services/auth_redirector.dart' as _i347;
 import '../../features/authentication/services/auth_service.dart' as _i47;
 import '../../features/cart/cart.dart' as _i699;
 import '../../features/cart/presentation/cubit/cart_cubit.dart' as _i499;
@@ -81,6 +82,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i64.CartService>(
       () => _i64.CartService(gh<_i919.Box<_i699.CartItem>>()),
     );
+    gh.lazySingleton<_i347.AuthRedirector>(
+      () => _i347.AuthRedirector(gh<_i81.AppRouter>()),
+    );
     gh.factory<_i499.CartCubit>(() => _i499.CartCubit(gh<_i64.CartService>()));
     gh.lazySingleton<_i373.EnvConfig>(
       () => _i737.ProdEnvConfig(),
@@ -89,9 +93,15 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i47.AuthService>(
       () => _i47.AuthService(gh<_i919.Box<_i845.UserData>>()),
     );
-    gh.factory<_i865.AuthGuard>(() => _i865.AuthGuard(gh<_i845.AuthService>()));
+    gh.factory<_i865.AuthGuard>(
+      () =>
+          _i865.AuthGuard(gh<_i845.AuthService>(), gh<_i845.AuthRedirector>()),
+    );
     gh.factory<_i745.AuthInterceptor>(
-      () => _i745.AuthInterceptor(gh<_i845.AuthService>()),
+      () => _i745.AuthInterceptor(
+        gh<_i845.AuthService>(),
+        gh<_i845.AuthRedirector>(),
+      ),
     );
     gh.lazySingleton<_i667.DioClient>(
       () => _i667.DioClient(gh<_i373.EnvConfig>(), gh<_i745.AuthInterceptor>()),

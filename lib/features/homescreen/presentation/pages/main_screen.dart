@@ -32,21 +32,7 @@ class DashboardPage extends StatelessWidget {
           if (index == 1 || index == 2) {
             final isLoggedIn = await authService.isAuthenticated();
             if (!isLoggedIn) {
-              if (!context.mounted) return;
-              final router = AutoRouter.of(context);
-              bool? success;
-
-              await router.push(
-                LoginRoute(
-                  onResult: (result) {
-                    success = result;
-                    if (success == true) {
-                      router.pop();
-                    }
-                  },
-                ),
-              );
-
+              final success = await getIt<AuthRedirector>().redirectToLogin();
               if (success == true) {
                 tabsRouter.setActiveIndex(index);
               }

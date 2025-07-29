@@ -6,7 +6,8 @@ import 'package:shoppi/features/authentication/authentication.dart';
 @injectable
 class AuthInterceptor extends Interceptor {
   final AuthService _authService;
-  AuthInterceptor(this._authService);
+  final AuthRedirector _redirector;
+  AuthInterceptor(this._authService, this._redirector);
 
   @override
   void onRequest(
@@ -26,11 +27,7 @@ class AuthInterceptor extends Interceptor {
   void onError(DioException err, ErrorInterceptorHandler handler) async {
     // Handle 401 Unauthorized errors (token expired)
     if (err.response?.statusCode == 401) {
-      await _authService.deleteUserData();
-      // _router.replace(AuthRoute());
-      // if (err.response!.statusCode == 401) {}
-      // Refresh token logic or logout user
-      // _authService.refreshToken() or _authService.logout()
+      _redirector.redirectToLogin();
     }
     return super.onError(err, handler);
   }

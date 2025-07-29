@@ -7,7 +7,6 @@ import 'package:shoppi/core/router/app_router.gr.dart';
 import 'package:shoppi/core/utils/utils.dart';
 import 'package:shoppi/features/authentication/authentication.dart';
 import 'package:shoppi/features/authentication/presentation/cubit/auth_cubit.dart';
-import 'package:toastification/toastification.dart';
 
 import '../../../../core/common/widgets/widget.dart';
 
