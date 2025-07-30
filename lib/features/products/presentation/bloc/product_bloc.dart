@@ -20,6 +20,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     on<_LoadMoreProducts>(_onLoadMoreProducts);
     on<_LoadProductsByCategory>(_onLoadProductsByCategory);
     on<_LoadMoreProductsByCategory>(_onLoadMoreProductsByCategory);
+    on<_LoadSingleProduct>(_onLoadSingleProduct);
   }
 
   Future<void> onGetAllCategories(
@@ -245,6 +246,32 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
               isLoadingMore: false,
               error: error.message,
             ),
+          ),
+        );
+      },
+    );
+  }
+
+  Future<void> _onLoadSingleProduct(
+    _LoadSingleProduct event,
+    Emitter<ProductState> emit,
+  ) async {
+    emit(state.copyWith(product: null, productStatus: ProductStatus.loading));
+    final result = await _productRepository.getSingleProduct(event.id);
+    result.when(
+      success: (data) {
+        emit(
+          state.copyWith(
+            product: data.data,
+            productStatus: ProductStatus.success,
+          ),
+        );
+      },
+      failure: (error) {
+        emit(
+          state.copyWith(
+            productStatus: ProductStatus.failure,
+            error: error.message,
           ),
         );
       },

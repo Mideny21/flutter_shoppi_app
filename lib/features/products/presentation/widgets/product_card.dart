@@ -1,7 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:shoppi/core/common/widgets/widget.dart';
+import 'package:shoppi/core/router/app_router.gr.dart';
 import 'package:shoppi/core/utils/utils.dart';
 import 'package:shoppi/features/products/model/model.dart';
 
@@ -12,7 +14,10 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap:
+          () => context.router.push(
+            ProductDetailRoute(id: product.id.toString()),
+          ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: Column(

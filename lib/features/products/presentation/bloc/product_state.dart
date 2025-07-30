@@ -14,6 +14,7 @@ abstract class ProductState with _$ProductState {
     PaginatedData<ProductModel> allproducts,
     @Default(PaginatedData<ProductModel>())
     PaginatedData<ProductModel> categoryProducts,
+    @Default(null) ProductModel? product,
 
     @Default('') String error,
   }) = _ProductState;

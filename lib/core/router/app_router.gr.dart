@@ -9,8 +9,8 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i9;
-import 'package:flutter/material.dart' as _i10;
+import 'package:auto_route/auto_route.dart' as _i10;
+import 'package:flutter/material.dart' as _i11;
 import 'package:shoppi/features/homescreen/presentation/pages/home_screen.dart'
     as _i4;
 import 'package:shoppi/features/homescreen/presentation/pages/main_screen.dart'
@@ -18,25 +18,27 @@ import 'package:shoppi/features/homescreen/presentation/pages/main_screen.dart'
 import 'package:shoppi/features/homescreen/presentation/pages/order_screen.dart'
     as _i6;
 import 'package:shoppi/features/homescreen/presentation/pages/profile_screen.dart'
-    as _i7;
+    as _i8;
 import 'package:shoppi/features/onboarding/presentation/pages/choose_language.dart'
     as _i2;
 import 'package:shoppi/features/onboarding/presentation/pages/onboarding.dart'
     as _i5;
 import 'package:shoppi/features/onboarding/presentation/pages/splash_screen.dart'
-    as _i8;
+    as _i9;
+import 'package:shoppi/features/products/presentation/pages/product_detail.dart'
+    as _i7;
 import 'package:shoppi/features/products/presentation/pages/products_by_category.dart'
     as _i1;
-import 'package:shoppi/features/products/products.dart' as _i11;
+import 'package:shoppi/features/products/products.dart' as _i12;
 
 /// generated route for
 /// [_i1.AllProductsByCategoryScreen]
 class AllProductsByCategoryRoute
-    extends _i9.PageRouteInfo<AllProductsByCategoryRouteArgs> {
+    extends _i10.PageRouteInfo<AllProductsByCategoryRouteArgs> {
   AllProductsByCategoryRoute({
-    _i10.Key? key,
-    required _i11.Categorymodel categorymodel,
-    List<_i9.PageRouteInfo>? children,
+    _i11.Key? key,
+    required _i12.Categorymodel categorymodel,
+    List<_i10.PageRouteInfo>? children,
   }) : super(
          AllProductsByCategoryRoute.name,
          args: AllProductsByCategoryRouteArgs(
@@ -48,7 +50,7 @@ class AllProductsByCategoryRoute
 
   static const String name = 'AllProductsByCategoryRoute';
 
-  static _i9.PageInfo page = _i9.PageInfo(
+  static _i10.PageInfo page = _i10.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<AllProductsByCategoryRouteArgs>();
@@ -63,9 +65,9 @@ class AllProductsByCategoryRoute
 class AllProductsByCategoryRouteArgs {
   const AllProductsByCategoryRouteArgs({this.key, required this.categorymodel});
 
-  final _i10.Key? key;
+  final _i11.Key? key;
 
-  final _i11.Categorymodel categorymodel;
+  final _i12.Categorymodel categorymodel;
 
   @override
   String toString() {
@@ -85,13 +87,13 @@ class AllProductsByCategoryRouteArgs {
 
 /// generated route for
 /// [_i2.ChooseLanguageScreen]
-class ChooseLanguageRoute extends _i9.PageRouteInfo<void> {
-  const ChooseLanguageRoute({List<_i9.PageRouteInfo>? children})
+class ChooseLanguageRoute extends _i10.PageRouteInfo<void> {
+  const ChooseLanguageRoute({List<_i10.PageRouteInfo>? children})
     : super(ChooseLanguageRoute.name, initialChildren: children);
 
   static const String name = 'ChooseLanguageRoute';
 
-  static _i9.PageInfo page = _i9.PageInfo(
+  static _i10.PageInfo page = _i10.PageInfo(
     name,
     builder: (data) {
       return const _i2.ChooseLanguageScreen();
@@ -101,13 +103,13 @@ class ChooseLanguageRoute extends _i9.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.DashboardPage]
-class DashboardRoute extends _i9.PageRouteInfo<void> {
-  const DashboardRoute({List<_i9.PageRouteInfo>? children})
+class DashboardRoute extends _i10.PageRouteInfo<void> {
+  const DashboardRoute({List<_i10.PageRouteInfo>? children})
     : super(DashboardRoute.name, initialChildren: children);
 
   static const String name = 'DashboardRoute';
 
-  static _i9.PageInfo page = _i9.PageInfo(
+  static _i10.PageInfo page = _i10.PageInfo(
     name,
     builder: (data) {
       return const _i3.DashboardPage();
@@ -117,13 +119,13 @@ class DashboardRoute extends _i9.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.HomeScreen]
-class HomeRoute extends _i9.PageRouteInfo<void> {
-  const HomeRoute({List<_i9.PageRouteInfo>? children})
+class HomeRoute extends _i10.PageRouteInfo<void> {
+  const HomeRoute({List<_i10.PageRouteInfo>? children})
     : super(HomeRoute.name, initialChildren: children);
 
   static const String name = 'HomeRoute';
 
-  static _i9.PageInfo page = _i9.PageInfo(
+  static _i10.PageInfo page = _i10.PageInfo(
     name,
     builder: (data) {
       return const _i4.HomeScreen();
@@ -133,13 +135,13 @@ class HomeRoute extends _i9.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i5.OnboardingScreen]
-class OnboardingRoute extends _i9.PageRouteInfo<void> {
-  const OnboardingRoute({List<_i9.PageRouteInfo>? children})
+class OnboardingRoute extends _i10.PageRouteInfo<void> {
+  const OnboardingRoute({List<_i10.PageRouteInfo>? children})
     : super(OnboardingRoute.name, initialChildren: children);
 
   static const String name = 'OnboardingRoute';
 
-  static _i9.PageInfo page = _i9.PageInfo(
+  static _i10.PageInfo page = _i10.PageInfo(
     name,
     builder: (data) {
       return const _i5.OnboardingScreen();
@@ -149,13 +151,13 @@ class OnboardingRoute extends _i9.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i6.OrdersPage]
-class OrdersRoute extends _i9.PageRouteInfo<void> {
-  const OrdersRoute({List<_i9.PageRouteInfo>? children})
+class OrdersRoute extends _i10.PageRouteInfo<void> {
+  const OrdersRoute({List<_i10.PageRouteInfo>? children})
     : super(OrdersRoute.name, initialChildren: children);
 
   static const String name = 'OrdersRoute';
 
-  static _i9.PageInfo page = _i9.PageInfo(
+  static _i10.PageInfo page = _i10.PageInfo(
     name,
     builder: (data) {
       return const _i6.OrdersPage();
@@ -164,33 +166,80 @@ class OrdersRoute extends _i9.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i7.ProfilePage]
-class ProfileRoute extends _i9.PageRouteInfo<void> {
-  const ProfileRoute({List<_i9.PageRouteInfo>? children})
+/// [_i7.ProductDetailPage]
+class ProductDetailRoute extends _i10.PageRouteInfo<ProductDetailRouteArgs> {
+  ProductDetailRoute({
+    _i11.Key? key,
+    required String id,
+    List<_i10.PageRouteInfo>? children,
+  }) : super(
+         ProductDetailRoute.name,
+         args: ProductDetailRouteArgs(key: key, id: id),
+         initialChildren: children,
+       );
+
+  static const String name = 'ProductDetailRoute';
+
+  static _i10.PageInfo page = _i10.PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<ProductDetailRouteArgs>();
+      return _i7.ProductDetailPage(key: args.key, id: args.id);
+    },
+  );
+}
+
+class ProductDetailRouteArgs {
+  const ProductDetailRouteArgs({this.key, required this.id});
+
+  final _i11.Key? key;
+
+  final String id;
+
+  @override
+  String toString() {
+    return 'ProductDetailRouteArgs{key: $key, id: $id}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! ProductDetailRouteArgs) return false;
+    return key == other.key && id == other.id;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ id.hashCode;
+}
+
+/// generated route for
+/// [_i8.ProfilePage]
+class ProfileRoute extends _i10.PageRouteInfo<void> {
+  const ProfileRoute({List<_i10.PageRouteInfo>? children})
     : super(ProfileRoute.name, initialChildren: children);
 
   static const String name = 'ProfileRoute';
 
-  static _i9.PageInfo page = _i9.PageInfo(
+  static _i10.PageInfo page = _i10.PageInfo(
     name,
     builder: (data) {
-      return const _i7.ProfilePage();
+      return const _i8.ProfilePage();
     },
   );
 }
 
 /// generated route for
-/// [_i8.SplashScreen]
-class SplashRoute extends _i9.PageRouteInfo<void> {
-  const SplashRoute({List<_i9.PageRouteInfo>? children})
+/// [_i9.SplashScreen]
+class SplashRoute extends _i10.PageRouteInfo<void> {
+  const SplashRoute({List<_i10.PageRouteInfo>? children})
     : super(SplashRoute.name, initialChildren: children);
 
   static const String name = 'SplashRoute';
 
-  static _i9.PageInfo page = _i9.PageInfo(
+  static _i10.PageInfo page = _i10.PageInfo(
     name,
     builder: (data) {
-      return const _i8.SplashScreen();
+      return const _i9.SplashScreen();
     },
   );
 }

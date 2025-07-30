@@ -73,4 +73,21 @@ class ProductRepository {
       },
     );
   }
+
+  Future<ApiResult<ApiResponse<ProductModel>>> getSingleProduct(int id) async {
+    final result = await _networkService.get('products/$id');
+    return result.when(
+      success: (response) {
+        return ApiResult.success(
+          ApiResponse<ProductModel>.fromJson(
+            response.data,
+            (json) => ProductModel.fromJson(json as Map<String, dynamic>),
+          ),
+        );
+      },
+      failure: (error) {
+        return ApiResult.failure(error);
+      },
+    );
+  }
 }
