@@ -90,4 +90,40 @@ class ProductRepository {
       },
     );
   }
+
+  Future<ApiResult<ApiResponse<ProductResponse>>> searchProducts({
+    int? page,
+    int? limit,
+    String? keyword,
+    int? categoryId,
+    String? minPrice,
+    String? maxPrice,
+  }) async {
+    final queryParams = {
+      if (page != null) 'page': page,
+      if (limit != null) 'limit': limit,
+      if (keyword != null) 'keyword': keyword,
+      if (categoryId != null) 'categoryId': categoryId,
+      if (minPrice != null) 'minPrice': minPrice,
+      if (maxPrice != null) 'maxPrice': maxPrice,
+    };
+
+    final result = await _networkService.get(
+      'products/search',
+      queryParameters: queryParams,
+    );
+    return result.when(
+      success: (response) {
+        return ApiResult.success(
+          ApiResponse<ProductResponse>.fromJson(
+            response.data,
+            (json) => ProductResponse.fromJson(json as Map<String, dynamic>),
+          ),
+        );
+      },
+      failure: (failure) {
+        return ApiResult.failure(failure);
+      },
+    );
+  }
 }

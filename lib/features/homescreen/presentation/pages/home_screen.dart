@@ -53,14 +53,6 @@ class _HomeScreenState extends State<HomeScreen> {
           return CustomScrollView(
             controller: _scrollController,
             slivers: [
-              const HomeSliverAppBar(),
-              const SliverToBoxAdapter(child: SizedBox(height: 10)),
-              const HomeSearchBar(),
-              const SliverToBoxAdapter(child: SizedBox(height: 10)),
-              const AdvertisementPanel(),
-              const SliverToBoxAdapter(child: SizedBox(height: 20)),
-              const HomeCategoriesView(),
-              const SliverToBoxAdapter(child: SizedBox(height: 10)),
               if (state.allproducts.isLoading &&
                   state.allproducts.items.isEmpty)
                 const SliverToBoxAdapter(child: AppLoadingIndicator())
@@ -100,3 +92,17 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
+
+
+
+
+
+    //  const HomeSliverAppBar(),
+    //           const SliverToBoxAdapter(child: SizedBox(height: 10)),
+    //           const HomeSearchBar(),
+    //           const SliverToBoxAdapter(child: SizedBox(height: 10)),
+    //           const AdvertisementPanel(),
+    //           const SliverToBoxAdapter(child: SizedBox(height: 20)),
+    //           const HomeCategoriesView(),
+    //           const SliverToBoxAdapter(child: SizedBox(height: 10)),

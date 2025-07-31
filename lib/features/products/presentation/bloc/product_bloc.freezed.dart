@@ -14,7 +14,8 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ProductState {
 
- ProductStatus get productStatus; CategoryStatus get categoryStatus; List<Categorymodel> get categories; PaginatedData<ProductModel> get allproducts; PaginatedData<ProductModel> get categoryProducts; ProductModel? get product; String get error;
+ ProductStatus get productStatus; CategoryStatus get categoryStatus; List<Categorymodel> get categories; PaginatedData<ProductModel> get allproducts; PaginatedData<ProductModel> get categoryProducts; ProductModel? get product;// SEARCH PRODUCTS STATES
+ PaginatedData<ProductModel> get searchResults; String get searchKeyword; int? get selectedCategoryId; String? get minPrice; String? get maxPrice; bool get hasSearched; int get activeFiltersCount; String get error;
 /// Create a copy of ProductState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +26,16 @@ $ProductStateCopyWith<ProductState> get copyWith => _$ProductStateCopyWithImpl<P
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProductState&&(identical(other.productStatus, productStatus) || other.productStatus == productStatus)&&(identical(other.categoryStatus, categoryStatus) || other.categoryStatus == categoryStatus)&&const DeepCollectionEquality().equals(other.categories, categories)&&(identical(other.allproducts, allproducts) || other.allproducts == allproducts)&&(identical(other.categoryProducts, categoryProducts) || other.categoryProducts == categoryProducts)&&(identical(other.product, product) || other.product == product)&&(identical(other.error, error) || other.error == error));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProductState&&(identical(other.productStatus, productStatus) || other.productStatus == productStatus)&&(identical(other.categoryStatus, categoryStatus) || other.categoryStatus == categoryStatus)&&const DeepCollectionEquality().equals(other.categories, categories)&&(identical(other.allproducts, allproducts) || other.allproducts == allproducts)&&(identical(other.categoryProducts, categoryProducts) || other.categoryProducts == categoryProducts)&&(identical(other.product, product) || other.product == product)&&(identical(other.searchResults, searchResults) || other.searchResults == searchResults)&&(identical(other.searchKeyword, searchKeyword) || other.searchKeyword == searchKeyword)&&(identical(other.selectedCategoryId, selectedCategoryId) || other.selectedCategoryId == selectedCategoryId)&&(identical(other.minPrice, minPrice) || other.minPrice == minPrice)&&(identical(other.maxPrice, maxPrice) || other.maxPrice == maxPrice)&&(identical(other.hasSearched, hasSearched) || other.hasSearched == hasSearched)&&(identical(other.activeFiltersCount, activeFiltersCount) || other.activeFiltersCount == activeFiltersCount)&&(identical(other.error, error) || other.error == error));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,productStatus,categoryStatus,const DeepCollectionEquality().hash(categories),allproducts,categoryProducts,product,error);
+int get hashCode => Object.hash(runtimeType,productStatus,categoryStatus,const DeepCollectionEquality().hash(categories),allproducts,categoryProducts,product,searchResults,searchKeyword,selectedCategoryId,minPrice,maxPrice,hasSearched,activeFiltersCount,error);
 
 @override
 String toString() {
-  return 'ProductState(productStatus: $productStatus, categoryStatus: $categoryStatus, categories: $categories, allproducts: $allproducts, categoryProducts: $categoryProducts, product: $product, error: $error)';
+  return 'ProductState(productStatus: $productStatus, categoryStatus: $categoryStatus, categories: $categories, allproducts: $allproducts, categoryProducts: $categoryProducts, product: $product, searchResults: $searchResults, searchKeyword: $searchKeyword, selectedCategoryId: $selectedCategoryId, minPrice: $minPrice, maxPrice: $maxPrice, hasSearched: $hasSearched, activeFiltersCount: $activeFiltersCount, error: $error)';
 }
 
 
@@ -45,11 +46,11 @@ abstract mixin class $ProductStateCopyWith<$Res>  {
   factory $ProductStateCopyWith(ProductState value, $Res Function(ProductState) _then) = _$ProductStateCopyWithImpl;
 @useResult
 $Res call({
- ProductStatus productStatus, CategoryStatus categoryStatus, List<Categorymodel> categories, PaginatedData<ProductModel> allproducts, PaginatedData<ProductModel> categoryProducts, ProductModel? product, String error
+ ProductStatus productStatus, CategoryStatus categoryStatus, List<Categorymodel> categories, PaginatedData<ProductModel> allproducts, PaginatedData<ProductModel> categoryProducts, ProductModel? product, PaginatedData<ProductModel> searchResults, String searchKeyword, int? selectedCategoryId, String? minPrice, String? maxPrice, bool hasSearched, int activeFiltersCount, String error
 });
 
 
-$PaginatedDataCopyWith<ProductModel, $Res> get allproducts;$PaginatedDataCopyWith<ProductModel, $Res> get categoryProducts;$ProductModelCopyWith<$Res>? get product;
+$PaginatedDataCopyWith<ProductModel, $Res> get allproducts;$PaginatedDataCopyWith<ProductModel, $Res> get categoryProducts;$ProductModelCopyWith<$Res>? get product;$PaginatedDataCopyWith<ProductModel, $Res> get searchResults;
 
 }
 /// @nodoc
@@ -62,7 +63,7 @@ class _$ProductStateCopyWithImpl<$Res>
 
 /// Create a copy of ProductState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? productStatus = null,Object? categoryStatus = null,Object? categories = null,Object? allproducts = null,Object? categoryProducts = null,Object? product = freezed,Object? error = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? productStatus = null,Object? categoryStatus = null,Object? categories = null,Object? allproducts = null,Object? categoryProducts = null,Object? product = freezed,Object? searchResults = null,Object? searchKeyword = null,Object? selectedCategoryId = freezed,Object? minPrice = freezed,Object? maxPrice = freezed,Object? hasSearched = null,Object? activeFiltersCount = null,Object? error = null,}) {
   return _then(_self.copyWith(
 productStatus: null == productStatus ? _self.productStatus : productStatus // ignore: cast_nullable_to_non_nullable
 as ProductStatus,categoryStatus: null == categoryStatus ? _self.categoryStatus : categoryStatus // ignore: cast_nullable_to_non_nullable
@@ -70,7 +71,14 @@ as CategoryStatus,categories: null == categories ? _self.categories : categories
 as List<Categorymodel>,allproducts: null == allproducts ? _self.allproducts : allproducts // ignore: cast_nullable_to_non_nullable
 as PaginatedData<ProductModel>,categoryProducts: null == categoryProducts ? _self.categoryProducts : categoryProducts // ignore: cast_nullable_to_non_nullable
 as PaginatedData<ProductModel>,product: freezed == product ? _self.product : product // ignore: cast_nullable_to_non_nullable
-as ProductModel?,error: null == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
+as ProductModel?,searchResults: null == searchResults ? _self.searchResults : searchResults // ignore: cast_nullable_to_non_nullable
+as PaginatedData<ProductModel>,searchKeyword: null == searchKeyword ? _self.searchKeyword : searchKeyword // ignore: cast_nullable_to_non_nullable
+as String,selectedCategoryId: freezed == selectedCategoryId ? _self.selectedCategoryId : selectedCategoryId // ignore: cast_nullable_to_non_nullable
+as int?,minPrice: freezed == minPrice ? _self.minPrice : minPrice // ignore: cast_nullable_to_non_nullable
+as String?,maxPrice: freezed == maxPrice ? _self.maxPrice : maxPrice // ignore: cast_nullable_to_non_nullable
+as String?,hasSearched: null == hasSearched ? _self.hasSearched : hasSearched // ignore: cast_nullable_to_non_nullable
+as bool,activeFiltersCount: null == activeFiltersCount ? _self.activeFiltersCount : activeFiltersCount // ignore: cast_nullable_to_non_nullable
+as int,error: null == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -103,6 +111,15 @@ $ProductModelCopyWith<$Res>? get product {
 
   return $ProductModelCopyWith<$Res>(_self.product!, (value) {
     return _then(_self.copyWith(product: value));
+  });
+}/// Create a copy of ProductState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$PaginatedDataCopyWith<ProductModel, $Res> get searchResults {
+  
+  return $PaginatedDataCopyWith<ProductModel, $Res>(_self.searchResults, (value) {
+    return _then(_self.copyWith(searchResults: value));
   });
 }
 }
@@ -186,10 +203,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ProductStatus productStatus,  CategoryStatus categoryStatus,  List<Categorymodel> categories,  PaginatedData<ProductModel> allproducts,  PaginatedData<ProductModel> categoryProducts,  ProductModel? product,  String error)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ProductStatus productStatus,  CategoryStatus categoryStatus,  List<Categorymodel> categories,  PaginatedData<ProductModel> allproducts,  PaginatedData<ProductModel> categoryProducts,  ProductModel? product,  PaginatedData<ProductModel> searchResults,  String searchKeyword,  int? selectedCategoryId,  String? minPrice,  String? maxPrice,  bool hasSearched,  int activeFiltersCount,  String error)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ProductState() when $default != null:
-return $default(_that.productStatus,_that.categoryStatus,_that.categories,_that.allproducts,_that.categoryProducts,_that.product,_that.error);case _:
+return $default(_that.productStatus,_that.categoryStatus,_that.categories,_that.allproducts,_that.categoryProducts,_that.product,_that.searchResults,_that.searchKeyword,_that.selectedCategoryId,_that.minPrice,_that.maxPrice,_that.hasSearched,_that.activeFiltersCount,_that.error);case _:
   return orElse();
 
 }
@@ -207,10 +224,10 @@ return $default(_that.productStatus,_that.categoryStatus,_that.categories,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ProductStatus productStatus,  CategoryStatus categoryStatus,  List<Categorymodel> categories,  PaginatedData<ProductModel> allproducts,  PaginatedData<ProductModel> categoryProducts,  ProductModel? product,  String error)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ProductStatus productStatus,  CategoryStatus categoryStatus,  List<Categorymodel> categories,  PaginatedData<ProductModel> allproducts,  PaginatedData<ProductModel> categoryProducts,  ProductModel? product,  PaginatedData<ProductModel> searchResults,  String searchKeyword,  int? selectedCategoryId,  String? minPrice,  String? maxPrice,  bool hasSearched,  int activeFiltersCount,  String error)  $default,) {final _that = this;
 switch (_that) {
 case _ProductState():
-return $default(_that.productStatus,_that.categoryStatus,_that.categories,_that.allproducts,_that.categoryProducts,_that.product,_that.error);case _:
+return $default(_that.productStatus,_that.categoryStatus,_that.categories,_that.allproducts,_that.categoryProducts,_that.product,_that.searchResults,_that.searchKeyword,_that.selectedCategoryId,_that.minPrice,_that.maxPrice,_that.hasSearched,_that.activeFiltersCount,_that.error);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -227,10 +244,10 @@ return $default(_that.productStatus,_that.categoryStatus,_that.categories,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ProductStatus productStatus,  CategoryStatus categoryStatus,  List<Categorymodel> categories,  PaginatedData<ProductModel> allproducts,  PaginatedData<ProductModel> categoryProducts,  ProductModel? product,  String error)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ProductStatus productStatus,  CategoryStatus categoryStatus,  List<Categorymodel> categories,  PaginatedData<ProductModel> allproducts,  PaginatedData<ProductModel> categoryProducts,  ProductModel? product,  PaginatedData<ProductModel> searchResults,  String searchKeyword,  int? selectedCategoryId,  String? minPrice,  String? maxPrice,  bool hasSearched,  int activeFiltersCount,  String error)?  $default,) {final _that = this;
 switch (_that) {
 case _ProductState() when $default != null:
-return $default(_that.productStatus,_that.categoryStatus,_that.categories,_that.allproducts,_that.categoryProducts,_that.product,_that.error);case _:
+return $default(_that.productStatus,_that.categoryStatus,_that.categories,_that.allproducts,_that.categoryProducts,_that.product,_that.searchResults,_that.searchKeyword,_that.selectedCategoryId,_that.minPrice,_that.maxPrice,_that.hasSearched,_that.activeFiltersCount,_that.error);case _:
   return null;
 
 }
@@ -242,7 +259,7 @@ return $default(_that.productStatus,_that.categoryStatus,_that.categories,_that.
 
 
 class _ProductState implements ProductState {
-  const _ProductState({this.productStatus = ProductStatus.initial, this.categoryStatus = CategoryStatus.initial, final  List<Categorymodel> categories = const <Categorymodel>[], this.allproducts = const PaginatedData<ProductModel>(), this.categoryProducts = const PaginatedData<ProductModel>(), this.product = null, this.error = ''}): _categories = categories;
+  const _ProductState({this.productStatus = ProductStatus.initial, this.categoryStatus = CategoryStatus.initial, final  List<Categorymodel> categories = const <Categorymodel>[], this.allproducts = const PaginatedData<ProductModel>(), this.categoryProducts = const PaginatedData<ProductModel>(), this.product = null, this.searchResults = const PaginatedData<ProductModel>(), this.searchKeyword = '', this.selectedCategoryId, this.minPrice, this.maxPrice, this.hasSearched = false, this.activeFiltersCount = 0, this.error = ''}): _categories = categories;
   
 
 @override@JsonKey() final  ProductStatus productStatus;
@@ -257,6 +274,14 @@ class _ProductState implements ProductState {
 @override@JsonKey() final  PaginatedData<ProductModel> allproducts;
 @override@JsonKey() final  PaginatedData<ProductModel> categoryProducts;
 @override@JsonKey() final  ProductModel? product;
+// SEARCH PRODUCTS STATES
+@override@JsonKey() final  PaginatedData<ProductModel> searchResults;
+@override@JsonKey() final  String searchKeyword;
+@override final  int? selectedCategoryId;
+@override final  String? minPrice;
+@override final  String? maxPrice;
+@override@JsonKey() final  bool hasSearched;
+@override@JsonKey() final  int activeFiltersCount;
 @override@JsonKey() final  String error;
 
 /// Create a copy of ProductState
@@ -269,16 +294,16 @@ _$ProductStateCopyWith<_ProductState> get copyWith => __$ProductStateCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProductState&&(identical(other.productStatus, productStatus) || other.productStatus == productStatus)&&(identical(other.categoryStatus, categoryStatus) || other.categoryStatus == categoryStatus)&&const DeepCollectionEquality().equals(other._categories, _categories)&&(identical(other.allproducts, allproducts) || other.allproducts == allproducts)&&(identical(other.categoryProducts, categoryProducts) || other.categoryProducts == categoryProducts)&&(identical(other.product, product) || other.product == product)&&(identical(other.error, error) || other.error == error));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProductState&&(identical(other.productStatus, productStatus) || other.productStatus == productStatus)&&(identical(other.categoryStatus, categoryStatus) || other.categoryStatus == categoryStatus)&&const DeepCollectionEquality().equals(other._categories, _categories)&&(identical(other.allproducts, allproducts) || other.allproducts == allproducts)&&(identical(other.categoryProducts, categoryProducts) || other.categoryProducts == categoryProducts)&&(identical(other.product, product) || other.product == product)&&(identical(other.searchResults, searchResults) || other.searchResults == searchResults)&&(identical(other.searchKeyword, searchKeyword) || other.searchKeyword == searchKeyword)&&(identical(other.selectedCategoryId, selectedCategoryId) || other.selectedCategoryId == selectedCategoryId)&&(identical(other.minPrice, minPrice) || other.minPrice == minPrice)&&(identical(other.maxPrice, maxPrice) || other.maxPrice == maxPrice)&&(identical(other.hasSearched, hasSearched) || other.hasSearched == hasSearched)&&(identical(other.activeFiltersCount, activeFiltersCount) || other.activeFiltersCount == activeFiltersCount)&&(identical(other.error, error) || other.error == error));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,productStatus,categoryStatus,const DeepCollectionEquality().hash(_categories),allproducts,categoryProducts,product,error);
+int get hashCode => Object.hash(runtimeType,productStatus,categoryStatus,const DeepCollectionEquality().hash(_categories),allproducts,categoryProducts,product,searchResults,searchKeyword,selectedCategoryId,minPrice,maxPrice,hasSearched,activeFiltersCount,error);
 
 @override
 String toString() {
-  return 'ProductState(productStatus: $productStatus, categoryStatus: $categoryStatus, categories: $categories, allproducts: $allproducts, categoryProducts: $categoryProducts, product: $product, error: $error)';
+  return 'ProductState(productStatus: $productStatus, categoryStatus: $categoryStatus, categories: $categories, allproducts: $allproducts, categoryProducts: $categoryProducts, product: $product, searchResults: $searchResults, searchKeyword: $searchKeyword, selectedCategoryId: $selectedCategoryId, minPrice: $minPrice, maxPrice: $maxPrice, hasSearched: $hasSearched, activeFiltersCount: $activeFiltersCount, error: $error)';
 }
 
 
@@ -289,11 +314,11 @@ abstract mixin class _$ProductStateCopyWith<$Res> implements $ProductStateCopyWi
   factory _$ProductStateCopyWith(_ProductState value, $Res Function(_ProductState) _then) = __$ProductStateCopyWithImpl;
 @override @useResult
 $Res call({
- ProductStatus productStatus, CategoryStatus categoryStatus, List<Categorymodel> categories, PaginatedData<ProductModel> allproducts, PaginatedData<ProductModel> categoryProducts, ProductModel? product, String error
+ ProductStatus productStatus, CategoryStatus categoryStatus, List<Categorymodel> categories, PaginatedData<ProductModel> allproducts, PaginatedData<ProductModel> categoryProducts, ProductModel? product, PaginatedData<ProductModel> searchResults, String searchKeyword, int? selectedCategoryId, String? minPrice, String? maxPrice, bool hasSearched, int activeFiltersCount, String error
 });
 
 
-@override $PaginatedDataCopyWith<ProductModel, $Res> get allproducts;@override $PaginatedDataCopyWith<ProductModel, $Res> get categoryProducts;@override $ProductModelCopyWith<$Res>? get product;
+@override $PaginatedDataCopyWith<ProductModel, $Res> get allproducts;@override $PaginatedDataCopyWith<ProductModel, $Res> get categoryProducts;@override $ProductModelCopyWith<$Res>? get product;@override $PaginatedDataCopyWith<ProductModel, $Res> get searchResults;
 
 }
 /// @nodoc
@@ -306,7 +331,7 @@ class __$ProductStateCopyWithImpl<$Res>
 
 /// Create a copy of ProductState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? productStatus = null,Object? categoryStatus = null,Object? categories = null,Object? allproducts = null,Object? categoryProducts = null,Object? product = freezed,Object? error = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? productStatus = null,Object? categoryStatus = null,Object? categories = null,Object? allproducts = null,Object? categoryProducts = null,Object? product = freezed,Object? searchResults = null,Object? searchKeyword = null,Object? selectedCategoryId = freezed,Object? minPrice = freezed,Object? maxPrice = freezed,Object? hasSearched = null,Object? activeFiltersCount = null,Object? error = null,}) {
   return _then(_ProductState(
 productStatus: null == productStatus ? _self.productStatus : productStatus // ignore: cast_nullable_to_non_nullable
 as ProductStatus,categoryStatus: null == categoryStatus ? _self.categoryStatus : categoryStatus // ignore: cast_nullable_to_non_nullable
@@ -314,7 +339,14 @@ as CategoryStatus,categories: null == categories ? _self._categories : categorie
 as List<Categorymodel>,allproducts: null == allproducts ? _self.allproducts : allproducts // ignore: cast_nullable_to_non_nullable
 as PaginatedData<ProductModel>,categoryProducts: null == categoryProducts ? _self.categoryProducts : categoryProducts // ignore: cast_nullable_to_non_nullable
 as PaginatedData<ProductModel>,product: freezed == product ? _self.product : product // ignore: cast_nullable_to_non_nullable
-as ProductModel?,error: null == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
+as ProductModel?,searchResults: null == searchResults ? _self.searchResults : searchResults // ignore: cast_nullable_to_non_nullable
+as PaginatedData<ProductModel>,searchKeyword: null == searchKeyword ? _self.searchKeyword : searchKeyword // ignore: cast_nullable_to_non_nullable
+as String,selectedCategoryId: freezed == selectedCategoryId ? _self.selectedCategoryId : selectedCategoryId // ignore: cast_nullable_to_non_nullable
+as int?,minPrice: freezed == minPrice ? _self.minPrice : minPrice // ignore: cast_nullable_to_non_nullable
+as String?,maxPrice: freezed == maxPrice ? _self.maxPrice : maxPrice // ignore: cast_nullable_to_non_nullable
+as String?,hasSearched: null == hasSearched ? _self.hasSearched : hasSearched // ignore: cast_nullable_to_non_nullable
+as bool,activeFiltersCount: null == activeFiltersCount ? _self.activeFiltersCount : activeFiltersCount // ignore: cast_nullable_to_non_nullable
+as int,error: null == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -348,6 +380,15 @@ $ProductModelCopyWith<$Res>? get product {
 
   return $ProductModelCopyWith<$Res>(_self.product!, (value) {
     return _then(_self.copyWith(product: value));
+  });
+}/// Create a copy of ProductState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$PaginatedDataCopyWith<ProductModel, $Res> get searchResults {
+  
+  return $PaginatedDataCopyWith<ProductModel, $Res>(_self.searchResults, (value) {
+    return _then(_self.copyWith(searchResults: value));
   });
 }
 }
@@ -396,7 +437,7 @@ extension ProductEventPatterns on ProductEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _LoadCategories value)?  loadCategories,TResult Function( _LoadProducts value)?  loadProducts,TResult Function( _LoadMoreProducts value)?  loadMoreProducts,TResult Function( _LoadProductsByCategory value)?  loadProductsByCategory,TResult Function( _LoadMoreProductsByCategory value)?  loadMoreProductsByCategory,TResult Function( _LoadSingleProduct value)?  loadSingleProduct,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _LoadCategories value)?  loadCategories,TResult Function( _LoadProducts value)?  loadProducts,TResult Function( _LoadMoreProducts value)?  loadMoreProducts,TResult Function( _LoadProductsByCategory value)?  loadProductsByCategory,TResult Function( _LoadMoreProductsByCategory value)?  loadMoreProductsByCategory,TResult Function( _LoadSingleProduct value)?  loadSingleProduct,TResult Function( _UpdateSearchKeyword value)?  updateSearchKeyword,TResult Function( _UpdateFilters value)?  updateFilters,TResult Function( _SearchProducts value)?  searchProducts,TResult Function( _LoadMoreSearchProducts value)?  loadMoreSearchProducts,TResult Function( _ResetSearchState value)?  resetSearchState,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _LoadCategories() when loadCategories != null:
@@ -405,7 +446,12 @@ return loadProducts(_that);case _LoadMoreProducts() when loadMoreProducts != nul
 return loadMoreProducts(_that);case _LoadProductsByCategory() when loadProductsByCategory != null:
 return loadProductsByCategory(_that);case _LoadMoreProductsByCategory() when loadMoreProductsByCategory != null:
 return loadMoreProductsByCategory(_that);case _LoadSingleProduct() when loadSingleProduct != null:
-return loadSingleProduct(_that);case _:
+return loadSingleProduct(_that);case _UpdateSearchKeyword() when updateSearchKeyword != null:
+return updateSearchKeyword(_that);case _UpdateFilters() when updateFilters != null:
+return updateFilters(_that);case _SearchProducts() when searchProducts != null:
+return searchProducts(_that);case _LoadMoreSearchProducts() when loadMoreSearchProducts != null:
+return loadMoreSearchProducts(_that);case _ResetSearchState() when resetSearchState != null:
+return resetSearchState(_that);case _:
   return orElse();
 
 }
@@ -423,7 +469,7 @@ return loadSingleProduct(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _LoadCategories value)  loadCategories,required TResult Function( _LoadProducts value)  loadProducts,required TResult Function( _LoadMoreProducts value)  loadMoreProducts,required TResult Function( _LoadProductsByCategory value)  loadProductsByCategory,required TResult Function( _LoadMoreProductsByCategory value)  loadMoreProductsByCategory,required TResult Function( _LoadSingleProduct value)  loadSingleProduct,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _LoadCategories value)  loadCategories,required TResult Function( _LoadProducts value)  loadProducts,required TResult Function( _LoadMoreProducts value)  loadMoreProducts,required TResult Function( _LoadProductsByCategory value)  loadProductsByCategory,required TResult Function( _LoadMoreProductsByCategory value)  loadMoreProductsByCategory,required TResult Function( _LoadSingleProduct value)  loadSingleProduct,required TResult Function( _UpdateSearchKeyword value)  updateSearchKeyword,required TResult Function( _UpdateFilters value)  updateFilters,required TResult Function( _SearchProducts value)  searchProducts,required TResult Function( _LoadMoreSearchProducts value)  loadMoreSearchProducts,required TResult Function( _ResetSearchState value)  resetSearchState,}){
 final _that = this;
 switch (_that) {
 case _LoadCategories():
@@ -432,7 +478,12 @@ return loadProducts(_that);case _LoadMoreProducts():
 return loadMoreProducts(_that);case _LoadProductsByCategory():
 return loadProductsByCategory(_that);case _LoadMoreProductsByCategory():
 return loadMoreProductsByCategory(_that);case _LoadSingleProduct():
-return loadSingleProduct(_that);case _:
+return loadSingleProduct(_that);case _UpdateSearchKeyword():
+return updateSearchKeyword(_that);case _UpdateFilters():
+return updateFilters(_that);case _SearchProducts():
+return searchProducts(_that);case _LoadMoreSearchProducts():
+return loadMoreSearchProducts(_that);case _ResetSearchState():
+return resetSearchState(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -449,7 +500,7 @@ return loadSingleProduct(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _LoadCategories value)?  loadCategories,TResult? Function( _LoadProducts value)?  loadProducts,TResult? Function( _LoadMoreProducts value)?  loadMoreProducts,TResult? Function( _LoadProductsByCategory value)?  loadProductsByCategory,TResult? Function( _LoadMoreProductsByCategory value)?  loadMoreProductsByCategory,TResult? Function( _LoadSingleProduct value)?  loadSingleProduct,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _LoadCategories value)?  loadCategories,TResult? Function( _LoadProducts value)?  loadProducts,TResult? Function( _LoadMoreProducts value)?  loadMoreProducts,TResult? Function( _LoadProductsByCategory value)?  loadProductsByCategory,TResult? Function( _LoadMoreProductsByCategory value)?  loadMoreProductsByCategory,TResult? Function( _LoadSingleProduct value)?  loadSingleProduct,TResult? Function( _UpdateSearchKeyword value)?  updateSearchKeyword,TResult? Function( _UpdateFilters value)?  updateFilters,TResult? Function( _SearchProducts value)?  searchProducts,TResult? Function( _LoadMoreSearchProducts value)?  loadMoreSearchProducts,TResult? Function( _ResetSearchState value)?  resetSearchState,}){
 final _that = this;
 switch (_that) {
 case _LoadCategories() when loadCategories != null:
@@ -458,7 +509,12 @@ return loadProducts(_that);case _LoadMoreProducts() when loadMoreProducts != nul
 return loadMoreProducts(_that);case _LoadProductsByCategory() when loadProductsByCategory != null:
 return loadProductsByCategory(_that);case _LoadMoreProductsByCategory() when loadMoreProductsByCategory != null:
 return loadMoreProductsByCategory(_that);case _LoadSingleProduct() when loadSingleProduct != null:
-return loadSingleProduct(_that);case _:
+return loadSingleProduct(_that);case _UpdateSearchKeyword() when updateSearchKeyword != null:
+return updateSearchKeyword(_that);case _UpdateFilters() when updateFilters != null:
+return updateFilters(_that);case _SearchProducts() when searchProducts != null:
+return searchProducts(_that);case _LoadMoreSearchProducts() when loadMoreSearchProducts != null:
+return loadMoreSearchProducts(_that);case _ResetSearchState() when resetSearchState != null:
+return resetSearchState(_that);case _:
   return null;
 
 }
@@ -475,7 +531,7 @@ return loadSingleProduct(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loadCategories,TResult Function()?  loadProducts,TResult Function()?  loadMoreProducts,TResult Function( int id)?  loadProductsByCategory,TResult Function( int id)?  loadMoreProductsByCategory,TResult Function( int id)?  loadSingleProduct,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loadCategories,TResult Function()?  loadProducts,TResult Function()?  loadMoreProducts,TResult Function( int id)?  loadProductsByCategory,TResult Function( int id)?  loadMoreProductsByCategory,TResult Function( int id)?  loadSingleProduct,TResult Function( String keyword)?  updateSearchKeyword,TResult Function( int? categoryId,  String? minPrice,  String? maxPrice)?  updateFilters,TResult Function()?  searchProducts,TResult Function()?  loadMoreSearchProducts,TResult Function()?  resetSearchState,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _LoadCategories() when loadCategories != null:
 return loadCategories();case _LoadProducts() when loadProducts != null:
@@ -483,7 +539,12 @@ return loadProducts();case _LoadMoreProducts() when loadMoreProducts != null:
 return loadMoreProducts();case _LoadProductsByCategory() when loadProductsByCategory != null:
 return loadProductsByCategory(_that.id);case _LoadMoreProductsByCategory() when loadMoreProductsByCategory != null:
 return loadMoreProductsByCategory(_that.id);case _LoadSingleProduct() when loadSingleProduct != null:
-return loadSingleProduct(_that.id);case _:
+return loadSingleProduct(_that.id);case _UpdateSearchKeyword() when updateSearchKeyword != null:
+return updateSearchKeyword(_that.keyword);case _UpdateFilters() when updateFilters != null:
+return updateFilters(_that.categoryId,_that.minPrice,_that.maxPrice);case _SearchProducts() when searchProducts != null:
+return searchProducts();case _LoadMoreSearchProducts() when loadMoreSearchProducts != null:
+return loadMoreSearchProducts();case _ResetSearchState() when resetSearchState != null:
+return resetSearchState();case _:
   return orElse();
 
 }
@@ -501,7 +562,7 @@ return loadSingleProduct(_that.id);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loadCategories,required TResult Function()  loadProducts,required TResult Function()  loadMoreProducts,required TResult Function( int id)  loadProductsByCategory,required TResult Function( int id)  loadMoreProductsByCategory,required TResult Function( int id)  loadSingleProduct,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loadCategories,required TResult Function()  loadProducts,required TResult Function()  loadMoreProducts,required TResult Function( int id)  loadProductsByCategory,required TResult Function( int id)  loadMoreProductsByCategory,required TResult Function( int id)  loadSingleProduct,required TResult Function( String keyword)  updateSearchKeyword,required TResult Function( int? categoryId,  String? minPrice,  String? maxPrice)  updateFilters,required TResult Function()  searchProducts,required TResult Function()  loadMoreSearchProducts,required TResult Function()  resetSearchState,}) {final _that = this;
 switch (_that) {
 case _LoadCategories():
 return loadCategories();case _LoadProducts():
@@ -509,7 +570,12 @@ return loadProducts();case _LoadMoreProducts():
 return loadMoreProducts();case _LoadProductsByCategory():
 return loadProductsByCategory(_that.id);case _LoadMoreProductsByCategory():
 return loadMoreProductsByCategory(_that.id);case _LoadSingleProduct():
-return loadSingleProduct(_that.id);case _:
+return loadSingleProduct(_that.id);case _UpdateSearchKeyword():
+return updateSearchKeyword(_that.keyword);case _UpdateFilters():
+return updateFilters(_that.categoryId,_that.minPrice,_that.maxPrice);case _SearchProducts():
+return searchProducts();case _LoadMoreSearchProducts():
+return loadMoreSearchProducts();case _ResetSearchState():
+return resetSearchState();case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -526,7 +592,7 @@ return loadSingleProduct(_that.id);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loadCategories,TResult? Function()?  loadProducts,TResult? Function()?  loadMoreProducts,TResult? Function( int id)?  loadProductsByCategory,TResult? Function( int id)?  loadMoreProductsByCategory,TResult? Function( int id)?  loadSingleProduct,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loadCategories,TResult? Function()?  loadProducts,TResult? Function()?  loadMoreProducts,TResult? Function( int id)?  loadProductsByCategory,TResult? Function( int id)?  loadMoreProductsByCategory,TResult? Function( int id)?  loadSingleProduct,TResult? Function( String keyword)?  updateSearchKeyword,TResult? Function( int? categoryId,  String? minPrice,  String? maxPrice)?  updateFilters,TResult? Function()?  searchProducts,TResult? Function()?  loadMoreSearchProducts,TResult? Function()?  resetSearchState,}) {final _that = this;
 switch (_that) {
 case _LoadCategories() when loadCategories != null:
 return loadCategories();case _LoadProducts() when loadProducts != null:
@@ -534,7 +600,12 @@ return loadProducts();case _LoadMoreProducts() when loadMoreProducts != null:
 return loadMoreProducts();case _LoadProductsByCategory() when loadProductsByCategory != null:
 return loadProductsByCategory(_that.id);case _LoadMoreProductsByCategory() when loadMoreProductsByCategory != null:
 return loadMoreProductsByCategory(_that.id);case _LoadSingleProduct() when loadSingleProduct != null:
-return loadSingleProduct(_that.id);case _:
+return loadSingleProduct(_that.id);case _UpdateSearchKeyword() when updateSearchKeyword != null:
+return updateSearchKeyword(_that.keyword);case _UpdateFilters() when updateFilters != null:
+return updateFilters(_that.categoryId,_that.minPrice,_that.maxPrice);case _SearchProducts() when searchProducts != null:
+return searchProducts();case _LoadMoreSearchProducts() when loadMoreSearchProducts != null:
+return loadMoreSearchProducts();case _ResetSearchState() when resetSearchState != null:
+return resetSearchState();case _:
   return null;
 
 }
@@ -835,5 +906,237 @@ as int,
 
 
 }
+
+/// @nodoc
+
+
+class _UpdateSearchKeyword implements ProductEvent {
+  const _UpdateSearchKeyword(this.keyword);
+  
+
+ final  String keyword;
+
+/// Create a copy of ProductEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$UpdateSearchKeywordCopyWith<_UpdateSearchKeyword> get copyWith => __$UpdateSearchKeywordCopyWithImpl<_UpdateSearchKeyword>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UpdateSearchKeyword&&(identical(other.keyword, keyword) || other.keyword == keyword));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,keyword);
+
+@override
+String toString() {
+  return 'ProductEvent.updateSearchKeyword(keyword: $keyword)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$UpdateSearchKeywordCopyWith<$Res> implements $ProductEventCopyWith<$Res> {
+  factory _$UpdateSearchKeywordCopyWith(_UpdateSearchKeyword value, $Res Function(_UpdateSearchKeyword) _then) = __$UpdateSearchKeywordCopyWithImpl;
+@useResult
+$Res call({
+ String keyword
+});
+
+
+
+
+}
+/// @nodoc
+class __$UpdateSearchKeywordCopyWithImpl<$Res>
+    implements _$UpdateSearchKeywordCopyWith<$Res> {
+  __$UpdateSearchKeywordCopyWithImpl(this._self, this._then);
+
+  final _UpdateSearchKeyword _self;
+  final $Res Function(_UpdateSearchKeyword) _then;
+
+/// Create a copy of ProductEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? keyword = null,}) {
+  return _then(_UpdateSearchKeyword(
+null == keyword ? _self.keyword : keyword // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _UpdateFilters implements ProductEvent {
+  const _UpdateFilters({this.categoryId, this.minPrice, this.maxPrice});
+  
+
+ final  int? categoryId;
+ final  String? minPrice;
+ final  String? maxPrice;
+
+/// Create a copy of ProductEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$UpdateFiltersCopyWith<_UpdateFilters> get copyWith => __$UpdateFiltersCopyWithImpl<_UpdateFilters>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UpdateFilters&&(identical(other.categoryId, categoryId) || other.categoryId == categoryId)&&(identical(other.minPrice, minPrice) || other.minPrice == minPrice)&&(identical(other.maxPrice, maxPrice) || other.maxPrice == maxPrice));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,categoryId,minPrice,maxPrice);
+
+@override
+String toString() {
+  return 'ProductEvent.updateFilters(categoryId: $categoryId, minPrice: $minPrice, maxPrice: $maxPrice)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$UpdateFiltersCopyWith<$Res> implements $ProductEventCopyWith<$Res> {
+  factory _$UpdateFiltersCopyWith(_UpdateFilters value, $Res Function(_UpdateFilters) _then) = __$UpdateFiltersCopyWithImpl;
+@useResult
+$Res call({
+ int? categoryId, String? minPrice, String? maxPrice
+});
+
+
+
+
+}
+/// @nodoc
+class __$UpdateFiltersCopyWithImpl<$Res>
+    implements _$UpdateFiltersCopyWith<$Res> {
+  __$UpdateFiltersCopyWithImpl(this._self, this._then);
+
+  final _UpdateFilters _self;
+  final $Res Function(_UpdateFilters) _then;
+
+/// Create a copy of ProductEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? categoryId = freezed,Object? minPrice = freezed,Object? maxPrice = freezed,}) {
+  return _then(_UpdateFilters(
+categoryId: freezed == categoryId ? _self.categoryId : categoryId // ignore: cast_nullable_to_non_nullable
+as int?,minPrice: freezed == minPrice ? _self.minPrice : minPrice // ignore: cast_nullable_to_non_nullable
+as String?,maxPrice: freezed == maxPrice ? _self.maxPrice : maxPrice // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _SearchProducts implements ProductEvent {
+  const _SearchProducts();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SearchProducts);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'ProductEvent.searchProducts()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _LoadMoreSearchProducts implements ProductEvent {
+  const _LoadMoreSearchProducts();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoadMoreSearchProducts);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'ProductEvent.loadMoreSearchProducts()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _ResetSearchState implements ProductEvent {
+  const _ResetSearchState();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ResetSearchState);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'ProductEvent.resetSearchState()';
+}
+
+
+}
+
+
+
 
 // dart format on

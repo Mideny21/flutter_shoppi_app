@@ -16,6 +16,16 @@ abstract class ProductState with _$ProductState {
     PaginatedData<ProductModel> categoryProducts,
     @Default(null) ProductModel? product,
 
+    // SEARCH PRODUCTS STATES
+    @Default(PaginatedData<ProductModel>())
+    PaginatedData<ProductModel> searchResults,
+    @Default('') String searchKeyword,
+    int? selectedCategoryId,
+    String? minPrice,
+    String? maxPrice,
+    @Default(false) bool hasSearched,
+    @Default(0) int activeFiltersCount,
+
     @Default('') String error,
   }) = _ProductState;
 
