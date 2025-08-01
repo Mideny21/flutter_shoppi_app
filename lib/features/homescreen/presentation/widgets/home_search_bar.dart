@@ -1,4 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:shoppi/core/router/app_router.gr.dart';
 
 class HomeSearchBar extends StatefulWidget {
   const HomeSearchBar({super.key});
@@ -8,6 +10,15 @@ class HomeSearchBar extends StatefulWidget {
 }
 
 class _HomeSearchBarState extends State<HomeSearchBar> {
+  final FocusNode _focusNode = FocusNode();
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _focusNode.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
@@ -15,8 +26,14 @@ class _HomeSearchBarState extends State<HomeSearchBar> {
         padding: const EdgeInsets.symmetric(horizontal: 5),
         child: TextFormField(
           readOnly: true,
+          focusNode: _focusNode,
 
-          onTap: () async {},
+          onTap: () async {
+            // unfocus before navigating to avoid keeping focus when returning
+            _focusNode.unfocus();
+            context.router.push(const SearchProductsRoute());
+            _focusNode.unfocus();
+          },
           decoration: InputDecoration(
             filled: true,
             fillColor: Colors.white,
