@@ -6,9 +6,11 @@ import 'package:shoppi/core/router/app_route_observer.dart';
 import 'package:shoppi/core/router/app_router.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:shoppi/features/cart/cart.dart';
 import 'package:shoppi/features/onboarding/onbording.dart';
 import 'package:shoppi/features/onboarding/presentation/cubit/app_settings.dart';
 import 'package:shoppi/features/products/products.dart';
+import 'package:toastification/toastification.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -20,19 +22,26 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => getIt<AppSettingsCubit>()),
         BlocProvider(create: (context) => getIt<ProductBloc>()),
+        BlocProvider(create: (context) => getIt<CartCubit>()..readAllCart()),
       ],
       child: BlocBuilder<AppSettingsCubit, AppSettings>(
         builder: (context, state) {
-          return MaterialApp.router(
-            routerConfig: appRouter.config(
-              navigatorObservers: () => [MyObserver()],
+          return ToastificationConfigProvider(
+            config: ToastificationConfig(
+              alignment: Alignment.topCenter,
+              animationDuration: Duration(milliseconds: 500),
             ),
-            title: FlavorConfig.instance.values.appName,
-            localizationsDelegates: AppLocalizations.localizationsDelegates,
-            supportedLocales: AppLocalizations.supportedLocales,
-            locale: Locale(state.localeCode),
-            theme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            child: MaterialApp.router(
+              routerConfig: appRouter.config(
+                navigatorObservers: () => [MyObserver()],
+              ),
+              title: FlavorConfig.instance.values.appName,
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              supportedLocales: AppLocalizations.supportedLocales,
+              locale: Locale(state.localeCode),
+              theme: ThemeData(
+                colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+              ),
             ),
           );
         },

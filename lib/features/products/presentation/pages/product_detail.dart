@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoppi/core/common/widgets/widget.dart';
 import 'package:shoppi/core/utils/utils.dart';
+import 'package:shoppi/features/cart/cart.dart';
 import 'package:shoppi/features/products/products.dart';
 
 @RoutePage()
@@ -16,17 +17,62 @@ class ProductDetailPage extends StatefulWidget {
 }
 
 class _ProductDetailPageState extends State<ProductDetailPage> {
+  CartCubit get cubit => BlocProvider.of<CartCubit>(context);
+  bool added = false;
+
+  void checkCart() {
+    var found = cubit.state.any(
+      (element) => element.productId == int.parse(widget.id),
+    );
+    if (found) {
+      setState(() {
+        added = true;
+      });
+    } else {
+      setState(() {
+        added = false;
+      });
+    }
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     BlocProvider.of<ProductBloc>(
       context,
     ).add(ProductEvent.loadSingleProduct(int.parse(widget.id)));
+    checkCart();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    final cartCubit = context.read<CartCubit>();
+    final ProductModel? product = context.select(
+      (ProductBloc bloc) => bloc.state.product,
+    );
+
+    void submitToCart() {
+      if (product != null) {
+        var cartData = CartItem(
+          productId: product.id,
+          name: product.name,
+          image: product.productImage!.first.url,
+          price: double.parse(product.price),
+          quantity: 1,
+        );
+        cartCubit.addToCart(cartData);
+        setState(() {
+          added = true;
+        });
+        ToastHelper.showSuccess(
+          context: context,
+          title: 'Success',
+          message: '${product.name} added to cart',
+        );
+      }
+    }
+
     return Scaffold(
       bottomSheet: Container(
         height: 70,
@@ -51,7 +97,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 },
               ),
               // TODO: Add to cart and handle translation
-              CustomNeumorphicButton(onTap: () {}, text: 'Add to cart'),
+              CustomNeumorphicButton(
+                onTap: !added ? submitToCart : null,
+                text: added ? 'Added' : 'Add to cart',
+              ),
             ],
           ),
         ),
