@@ -230,7 +230,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           title: 'Success',
                           message: "Sign up Successfully!",
                         );
-                        context.pop();
+                        context.router.removeLast();
                       } else if (state.status == UserStatus.error) {
                         context.pop();
                         ToastHelper.showError(
