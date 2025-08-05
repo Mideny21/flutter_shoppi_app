@@ -1,0 +1,43 @@
+import 'package:shoppi/core/network/api_response.dart';
+import 'package:shoppi/core/network/api_result.dart';
+import 'package:shoppi/core/network/network_service.dart';
+import 'package:shoppi/features/authentication/authentication.dart';
+
+class AuthRepository {
+  final NetworkService _networkService;
+
+  AuthRepository(this._networkService);
+
+  Future<ApiResult<bool>> register(CreateUserParam param) async {
+    final result = await _networkService.post(
+      'auth/signup',
+      data: param.toJson(),
+    );
+
+    return result.when(
+      success:
+          (response) => ApiResult.success(response.data['success'] as bool),
+      failure: (error) => ApiResult.failure(error),
+    );
+  }
+
+  Future<ApiResult<ApiResponse<UserResponse>>> login(LoginParam param) async {
+    final result = await _networkService.post(
+      'auth/login',
+      data: param.toJson(),
+    );
+    return result.when(
+      success: (response) {
+        return ApiResult.success(
+          ApiResponse<UserResponse>.fromJson(
+            response.data,
+            (json) => UserResponse.fromJson(json as Map<String, dynamic>),
+          ),
+        );
+      },
+      failure: (error) {
+        return ApiResult.failure(error);
+      },
+    );
+  }
+}

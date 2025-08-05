@@ -13,6 +13,10 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:hive_ce_flutter/hive_flutter.dart' as _i919;
 import 'package:injectable/injectable.dart' as _i526;
 
+import '../../features/authentication/authentication.dart' as _i845;
+import '../../features/authentication/presentation/cubit/auth_cubit.dart'
+    as _i678;
+import '../../features/authentication/services/auth_service.dart' as _i47;
 import '../../features/cart/cart.dart' as _i699;
 import '../../features/cart/model/cart.dart' as _i609;
 import '../../features/cart/presentation/cubit/cart_cubit.dart' as _i499;
@@ -53,6 +57,10 @@ extension GetItInjectableX on _i174.GetIt {
       () => appConfigModule.cartBox,
       preResolve: true,
     );
+    await gh.factoryAsync<_i919.Box<_i845.UserData>>(
+      () => appConfigModule.userDataBox,
+      preResolve: true,
+    );
     gh.factory<_i1071.AuthInterceptor>(() => _i1071.AuthInterceptor());
     gh.factory<_i119.AppSettingsCubit>(() => _i119.AppSettingsCubit());
     gh.lazySingleton<_i81.AppRouter>(() => _i81.AppRouter());
@@ -75,9 +83,16 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i1025.NetworkService>(
       () => _i1025.NetworkService(gh<_i667.DioClient>()),
     );
+    gh.factory<_i47.AuthService>(
+      () => _i47.AuthService(gh<_i919.Box<_i845.UserData>>()),
+    );
     gh.lazySingleton<_i284.EnvConfig>(
       () => _i609.ProdEnvConfig(),
       registerFor: {_prod},
+    );
+    gh.factory<_i678.AuthCubit>(
+      () =>
+          _i678.AuthCubit(gh<_i845.AuthRepository>(), gh<_i845.AuthService>()),
     );
     gh.lazySingleton<_i592.ProductRepository>(
       () => _i592.ProductRepository(gh<_i1025.NetworkService>()),
