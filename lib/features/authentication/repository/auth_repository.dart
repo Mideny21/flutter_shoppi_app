@@ -1,8 +1,10 @@
+import 'package:injectable/injectable.dart';
 import 'package:shoppi/core/network/api_response.dart';
 import 'package:shoppi/core/network/api_result.dart';
 import 'package:shoppi/core/network/network_service.dart';
 import 'package:shoppi/features/authentication/authentication.dart';
 
+@lazySingleton
 class AuthRepository {
   final NetworkService _networkService;
 

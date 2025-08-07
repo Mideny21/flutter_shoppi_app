@@ -43,7 +43,12 @@ class CartPage extends StatelessWidget {
               ),
               const SizedBox(height: 10),
 
-              CustomNeumorphicButton(text: 'Checkout', onTap: () {}),
+              CustomNeumorphicButton(
+                text: 'Checkout',
+                onTap: () {
+                  context.router.push(ProfileRoute());
+                },
+              ),
             ],
           ),
         ),

@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:injectable/injectable.dart';
+import 'package:shoppi/core/di/injection.dart';
+import 'package:shoppi/core/router/app_route_guard.dart';
 import 'package:shoppi/core/router/app_router.gr.dart';
 
 @lazySingleton
@@ -26,5 +28,8 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: ProductDetailRoute.page),
     AutoRoute(page: SearchProductsRoute.page),
     AutoRoute(page: CartRoute.page),
+    AutoRoute(page: LoginRoute.page),
+    AutoRoute(page: SignUpRoute.page),
+    AutoRoute(page: ProfileRoute.page, guards: [getIt<AuthGuard>()]),
   ];
 }

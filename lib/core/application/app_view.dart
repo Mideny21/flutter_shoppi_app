@@ -6,6 +6,7 @@ import 'package:shoppi/core/router/app_route_observer.dart';
 import 'package:shoppi/core/router/app_router.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:shoppi/features/authentication/authentication.dart';
 import 'package:shoppi/features/cart/cart.dart';
 import 'package:shoppi/features/onboarding/onbording.dart';
 import 'package:shoppi/features/onboarding/presentation/cubit/app_settings.dart';
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => getIt<AppSettingsCubit>()),
         BlocProvider(create: (context) => getIt<ProductBloc>()),
         BlocProvider(create: (context) => getIt<CartCubit>()..readAllCart()),
+        BlocProvider(create: (context) => getIt<AuthCubit>()),
       ],
       child: BlocBuilder<AppSettingsCubit, AppSettings>(
         builder: (context, state) {
