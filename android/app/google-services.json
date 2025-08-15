@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "134032283263",
+    "project_id": "shoppi-f9046",
+    "storage_bucket": "shoppi-f9046.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:134032283263:android:d0b83102876fc70cc3514a",
+        "android_client_info": {
+          "package_name": "com.example.shoppi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwyk5CDVgGPxjROKxTaxzNIlb0Vcdfatw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -9,6 +9,9 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:firebase_messaging/firebase_messaging.dart' as _i892;
+import 'package:flutter_local_notifications/flutter_local_notifications.dart'
+    as _i163;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:hive_ce_flutter/hive_flutter.dart' as _i919;
 import 'package:injectable/injectable.dart' as _i526;
@@ -33,11 +36,14 @@ import '../../features/orders/repository/order_repository.dart' as _i848;
 import '../../features/products/presentation/bloc/product_bloc.dart' as _i28;
 import '../../features/products/products.dart' as _i485;
 import '../../features/products/repository/product_repository.dart' as _i592;
+import '../../features/pushnotification/services/push_notification_services.dart'
+    as _i181;
 import '../config/env_config.dart' as _i373;
 import '../config/env_config_dev.dart' as _i325;
 import '../config/env_config_prod.dart' as _i737;
 import '../config/env_config_staging.dart' as _i448;
 import '../modules/app_settings.dart' as _i814;
+import '../modules/notification_module.dart' as _i509;
 import '../network/dio_client.dart' as _i667;
 import '../network/interceptors/auth_interceptor.dart' as _i745;
 import '../network/network_service.dart' as _i1025;
@@ -56,6 +62,7 @@ extension GetItInjectableX on _i174.GetIt {
   }) async {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final registerModule = _$RegisterModule();
+    final notificationModule = _$NotificationModule();
     await gh.factoryAsync<_i919.Box<_i857.AppSettings>>(
       () => registerModule.appSettingsBox,
       preResolve: true,
@@ -69,12 +76,25 @@ extension GetItInjectableX on _i174.GetIt {
       preResolve: true,
     );
     gh.factory<_i833.AppSettingsCubit>(() => _i833.AppSettingsCubit());
+    gh.singleton<_i892.FirebaseMessaging>(
+      () => notificationModule.firebaseMessaging,
+    );
+    gh.singleton<_i163.FlutterLocalNotificationsPlugin>(
+      () => notificationModule.localNotifications,
+    );
     gh.lazySingleton<_i81.AppRouter>(() => _i81.AppRouter());
     gh.lazySingleton<_i389.OnboardingCubit>(() => _i389.OnboardingCubit());
     gh.lazySingleton<_i373.EnvConfig>(
       () => _i325.DevEnvConfig(),
       registerFor: {_dev},
     );
+    gh.singletonAsync<_i181.PushNotificationService>(() {
+      final i = _i181.PushNotificationService(
+        gh<_i892.FirebaseMessaging>(),
+        gh<_i163.FlutterLocalNotificationsPlugin>(),
+      );
+      return i.init().then((_) => i);
+    });
     gh.lazySingleton<_i373.EnvConfig>(
       () => _i448.StagingEnvConfig(),
       registerFor: {_staging},
@@ -133,3 +153,5 @@ extension GetItInjectableX on _i174.GetIt {
 }
 
 class _$RegisterModule extends _i814.RegisterModule {}
+
+class _$NotificationModule extends _i509.NotificationModule {}
