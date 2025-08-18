@@ -10,7 +10,7 @@ import 'package:shoppi/core/router/app_router.gr.dart';
 import 'package:shoppi/core/utils/app_logger.dart';
 import 'package:shoppi/core/utils/utils.dart';
 
-//@pragma('vm:entry-point')
+@pragma('vm:entry-point')
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // await Firebase.initializeApp();
 
@@ -56,6 +56,7 @@ class PushNotificationService {
 
     // When notification is tapped and app is in background
     FirebaseMessaging.onMessageOpenedApp.listen((message) {
+      log.i("Message itself: ${message.data.toString()}");
       _handleNavigation(message.data.toString());
     });
 
@@ -64,6 +65,7 @@ class PushNotificationService {
     if (initialMessage != null) {
       _handleNavigation(initialMessage.data.toString());
     }
+
     // 🔹 Initial token
     final token = await _messaging.getToken();
     if (token != null) {
@@ -71,7 +73,6 @@ class PushNotificationService {
       _sendTokenToBackend(token);
     }
 
-    // 🔹 Listen for token refresh
     _messaging.onTokenRefresh.listen((newToken) {
       log.i("Refreshed FCM Token: $newToken");
       _sendTokenToBackend(newToken);
@@ -84,15 +85,11 @@ class PushNotificationService {
 
   void _handleNavigation(String? data) {
     if (data != null) {
-      // You can use Navigator, GoRouter, or AutoRoute
-      // Example with GoRouter:
       getIt<AppRouter>().push(PushRoute());
     }
   }
 
-  /// ✅ Handles both initial & refreshed token
   Future<void> _sendTokenToBackend(String token) async {
-    // Replace with API call to save token for current user
     log.i("Sending token to backend: $token");
   }
 
