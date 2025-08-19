@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -50,20 +51,20 @@ class PushNotificationService {
         message.hashCode,
         message.notification?.title,
         message.notification?.body,
-        payload: message.data.toString(),
+        payload: message.data['orderId'].toString(),
       );
     });
 
     // When notification is tapped and app is in background
     FirebaseMessaging.onMessageOpenedApp.listen((message) {
       log.i("Message itself: ${message.data.toString()}");
-      _handleNavigation(message.data.toString());
+      _handleNavigation(message.data['orderId'].toString());
     });
 
     // App was terminated
     final initialMessage = await _messaging.getInitialMessage();
     if (initialMessage != null) {
-      _handleNavigation(initialMessage.data.toString());
+      _handleNavigation(initialMessage.data['orderId'].toString());
     }
 
     // 🔹 Initial token
@@ -85,7 +86,8 @@ class PushNotificationService {
 
   void _handleNavigation(String? data) {
     if (data != null) {
-      getIt<AppRouter>().push(PushRoute());
+      final String orderId = data;
+      getIt<AppRouter>().push(PushRoute(orderId: orderId));
     }
   }
 

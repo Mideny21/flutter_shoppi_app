@@ -347,18 +347,39 @@ class ProfileRoute extends _i21.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i15.PushPage]
-class PushRoute extends _i21.PageRouteInfo<void> {
-  const PushRoute({List<_i21.PageRouteInfo>? children})
-    : super(PushRoute.name, initialChildren: children);
+class PushRoute extends _i21.PageRouteInfo<PushRouteArgs> {
+  PushRoute({
+    _i22.Key? key,
+    required String orderId,
+    List<_i21.PageRouteInfo>? children,
+  }) : super(
+         PushRoute.name,
+         args: PushRouteArgs(key: key, orderId: orderId),
+         initialChildren: children,
+       );
 
   static const String name = 'PushRoute';
 
   static _i21.PageInfo page = _i21.PageInfo(
     name,
     builder: (data) {
-      return const _i15.PushPage();
+      final args = data.argsAs<PushRouteArgs>();
+      return _i15.PushPage(key: args.key, orderId: args.orderId);
     },
   );
+}
+
+class PushRouteArgs {
+  const PushRouteArgs({this.key, required this.orderId});
+
+  final _i22.Key? key;
+
+  final String orderId;
+
+  @override
+  String toString() {
+    return 'PushRouteArgs{key: $key, orderId: $orderId}';
+  }
 }
 
 /// generated route for
