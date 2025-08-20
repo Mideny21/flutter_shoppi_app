@@ -13,8 +13,6 @@ import 'package:auto_route/auto_route.dart' as _i14;
 import 'package:flutter/material.dart' as _i15;
 import 'package:shoppi/features/authentication/presentation/pages/login_view.dart'
     as _i6;
-import 'package:shoppi/features/authentication/presentation/pages/profile_view.dart'
-    as _i10;
 import 'package:shoppi/features/authentication/presentation/pages/signup_view.dart'
     as _i12;
 import 'package:shoppi/features/cart/presentation/pages/cart_page.dart' as _i2;
@@ -24,6 +22,8 @@ import 'package:shoppi/features/homescreen/presentation/pages/main_screen.dart'
     as _i4;
 import 'package:shoppi/features/homescreen/presentation/pages/order_screen.dart'
     as _i8;
+import 'package:shoppi/features/homescreen/presentation/pages/profile_screen.dart'
+    as _i10;
 import 'package:shoppi/features/onboarding/presentation/pages/choose_language.dart'
     as _i3;
 import 'package:shoppi/features/onboarding/presentation/pages/onboarding.dart'

@@ -27,6 +27,9 @@ import '../../features/cart/services/cart_service.dart' as _i64;
 import '../../features/onboarding/onbording.dart' as _i413;
 import '../../features/onboarding/presentation/cubit/app_settings.dart'
     as _i119;
+import '../../features/orders/orders.dart' as _i332;
+import '../../features/orders/presentation/bloc/order_bloc.dart' as _i298;
+import '../../features/orders/repository/order_repository.dart' as _i848;
 import '../../features/products/presentation/bloc/product_bloc.dart' as _i28;
 import '../../features/products/products.dart' as _i485;
 import '../../features/products/repository/product_repository.dart' as _i592;
@@ -109,12 +112,18 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i268.AuthRepository>(
       () => _i268.AuthRepository(gh<_i1025.NetworkService>()),
     );
+    gh.lazySingleton<_i848.OrderRepository>(
+      () => _i848.OrderRepository(gh<_i1025.NetworkService>()),
+    );
     gh.lazySingleton<_i592.ProductRepository>(
       () => _i592.ProductRepository(gh<_i1025.NetworkService>()),
     );
     gh.factory<_i678.AuthCubit>(
       () =>
           _i678.AuthCubit(gh<_i845.AuthRepository>(), gh<_i845.AuthService>()),
+    );
+    gh.factory<_i298.OrderBloc>(
+      () => _i298.OrderBloc(gh<_i332.OrderRepository>()),
     );
     gh.factory<_i28.ProductBloc>(
       () => _i28.ProductBloc(gh<_i485.ProductRepository>()),
