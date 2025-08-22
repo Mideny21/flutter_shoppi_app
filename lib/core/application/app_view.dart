@@ -10,6 +10,7 @@ import 'package:shoppi/features/authentication/authentication.dart';
 import 'package:shoppi/features/cart/cart.dart';
 import 'package:shoppi/features/onboarding/onbording.dart';
 import 'package:shoppi/features/onboarding/presentation/cubit/app_settings.dart';
+import 'package:shoppi/features/orders/orders.dart';
 import 'package:shoppi/features/products/products.dart';
 import 'package:toastification/toastification.dart';
 
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => getIt<ProductBloc>()),
         BlocProvider(create: (context) => getIt<CartCubit>()..readAllCart()),
         BlocProvider(create: (context) => getIt<AuthCubit>()),
+        BlocProvider(create: (context) => getIt<OrderBloc>()),
       ],
       child: BlocBuilder<AppSettingsCubit, AppSettings>(
         builder: (context, state) {

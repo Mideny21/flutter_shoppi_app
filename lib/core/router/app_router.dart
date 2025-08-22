@@ -31,5 +31,6 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: LoginRoute.page),
     AutoRoute(page: SignUpRoute.page),
     AutoRoute(page: ProfileRoute.page, guards: [getIt<AuthGuard>()]),
+    AutoRoute(page: ShippingAddressRoute.page, guards: [getIt<AuthGuard>()]),
   ];
 }

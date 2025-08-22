@@ -46,7 +46,7 @@ class CartPage extends StatelessWidget {
               CustomNeumorphicButton(
                 text: 'Checkout',
                 onTap: () {
-                  context.router.push(ProfileRoute());
+                  context.router.push(ShippingAddressRoute());
                 },
               ),
             ],

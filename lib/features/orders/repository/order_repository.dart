@@ -34,4 +34,21 @@ class OrderRepository {
       },
     );
   }
+
+  Future<ApiResult<bool>> createShippingAddress(
+    ShippingAddressParam param,
+  ) async {
+    final result = await _networkService.post(
+      'shipping-adress',
+      data: param.toJson(),
+    );
+    return result.when(
+      success: (response) {
+        return ApiResult.success(response.data['success'] as bool);
+      },
+      failure: (error) {
+        return ApiResult.failure(error);
+      },
+    );
+  }
 }

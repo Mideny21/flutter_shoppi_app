@@ -9,12 +9,12 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i14;
-import 'package:flutter/material.dart' as _i15;
+import 'package:auto_route/auto_route.dart' as _i15;
+import 'package:flutter/material.dart' as _i16;
 import 'package:shoppi/features/authentication/presentation/pages/login_view.dart'
     as _i6;
 import 'package:shoppi/features/authentication/presentation/pages/signup_view.dart'
-    as _i12;
+    as _i13;
 import 'package:shoppi/features/cart/presentation/pages/cart_page.dart' as _i2;
 import 'package:shoppi/features/homescreen/presentation/pages/home_screen.dart'
     as _i5;
@@ -29,23 +29,25 @@ import 'package:shoppi/features/onboarding/presentation/pages/choose_language.da
 import 'package:shoppi/features/onboarding/presentation/pages/onboarding.dart'
     as _i7;
 import 'package:shoppi/features/onboarding/presentation/pages/splash_screen.dart'
-    as _i13;
+    as _i14;
+import 'package:shoppi/features/orders/presentation/pages/shipping_address.dart'
+    as _i12;
 import 'package:shoppi/features/products/presentation/pages/product_detail.dart'
     as _i9;
 import 'package:shoppi/features/products/presentation/pages/products_by_category.dart'
     as _i1;
 import 'package:shoppi/features/products/presentation/pages/search_products.dart'
     as _i11;
-import 'package:shoppi/features/products/products.dart' as _i16;
+import 'package:shoppi/features/products/products.dart' as _i17;
 
 /// generated route for
 /// [_i1.AllProductsByCategoryScreen]
 class AllProductsByCategoryRoute
-    extends _i14.PageRouteInfo<AllProductsByCategoryRouteArgs> {
+    extends _i15.PageRouteInfo<AllProductsByCategoryRouteArgs> {
   AllProductsByCategoryRoute({
-    _i15.Key? key,
-    required _i16.Categorymodel categorymodel,
-    List<_i14.PageRouteInfo>? children,
+    _i16.Key? key,
+    required _i17.Categorymodel categorymodel,
+    List<_i15.PageRouteInfo>? children,
   }) : super(
          AllProductsByCategoryRoute.name,
          args: AllProductsByCategoryRouteArgs(
@@ -57,7 +59,7 @@ class AllProductsByCategoryRoute
 
   static const String name = 'AllProductsByCategoryRoute';
 
-  static _i14.PageInfo page = _i14.PageInfo(
+  static _i15.PageInfo page = _i15.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<AllProductsByCategoryRouteArgs>();
@@ -72,9 +74,9 @@ class AllProductsByCategoryRoute
 class AllProductsByCategoryRouteArgs {
   const AllProductsByCategoryRouteArgs({this.key, required this.categorymodel});
 
-  final _i15.Key? key;
+  final _i16.Key? key;
 
-  final _i16.Categorymodel categorymodel;
+  final _i17.Categorymodel categorymodel;
 
   @override
   String toString() {
@@ -94,13 +96,13 @@ class AllProductsByCategoryRouteArgs {
 
 /// generated route for
 /// [_i2.CartPage]
-class CartRoute extends _i14.PageRouteInfo<void> {
-  const CartRoute({List<_i14.PageRouteInfo>? children})
+class CartRoute extends _i15.PageRouteInfo<void> {
+  const CartRoute({List<_i15.PageRouteInfo>? children})
     : super(CartRoute.name, initialChildren: children);
 
   static const String name = 'CartRoute';
 
-  static _i14.PageInfo page = _i14.PageInfo(
+  static _i15.PageInfo page = _i15.PageInfo(
     name,
     builder: (data) {
       return const _i2.CartPage();
@@ -110,13 +112,13 @@ class CartRoute extends _i14.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.ChooseLanguageScreen]
-class ChooseLanguageRoute extends _i14.PageRouteInfo<void> {
-  const ChooseLanguageRoute({List<_i14.PageRouteInfo>? children})
+class ChooseLanguageRoute extends _i15.PageRouteInfo<void> {
+  const ChooseLanguageRoute({List<_i15.PageRouteInfo>? children})
     : super(ChooseLanguageRoute.name, initialChildren: children);
 
   static const String name = 'ChooseLanguageRoute';
 
-  static _i14.PageInfo page = _i14.PageInfo(
+  static _i15.PageInfo page = _i15.PageInfo(
     name,
     builder: (data) {
       return const _i3.ChooseLanguageScreen();
@@ -126,13 +128,13 @@ class ChooseLanguageRoute extends _i14.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.DashboardPage]
-class DashboardRoute extends _i14.PageRouteInfo<void> {
-  const DashboardRoute({List<_i14.PageRouteInfo>? children})
+class DashboardRoute extends _i15.PageRouteInfo<void> {
+  const DashboardRoute({List<_i15.PageRouteInfo>? children})
     : super(DashboardRoute.name, initialChildren: children);
 
   static const String name = 'DashboardRoute';
 
-  static _i14.PageInfo page = _i14.PageInfo(
+  static _i15.PageInfo page = _i15.PageInfo(
     name,
     builder: (data) {
       return const _i4.DashboardPage();
@@ -142,13 +144,13 @@ class DashboardRoute extends _i14.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i5.HomeScreen]
-class HomeRoute extends _i14.PageRouteInfo<void> {
-  const HomeRoute({List<_i14.PageRouteInfo>? children})
+class HomeRoute extends _i15.PageRouteInfo<void> {
+  const HomeRoute({List<_i15.PageRouteInfo>? children})
     : super(HomeRoute.name, initialChildren: children);
 
   static const String name = 'HomeRoute';
 
-  static _i14.PageInfo page = _i14.PageInfo(
+  static _i15.PageInfo page = _i15.PageInfo(
     name,
     builder: (data) {
       return const _i5.HomeScreen();
@@ -158,11 +160,11 @@ class HomeRoute extends _i14.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i6.LoginPage]
-class LoginRoute extends _i14.PageRouteInfo<LoginRouteArgs> {
+class LoginRoute extends _i15.PageRouteInfo<LoginRouteArgs> {
   LoginRoute({
-    _i15.Key? key,
+    _i16.Key? key,
     required dynamic Function(bool?) onResults,
-    List<_i14.PageRouteInfo>? children,
+    List<_i15.PageRouteInfo>? children,
   }) : super(
          LoginRoute.name,
          args: LoginRouteArgs(key: key, onResults: onResults),
@@ -171,7 +173,7 @@ class LoginRoute extends _i14.PageRouteInfo<LoginRouteArgs> {
 
   static const String name = 'LoginRoute';
 
-  static _i14.PageInfo page = _i14.PageInfo(
+  static _i15.PageInfo page = _i15.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<LoginRouteArgs>();
@@ -183,7 +185,7 @@ class LoginRoute extends _i14.PageRouteInfo<LoginRouteArgs> {
 class LoginRouteArgs {
   const LoginRouteArgs({this.key, required this.onResults});
 
-  final _i15.Key? key;
+  final _i16.Key? key;
 
   final dynamic Function(bool?) onResults;
 
@@ -205,13 +207,13 @@ class LoginRouteArgs {
 
 /// generated route for
 /// [_i7.OnboardingScreen]
-class OnboardingRoute extends _i14.PageRouteInfo<void> {
-  const OnboardingRoute({List<_i14.PageRouteInfo>? children})
+class OnboardingRoute extends _i15.PageRouteInfo<void> {
+  const OnboardingRoute({List<_i15.PageRouteInfo>? children})
     : super(OnboardingRoute.name, initialChildren: children);
 
   static const String name = 'OnboardingRoute';
 
-  static _i14.PageInfo page = _i14.PageInfo(
+  static _i15.PageInfo page = _i15.PageInfo(
     name,
     builder: (data) {
       return const _i7.OnboardingScreen();
@@ -221,13 +223,13 @@ class OnboardingRoute extends _i14.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i8.OrdersPage]
-class OrdersRoute extends _i14.PageRouteInfo<void> {
-  const OrdersRoute({List<_i14.PageRouteInfo>? children})
+class OrdersRoute extends _i15.PageRouteInfo<void> {
+  const OrdersRoute({List<_i15.PageRouteInfo>? children})
     : super(OrdersRoute.name, initialChildren: children);
 
   static const String name = 'OrdersRoute';
 
-  static _i14.PageInfo page = _i14.PageInfo(
+  static _i15.PageInfo page = _i15.PageInfo(
     name,
     builder: (data) {
       return const _i8.OrdersPage();
@@ -237,11 +239,11 @@ class OrdersRoute extends _i14.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i9.ProductDetailPage]
-class ProductDetailRoute extends _i14.PageRouteInfo<ProductDetailRouteArgs> {
+class ProductDetailRoute extends _i15.PageRouteInfo<ProductDetailRouteArgs> {
   ProductDetailRoute({
-    _i15.Key? key,
+    _i16.Key? key,
     required String id,
-    List<_i14.PageRouteInfo>? children,
+    List<_i15.PageRouteInfo>? children,
   }) : super(
          ProductDetailRoute.name,
          args: ProductDetailRouteArgs(key: key, id: id),
@@ -250,7 +252,7 @@ class ProductDetailRoute extends _i14.PageRouteInfo<ProductDetailRouteArgs> {
 
   static const String name = 'ProductDetailRoute';
 
-  static _i14.PageInfo page = _i14.PageInfo(
+  static _i15.PageInfo page = _i15.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<ProductDetailRouteArgs>();
@@ -262,7 +264,7 @@ class ProductDetailRoute extends _i14.PageRouteInfo<ProductDetailRouteArgs> {
 class ProductDetailRouteArgs {
   const ProductDetailRouteArgs({this.key, required this.id});
 
-  final _i15.Key? key;
+  final _i16.Key? key;
 
   final String id;
 
@@ -284,13 +286,13 @@ class ProductDetailRouteArgs {
 
 /// generated route for
 /// [_i10.ProfilePage]
-class ProfileRoute extends _i14.PageRouteInfo<void> {
-  const ProfileRoute({List<_i14.PageRouteInfo>? children})
+class ProfileRoute extends _i15.PageRouteInfo<void> {
+  const ProfileRoute({List<_i15.PageRouteInfo>? children})
     : super(ProfileRoute.name, initialChildren: children);
 
   static const String name = 'ProfileRoute';
 
-  static _i14.PageInfo page = _i14.PageInfo(
+  static _i15.PageInfo page = _i15.PageInfo(
     name,
     builder: (data) {
       return const _i10.ProfilePage();
@@ -300,13 +302,13 @@ class ProfileRoute extends _i14.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i11.SearchProductsScreen]
-class SearchProductsRoute extends _i14.PageRouteInfo<void> {
-  const SearchProductsRoute({List<_i14.PageRouteInfo>? children})
+class SearchProductsRoute extends _i15.PageRouteInfo<void> {
+  const SearchProductsRoute({List<_i15.PageRouteInfo>? children})
     : super(SearchProductsRoute.name, initialChildren: children);
 
   static const String name = 'SearchProductsRoute';
 
-  static _i14.PageInfo page = _i14.PageInfo(
+  static _i15.PageInfo page = _i15.PageInfo(
     name,
     builder: (data) {
       return const _i11.SearchProductsScreen();
@@ -315,33 +317,49 @@ class SearchProductsRoute extends _i14.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i12.SignUpPage]
-class SignUpRoute extends _i14.PageRouteInfo<void> {
-  const SignUpRoute({List<_i14.PageRouteInfo>? children})
-    : super(SignUpRoute.name, initialChildren: children);
+/// [_i12.ShippingAddressScreen]
+class ShippingAddressRoute extends _i15.PageRouteInfo<void> {
+  const ShippingAddressRoute({List<_i15.PageRouteInfo>? children})
+    : super(ShippingAddressRoute.name, initialChildren: children);
 
-  static const String name = 'SignUpRoute';
+  static const String name = 'ShippingAddressRoute';
 
-  static _i14.PageInfo page = _i14.PageInfo(
+  static _i15.PageInfo page = _i15.PageInfo(
     name,
     builder: (data) {
-      return const _i12.SignUpPage();
+      return const _i12.ShippingAddressScreen();
     },
   );
 }
 
 /// generated route for
-/// [_i13.SplashScreen]
-class SplashRoute extends _i14.PageRouteInfo<void> {
-  const SplashRoute({List<_i14.PageRouteInfo>? children})
+/// [_i13.SignUpPage]
+class SignUpRoute extends _i15.PageRouteInfo<void> {
+  const SignUpRoute({List<_i15.PageRouteInfo>? children})
+    : super(SignUpRoute.name, initialChildren: children);
+
+  static const String name = 'SignUpRoute';
+
+  static _i15.PageInfo page = _i15.PageInfo(
+    name,
+    builder: (data) {
+      return const _i13.SignUpPage();
+    },
+  );
+}
+
+/// generated route for
+/// [_i14.SplashScreen]
+class SplashRoute extends _i15.PageRouteInfo<void> {
+  const SplashRoute({List<_i15.PageRouteInfo>? children})
     : super(SplashRoute.name, initialChildren: children);
 
   static const String name = 'SplashRoute';
 
-  static _i14.PageInfo page = _i14.PageInfo(
+  static _i15.PageInfo page = _i15.PageInfo(
     name,
     builder: (data) {
-      return const _i13.SplashScreen();
+      return const _i14.SplashScreen();
     },
   );
 }
