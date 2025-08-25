@@ -2,5 +2,6 @@
   "helloWorld": "Habari Dunia",
  "continue_text":"Endelea",
  "choose_language":"Chagua lugha yako",
- "select_preferred_language":"Chagua lugha unayopendelea kutumia \n Shopping"
+ "select_preferred_language":"Chagua lugha unayopendelea kutumia \n Shopping",
+ "shipping_address":"Anuani"
 }

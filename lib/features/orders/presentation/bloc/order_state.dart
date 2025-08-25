@@ -15,6 +15,8 @@ abstract class OrderState with _$OrderState {
     ShippingAddressStatus shippingAddressStatus,
     @Default([]) List<Shippingaddressmodel> addresses,
     @Default('') String error,
+    @Default(false) bool fetchAddress,
+    @Default(false) bool addressSubmitted,
   }) = _OrderState;
 
   factory OrderState.initial() => const OrderState();

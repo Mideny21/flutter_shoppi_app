@@ -2,5 +2,6 @@
   "helloWorld": "Hello World!",
  "continue_text":"Continue",
  "choose_language":"Choose Your Language",
- "select_preferred_language":"Select your preferred language to use \n Shopping"
+ "select_preferred_language":"Select your preferred language to use \n Shopping",
+ "shipping_address":"Shipping Address"
 }      

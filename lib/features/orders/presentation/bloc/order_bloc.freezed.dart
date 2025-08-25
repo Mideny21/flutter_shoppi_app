@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$OrderState {
 
- ShippingAddressStatus get shippingAddressStatus; List<Shippingaddressmodel> get addresses; String get error;
+ ShippingAddressStatus get shippingAddressStatus; List<Shippingaddressmodel> get addresses; String get error; bool get fetchAddress; bool get addressSubmitted;
 /// Create a copy of OrderState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $OrderStateCopyWith<OrderState> get copyWith => _$OrderStateCopyWithImpl<OrderSt
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is OrderState&&(identical(other.shippingAddressStatus, shippingAddressStatus) || other.shippingAddressStatus == shippingAddressStatus)&&const DeepCollectionEquality().equals(other.addresses, addresses)&&(identical(other.error, error) || other.error == error));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is OrderState&&(identical(other.shippingAddressStatus, shippingAddressStatus) || other.shippingAddressStatus == shippingAddressStatus)&&const DeepCollectionEquality().equals(other.addresses, addresses)&&(identical(other.error, error) || other.error == error)&&(identical(other.fetchAddress, fetchAddress) || other.fetchAddress == fetchAddress)&&(identical(other.addressSubmitted, addressSubmitted) || other.addressSubmitted == addressSubmitted));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,shippingAddressStatus,const DeepCollectionEquality().hash(addresses),error);
+int get hashCode => Object.hash(runtimeType,shippingAddressStatus,const DeepCollectionEquality().hash(addresses),error,fetchAddress,addressSubmitted);
 
 @override
 String toString() {
-  return 'OrderState(shippingAddressStatus: $shippingAddressStatus, addresses: $addresses, error: $error)';
+  return 'OrderState(shippingAddressStatus: $shippingAddressStatus, addresses: $addresses, error: $error, fetchAddress: $fetchAddress, addressSubmitted: $addressSubmitted)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $OrderStateCopyWith<$Res>  {
   factory $OrderStateCopyWith(OrderState value, $Res Function(OrderState) _then) = _$OrderStateCopyWithImpl;
 @useResult
 $Res call({
- ShippingAddressStatus shippingAddressStatus, List<Shippingaddressmodel> addresses, String error
+ ShippingAddressStatus shippingAddressStatus, List<Shippingaddressmodel> addresses, String error, bool fetchAddress, bool addressSubmitted
 });
 
 
@@ -62,12 +62,14 @@ class _$OrderStateCopyWithImpl<$Res>
 
 /// Create a copy of OrderState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? shippingAddressStatus = null,Object? addresses = null,Object? error = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? shippingAddressStatus = null,Object? addresses = null,Object? error = null,Object? fetchAddress = null,Object? addressSubmitted = null,}) {
   return _then(_self.copyWith(
 shippingAddressStatus: null == shippingAddressStatus ? _self.shippingAddressStatus : shippingAddressStatus // ignore: cast_nullable_to_non_nullable
 as ShippingAddressStatus,addresses: null == addresses ? _self.addresses : addresses // ignore: cast_nullable_to_non_nullable
 as List<Shippingaddressmodel>,error: null == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
-as String,
+as String,fetchAddress: null == fetchAddress ? _self.fetchAddress : fetchAddress // ignore: cast_nullable_to_non_nullable
+as bool,addressSubmitted: null == addressSubmitted ? _self.addressSubmitted : addressSubmitted // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 
@@ -152,10 +154,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ShippingAddressStatus shippingAddressStatus,  List<Shippingaddressmodel> addresses,  String error)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ShippingAddressStatus shippingAddressStatus,  List<Shippingaddressmodel> addresses,  String error,  bool fetchAddress,  bool addressSubmitted)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _OrderState() when $default != null:
-return $default(_that.shippingAddressStatus,_that.addresses,_that.error);case _:
+return $default(_that.shippingAddressStatus,_that.addresses,_that.error,_that.fetchAddress,_that.addressSubmitted);case _:
   return orElse();
 
 }
@@ -173,10 +175,10 @@ return $default(_that.shippingAddressStatus,_that.addresses,_that.error);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ShippingAddressStatus shippingAddressStatus,  List<Shippingaddressmodel> addresses,  String error)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ShippingAddressStatus shippingAddressStatus,  List<Shippingaddressmodel> addresses,  String error,  bool fetchAddress,  bool addressSubmitted)  $default,) {final _that = this;
 switch (_that) {
 case _OrderState():
-return $default(_that.shippingAddressStatus,_that.addresses,_that.error);case _:
+return $default(_that.shippingAddressStatus,_that.addresses,_that.error,_that.fetchAddress,_that.addressSubmitted);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -193,10 +195,10 @@ return $default(_that.shippingAddressStatus,_that.addresses,_that.error);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ShippingAddressStatus shippingAddressStatus,  List<Shippingaddressmodel> addresses,  String error)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ShippingAddressStatus shippingAddressStatus,  List<Shippingaddressmodel> addresses,  String error,  bool fetchAddress,  bool addressSubmitted)?  $default,) {final _that = this;
 switch (_that) {
 case _OrderState() when $default != null:
-return $default(_that.shippingAddressStatus,_that.addresses,_that.error);case _:
+return $default(_that.shippingAddressStatus,_that.addresses,_that.error,_that.fetchAddress,_that.addressSubmitted);case _:
   return null;
 
 }
@@ -208,7 +210,7 @@ return $default(_that.shippingAddressStatus,_that.addresses,_that.error);case _:
 
 
 class _OrderState implements OrderState {
-  const _OrderState({this.shippingAddressStatus = ShippingAddressStatus.initial, final  List<Shippingaddressmodel> addresses = const [], this.error = ''}): _addresses = addresses;
+  const _OrderState({this.shippingAddressStatus = ShippingAddressStatus.initial, final  List<Shippingaddressmodel> addresses = const [], this.error = '', this.fetchAddress = false, this.addressSubmitted = false}): _addresses = addresses;
   
 
 @override@JsonKey() final  ShippingAddressStatus shippingAddressStatus;
@@ -220,6 +222,8 @@ class _OrderState implements OrderState {
 }
 
 @override@JsonKey() final  String error;
+@override@JsonKey() final  bool fetchAddress;
+@override@JsonKey() final  bool addressSubmitted;
 
 /// Create a copy of OrderState
 /// with the given fields replaced by the non-null parameter values.
@@ -231,16 +235,16 @@ _$OrderStateCopyWith<_OrderState> get copyWith => __$OrderStateCopyWithImpl<_Ord
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _OrderState&&(identical(other.shippingAddressStatus, shippingAddressStatus) || other.shippingAddressStatus == shippingAddressStatus)&&const DeepCollectionEquality().equals(other._addresses, _addresses)&&(identical(other.error, error) || other.error == error));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _OrderState&&(identical(other.shippingAddressStatus, shippingAddressStatus) || other.shippingAddressStatus == shippingAddressStatus)&&const DeepCollectionEquality().equals(other._addresses, _addresses)&&(identical(other.error, error) || other.error == error)&&(identical(other.fetchAddress, fetchAddress) || other.fetchAddress == fetchAddress)&&(identical(other.addressSubmitted, addressSubmitted) || other.addressSubmitted == addressSubmitted));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,shippingAddressStatus,const DeepCollectionEquality().hash(_addresses),error);
+int get hashCode => Object.hash(runtimeType,shippingAddressStatus,const DeepCollectionEquality().hash(_addresses),error,fetchAddress,addressSubmitted);
 
 @override
 String toString() {
-  return 'OrderState(shippingAddressStatus: $shippingAddressStatus, addresses: $addresses, error: $error)';
+  return 'OrderState(shippingAddressStatus: $shippingAddressStatus, addresses: $addresses, error: $error, fetchAddress: $fetchAddress, addressSubmitted: $addressSubmitted)';
 }
 
 
@@ -251,7 +255,7 @@ abstract mixin class _$OrderStateCopyWith<$Res> implements $OrderStateCopyWith<$
   factory _$OrderStateCopyWith(_OrderState value, $Res Function(_OrderState) _then) = __$OrderStateCopyWithImpl;
 @override @useResult
 $Res call({
- ShippingAddressStatus shippingAddressStatus, List<Shippingaddressmodel> addresses, String error
+ ShippingAddressStatus shippingAddressStatus, List<Shippingaddressmodel> addresses, String error, bool fetchAddress, bool addressSubmitted
 });
 
 
@@ -268,12 +272,14 @@ class __$OrderStateCopyWithImpl<$Res>
 
 /// Create a copy of OrderState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? shippingAddressStatus = null,Object? addresses = null,Object? error = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? shippingAddressStatus = null,Object? addresses = null,Object? error = null,Object? fetchAddress = null,Object? addressSubmitted = null,}) {
   return _then(_OrderState(
 shippingAddressStatus: null == shippingAddressStatus ? _self.shippingAddressStatus : shippingAddressStatus // ignore: cast_nullable_to_non_nullable
 as ShippingAddressStatus,addresses: null == addresses ? _self._addresses : addresses // ignore: cast_nullable_to_non_nullable
 as List<Shippingaddressmodel>,error: null == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
-as String,
+as String,fetchAddress: null == fetchAddress ? _self.fetchAddress : fetchAddress // ignore: cast_nullable_to_non_nullable
+as bool,addressSubmitted: null == addressSubmitted ? _self.addressSubmitted : addressSubmitted // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 
@@ -324,11 +330,12 @@ extension OrderEventPatterns on OrderEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _FetchUserAddress value)?  fetchUserAddress,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _FetchUserAddress value)?  fetchUserAddress,TResult Function( _CreateShippingAddress value)?  createShippingAddress,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _FetchUserAddress() when fetchUserAddress != null:
-return fetchUserAddress(_that);case _:
+return fetchUserAddress(_that);case _CreateShippingAddress() when createShippingAddress != null:
+return createShippingAddress(_that);case _:
   return orElse();
 
 }
@@ -346,11 +353,12 @@ return fetchUserAddress(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _FetchUserAddress value)  fetchUserAddress,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _FetchUserAddress value)  fetchUserAddress,required TResult Function( _CreateShippingAddress value)  createShippingAddress,}){
 final _that = this;
 switch (_that) {
 case _FetchUserAddress():
-return fetchUserAddress(_that);case _:
+return fetchUserAddress(_that);case _CreateShippingAddress():
+return createShippingAddress(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -367,11 +375,12 @@ return fetchUserAddress(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _FetchUserAddress value)?  fetchUserAddress,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _FetchUserAddress value)?  fetchUserAddress,TResult? Function( _CreateShippingAddress value)?  createShippingAddress,}){
 final _that = this;
 switch (_that) {
 case _FetchUserAddress() when fetchUserAddress != null:
-return fetchUserAddress(_that);case _:
+return fetchUserAddress(_that);case _CreateShippingAddress() when createShippingAddress != null:
+return createShippingAddress(_that);case _:
   return null;
 
 }
@@ -388,10 +397,11 @@ return fetchUserAddress(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  fetchUserAddress,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  fetchUserAddress,TResult Function( ShippingAddressParam param)?  createShippingAddress,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _FetchUserAddress() when fetchUserAddress != null:
-return fetchUserAddress();case _:
+return fetchUserAddress();case _CreateShippingAddress() when createShippingAddress != null:
+return createShippingAddress(_that.param);case _:
   return orElse();
 
 }
@@ -409,10 +419,11 @@ return fetchUserAddress();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  fetchUserAddress,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  fetchUserAddress,required TResult Function( ShippingAddressParam param)  createShippingAddress,}) {final _that = this;
 switch (_that) {
 case _FetchUserAddress():
-return fetchUserAddress();case _:
+return fetchUserAddress();case _CreateShippingAddress():
+return createShippingAddress(_that.param);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -429,10 +440,11 @@ return fetchUserAddress();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  fetchUserAddress,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  fetchUserAddress,TResult? Function( ShippingAddressParam param)?  createShippingAddress,}) {final _that = this;
 switch (_that) {
 case _FetchUserAddress() when fetchUserAddress != null:
-return fetchUserAddress();case _:
+return fetchUserAddress();case _CreateShippingAddress() when createShippingAddress != null:
+return createShippingAddress(_that.param);case _:
   return null;
 
 }
@@ -471,5 +483,71 @@ String toString() {
 
 
 
+
+/// @nodoc
+
+
+class _CreateShippingAddress implements OrderEvent {
+  const _CreateShippingAddress(this.param);
+  
+
+ final  ShippingAddressParam param;
+
+/// Create a copy of OrderEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$CreateShippingAddressCopyWith<_CreateShippingAddress> get copyWith => __$CreateShippingAddressCopyWithImpl<_CreateShippingAddress>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CreateShippingAddress&&(identical(other.param, param) || other.param == param));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,param);
+
+@override
+String toString() {
+  return 'OrderEvent.createShippingAddress(param: $param)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$CreateShippingAddressCopyWith<$Res> implements $OrderEventCopyWith<$Res> {
+  factory _$CreateShippingAddressCopyWith(_CreateShippingAddress value, $Res Function(_CreateShippingAddress) _then) = __$CreateShippingAddressCopyWithImpl;
+@useResult
+$Res call({
+ ShippingAddressParam param
+});
+
+
+
+
+}
+/// @nodoc
+class __$CreateShippingAddressCopyWithImpl<$Res>
+    implements _$CreateShippingAddressCopyWith<$Res> {
+  __$CreateShippingAddressCopyWithImpl(this._self, this._then);
+
+  final _CreateShippingAddress _self;
+  final $Res Function(_CreateShippingAddress) _then;
+
+/// Create a copy of OrderEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? param = null,}) {
+  return _then(_CreateShippingAddress(
+null == param ? _self.param : param // ignore: cast_nullable_to_non_nullable
+as ShippingAddressParam,
+  ));
+}
+
+
+}
 
 // dart format on

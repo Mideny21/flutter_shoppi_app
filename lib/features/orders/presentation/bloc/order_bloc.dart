@@ -14,6 +14,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
   final OrderRepository _orderRepository;
   OrderBloc(this._orderRepository) : super(OrderState.initial()) {
     on<_FetchUserAddress>(_onfetchUserAddress);
+    on<_CreateShippingAddress>(_onCreateShippingAddress);
   }
 
   Future<void> _onfetchUserAddress(
@@ -23,6 +24,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     emit(
       state.copyWith(
         shippingAddressStatus: ShippingAddressStatus.loading,
+        fetchAddress: false,
         error: '',
       ),
     );
@@ -36,6 +38,41 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
             addresses: data.data,
           ),
         );
+      },
+      failure: (error) {
+        emit(
+          state.copyWith(
+            shippingAddressStatus: ShippingAddressStatus.failure,
+            error: error.message,
+          ),
+        );
+      },
+    );
+  }
+
+  Future<void> _onCreateShippingAddress(
+    _CreateShippingAddress event,
+    Emitter<OrderState> emit,
+  ) async {
+    emit(
+      state.copyWith(
+        shippingAddressStatus: ShippingAddressStatus.submittingAddress,
+        error: '',
+      ),
+    );
+
+    final result = await _orderRepository.createShippingAddress(event.param);
+    result.when(
+      success: (data) {
+        if (data) {
+          emit(
+            state.copyWith(
+              shippingAddressStatus: ShippingAddressStatus.initial,
+              addressSubmitted: true,
+              fetchAddress: true,
+            ),
+          );
+        }
       },
       failure: (error) {
         emit(
