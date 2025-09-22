@@ -5,8 +5,8 @@ import 'package:shoppi/core/common/widgets/widget.dart';
 import 'package:shoppi/core/router/app_router.gr.dart';
 import 'package:shoppi/core/utils/utils.dart';
 import 'package:shoppi/features/onbaording/language.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shoppi/features/onbaording/model/app_settings.dart';
+import 'package:shoppi/l10n/app_localizations.dart';
 
 @RoutePage()
 class ChangeLanguageScreen extends StatefulWidget {

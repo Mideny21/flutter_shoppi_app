@@ -11,9 +11,9 @@ import 'package:shoppi/features/onbaording/model/app_settings.dart';
 import 'package:shoppi/features/onbaording/presentation/cubit/on_boarding_cubit.dart';
 import 'package:shoppi/features/orders/orders.dart';
 import 'package:shoppi/features/products/presentation/bloc/product_bloc.dart';
+import 'package:shoppi/l10n/app_localizations.dart';
 import 'package:toastification/toastification.dart';
 import '../app_flavor/flavors.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -44,7 +44,6 @@ class MyApp extends StatelessWidget {
               routerConfig: appRouter.config(
                 navigatorObservers: () => [MyObserver()],
               ),
-
               title: FlavorConfig.instance.values.appName,
               localizationsDelegates: AppLocalizations.localizationsDelegates,
               supportedLocales: AppLocalizations.supportedLocales,
