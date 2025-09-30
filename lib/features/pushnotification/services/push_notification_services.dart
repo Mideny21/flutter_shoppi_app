@@ -30,14 +30,16 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 @singleton
 class PushNotificationService {
   final FirebaseMessaging _messaging;
-  final FlutterLocalNotificationsPlugin _localNotifications;
-
+  late final FlutterLocalNotificationsPlugin _localNotifications;
   final _messageController = StreamController<RemoteMessage>.broadcast();
 
-  PushNotificationService(this._messaging, this._localNotifications);
+  PushNotificationService(this._messaging);
 
   @postConstruct
   Future<void> init() async {
+    _localNotifications = NotificationHelper.createPlugin((payload) async {
+      _handleNavigation(payload);
+    });
     await _requestPermission();
 
     // Foreground messages
@@ -52,6 +54,13 @@ class PushNotificationService {
         payload: message.data['orderId'].toString(),
       );
     });
+
+    await FirebaseMessaging.instance
+        .setForegroundNotificationPresentationOptions(
+          alert: true, // Required to display a heads up notification
+          badge: true,
+          sound: true,
+        );
 
     // When notification is tapped and app is in background
     FirebaseMessaging.onMessageOpenedApp.listen((message) {
@@ -79,7 +88,15 @@ class PushNotificationService {
   }
 
   Future<void> _requestPermission() async {
-    await _messaging.requestPermission();
+    await _messaging.requestPermission(alert: true, badge: true, sound: true);
+
+    final androidImplementation =
+        _localNotifications
+            .resolvePlatformSpecificImplementation<
+              AndroidFlutterLocalNotificationsPlugin
+            >();
+
+    await androidImplementation?.requestNotificationsPermission();
   }
 
   void _handleNavigation(String? data) {

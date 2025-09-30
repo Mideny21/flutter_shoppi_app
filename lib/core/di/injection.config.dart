@@ -84,17 +84,14 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i81.AppRouter>(() => _i81.AppRouter());
     gh.lazySingleton<_i389.OnboardingCubit>(() => _i389.OnboardingCubit());
+    gh.singletonAsync<_i181.PushNotificationService>(() {
+      final i = _i181.PushNotificationService(gh<_i892.FirebaseMessaging>());
+      return i.init().then((_) => i);
+    });
     gh.lazySingleton<_i373.EnvConfig>(
       () => _i325.DevEnvConfig(),
       registerFor: {_dev},
     );
-    gh.singletonAsync<_i181.PushNotificationService>(() {
-      final i = _i181.PushNotificationService(
-        gh<_i892.FirebaseMessaging>(),
-        gh<_i163.FlutterLocalNotificationsPlugin>(),
-      );
-      return i.init().then((_) => i);
-    });
     gh.lazySingleton<_i373.EnvConfig>(
       () => _i448.StagingEnvConfig(),
       registerFor: {_staging},
@@ -129,14 +126,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i1025.NetworkService>(
       () => _i1025.NetworkService(gh<_i667.DioClient>()),
     );
-    gh.lazySingleton<_i268.AuthRepository>(
-      () => _i268.AuthRepository(gh<_i1025.NetworkService>()),
+    gh.lazySingleton<_i592.ProductRepository>(
+      () => _i592.ProductRepository(gh<_i1025.NetworkService>()),
     );
     gh.lazySingleton<_i848.OrderRepository>(
       () => _i848.OrderRepository(gh<_i1025.NetworkService>()),
     );
-    gh.lazySingleton<_i592.ProductRepository>(
-      () => _i592.ProductRepository(gh<_i1025.NetworkService>()),
+    gh.lazySingleton<_i268.AuthRepository>(
+      () => _i268.AuthRepository(gh<_i1025.NetworkService>()),
     );
     gh.factory<_i28.ProductBloc>(
       () => _i28.ProductBloc(gh<_i485.ProductRepository>()),

@@ -1,33 +1,28 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:shoppi/core/utils/app_logger.dart';
 
 typedef NotificationTapCallback = Future<void> Function(String? payload);
 
 class NotificationHelper {
   static const AndroidInitializationSettings _androidInit =
-      AndroidInitializationSettings('@mipmap/ic_launcher');
+      AndroidInitializationSettings('@drawable/ic_launcher');
 
   static const DarwinInitializationSettings _iosInit =
       DarwinInitializationSettings();
 
-  static InitializationSettings initSettings(NotificationTapCallback onTap) {
-    return InitializationSettings(android: _androidInit, iOS: _iosInit);
-  }
-
-  static final AndroidNotificationDetails _androidDetails =
+  static const AndroidNotificationDetails _androidDetails =
       AndroidNotificationDetails(
-        'shoppi', // channel id
-        'Default', // channel name visible in Android settings
+        'shoppi_channel', // channel id
+        'High Importance Notifications', // channel name
         channelDescription: 'Default notification channel for Shoppi',
-        importance: Importance.high,
+        importance: Importance.max,
         priority: Priority.high,
-        icon: '@mipmap/ic_launcher',
+        icon: '@drawable/ic_launcher',
       );
 
   static const DarwinNotificationDetails _iosDetails =
       DarwinNotificationDetails();
 
-  static final NotificationDetails notificationDetails = NotificationDetails(
+  static const NotificationDetails notificationDetails = NotificationDetails(
     android: _androidDetails,
     iOS: _iosDetails,
   );
@@ -36,16 +31,32 @@ class NotificationHelper {
     NotificationTapCallback onTap,
   ) {
     final plugin = FlutterLocalNotificationsPlugin();
+
+    // Create Android Notification Channel
+    const AndroidNotificationChannel channel = AndroidNotificationChannel(
+      'shoppi_channel', // must match channel id above
+      'High Importance Notifications',
+      description: 'This channel is used for important notifications.',
+      importance: Importance.max,
+    );
+
+    plugin
+        .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin
+        >()
+        ?.createNotificationChannel(channel);
+
     plugin.initialize(
-      initSettings(onTap),
+      const InitializationSettings(android: _androidInit, iOS: _iosInit),
       onDidReceiveNotificationResponse: (NotificationResponse response) async {
-        log.i('Notification tapped: ${response.id}');
         await onTap(response.payload);
       },
     );
+
     return plugin;
   }
 
+  /// 🔹 Show a local notification
   static Future<void> showNotification(
     FlutterLocalNotificationsPlugin plugin,
     int id,
